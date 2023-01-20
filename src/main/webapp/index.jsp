@@ -7,6 +7,6 @@
 <title>yespresso-app</title>
 </head>
 <body>
-	<h1>yespresso-app</h1>
+	<h1>yespresso</h1>
 </body>
 </html>
