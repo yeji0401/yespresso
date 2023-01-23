@@ -1,6 +1,6 @@
-package com.sh.yespresso.orders.model.service;
+package com.sh.yespresso.review.model.dao;
 
-public class OrdersService {
+public class ReviewDao {
 	
 	/**
 	 * hj start
