@@ -27,7 +27,7 @@
                         <li class="recipe"><a href="<%= request.getContextPath() %>">RECIPE</a></li>
                     </ul>
                     <ul class="main_login_block">
-                        <li class="login"><a href="<%= request.getContextPath() %>">LOGIN</a></li>
+                        <li class="login"><a href="<%= request.getContextPath() %>/member/memberLogin">LOGIN</a></li>
                         <li class="cart"><a href="<%= request.getContextPath() %>">CART</a></li>
                     </ul>
                     <ul class="admin_block">
