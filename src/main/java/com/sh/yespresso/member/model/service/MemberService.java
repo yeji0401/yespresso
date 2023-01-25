@@ -1,7 +1,17 @@
 package com.sh.yespresso.member.model.service;
 
+import java.sql.Connection;
+
+import static com.sh.yespresso.common.JdbcTemplate.close;
+import static com.sh.yespresso.common.JdbcTemplate.commit;
+import static com.sh.yespresso.common.JdbcTemplate.getConnection;
+import static com.sh.yespresso.common.JdbcTemplate.rollback;
+
+import com.sh.yespresso.member.model.dao.MemberDao;
+import com.sh.yespresso.member.model.dto.Member;
+
 public class MemberService {
-	
+	private MemberDao memberDao = new MemberDao();
 	/**
 	 * hj start
 	 */
@@ -26,11 +36,20 @@ public class MemberService {
 	 */
 
 
-	/**
-	 * jooh start
-	 */
-	/**
-	 * jooh end
-	 */
+	/** * jooh start */
+	
+	public Member selectOneMember(String memberId) {
+		//1. Connection 생성
+		Connection conn  = getConnection();
+		
+		//2. Dao 요청 (Connection 전달)
+		Member member = memberDao.selectOneMember(conn, memberId);
+		
+		//3. 반환
+		close(conn);
+		return member;
+	}
+
+	/** * jooh end */
 
 }
