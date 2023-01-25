@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+/***** 전체 컨테이너 *****/
+* {
+    margin: 0 auto;   
+}
+
+body {
+    background-color: #DDD6C9;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/***** header *****/
+div.header_block {
+    display: flex;
+    margin-top: 10px;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    align-items: center;
+}
+
+/***** 메뉴 스타일 *****/
+div.header_block .header_logo {
+    margin-top: 5px;
+    width: 250px;
+}
+
+div.main_block {
+    display: flex;
+}
+
+div.main_block ul {
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+}
+
+div.main_block ul :first-child {
+    border-radius: 30px 0px 0px 30px;
+}
+
+div.main_block ul :last-child {
+    border-radius: 0px 30px 30px 0px;
+}
+
+div.main_block ul li.admin {
+    border-radius: 30px 30px 30px 30px;
+}
+
+div.main_block ul:not(:nth-child(2)) li {
+    width: 150px;
+    line-height: 50px;
+    text-align: center;
+    list-style-type: none;
+    background-color: #3C6255;
+}
+
+div.main_block ul:nth-child(2) li {
+    width: 150px;
+    line-height: 50px;
+    text-align: center;
+    list-style-type: none;
+    background-color: white;
+}
+
+div.main_block ul li:not(:last-child) {
+    margin-right: 3px;
+}
+
+div.main_block ul:not(:nth-child(2)) li:hover {
+    background-color: white;
+}
+
+div.main_block ul li:hover {
+    background-color: #3C6255;
+}
+
+div.main_block ul:not(:nth-child(2)) li:hover a {
+    color: #3C6255;
+}
+
+div.main_block ul:nth-child(2) li:hover a {
+    color: white;
+}
+
+div.main_block ul:not(:nth-child(2)) a {
+    color: white;
+    text-decoration: none;
+}
+
+div.main_block ul:nth-child(2) a {
+    color: #3C6255;
+    text-decoration: none;
+}
+
+
+/***** footer *****/
+div.footer_block {
+    color: white;
+    background-color: #3C6255;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+div.footer_block :not(:nth-child(2)) {
+    display: flex;
+    align-items: center;
+}
+
+div.footer_block p {
+    opacity: 80%;
+    margin: 15px;
+}
+
+div.pagetop {
+    margin: 0px;
+    cursor: pointer;
+}
+
+img.footer_logo {
+    width: 120px;
+}
+
+img.github {
+    width: 30px;
+}
+
+section {
+    height: 1500px;
+}
