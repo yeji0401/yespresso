@@ -21,9 +21,9 @@
                 <!-- 메인 메뉴 시작 -->
                 <div class="main_block">
                     <ul class="main_nav">
-                        <li class="coffee"><a href="<%= request.getContextPath() %>">COFFEE</a></li>
-                        <li class="machine"><a href="<%= request.getContextPath() %>">MACHINE</a></li>
-                        <li class="accessories"><a href="<%= request.getContextPath() %>">ACCESSORIES</a></li>
+                        <li class="coffee"><a href="<%= request.getContextPath() %>/product/productList">COFFEE</a></li>
+                        <li class="machine"><a href="<%= request.getContextPath() %>/product/productList">MACHINE</a></li>
+                        <li class="accessories"><a href="<%= request.getContextPath() %>/product/productList">ACCESSORIES</a></li>
                         <li class="recipe"><a href="<%= request.getContextPath() %>">RECIPE</a></li>
                     </ul>
                     <ul class="main_login_block">
