@@ -31,6 +31,20 @@ public class MemberService {
 	/**
 	 * awon start
 	 */
+	public int updateMember(Member member) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = memberDao.UpdateMember(conn, member);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
 	/**
 	 * awon end
 	 */
@@ -49,6 +63,7 @@ public class MemberService {
 		close(conn);
 		return member;
 	}
+
 
 	/** * jooh end */
 
