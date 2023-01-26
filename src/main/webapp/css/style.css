@@ -15,19 +15,26 @@ div.header_block {
     display: flex;
     margin-top: 10px;
     position: fixed;
-    left: 50%;
+    left: 45%;
     transform: translate(-50%, 0);
     align-items: center;
 }
 
-/***** 메뉴 스타일 *****/
-div.header_block .header_logo {
+div.header_block .header_logo_block {
+    background-image: url('/yespresso/images/logo_basic.png');
+    background-repeat: no-repeat;
+    position: fixed;
     margin-top: 5px;
     width: 250px;
+    height: 50px; 
 }
+
+/***** 메뉴 스타일 *****/
 
 div.main_block {
     display: flex;
+    margin-top: 10px;
+    margin-left: 20%;
 }
 
 div.main_block ul {
@@ -114,19 +121,19 @@ div.footer_block p {
     margin: 15px;
 }
 
+div.github {
+    background-image: url('/yespresso/images/github_white.png');
+    width: 30px;
+    height: 30px;
+}
+
 div.pagetop {
     margin: 0px;
     cursor: pointer;
 }
 
-img.footer_logo {
+div.footer_logo {
+    background-image: url('/yespresso/images/logo_white.png');
     width: 120px;
-}
-
-img.github {
-    width: 30px;
-}
-
-section {
-    height: 1500px;
+    height: 24px;
 }
