@@ -11,6 +11,7 @@ import java.util.Properties;
 import com.sh.yespresso.member.model.dto.Gender;
 import com.sh.yespresso.member.model.dto.Member;
 import com.sh.yespresso.member.model.dto.MemberRole;
+import com.sh.yespresso.member.model.exception.MemberException;
 public class MemberDao {
 	private Properties prop = new Properties();
 	
@@ -42,6 +43,28 @@ public class MemberDao {
 	/**
 	 * awon start
 	 */
+
+
+	public int UpdateMember(Connection conn, Member member) {
+		// updateMember = update member set member_name = ?, birthday = ?, email = ?, phone = ?, address = ? where member_id = ?
+		String sql = prop.getProperty("updateMember");
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, member.getMemberName());
+			pstmt.setDate(3, member.getBirthday());
+			pstmt.setString(4, member.getEmail());
+			pstmt.setString(5, member.getPhone());
+			pstmt.setString(6, member.getAddress());
+			pstmt.setString(7, member.getMemberId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new MemberException("회원정보 수정 오류", e);
+		}
+		return result;
+	}
 	/**
 	 * awon end
 	 */
@@ -87,6 +110,7 @@ public class MemberDao {
 		return member;
 	}
 	/** * jooh end */
+
 
 }
 
