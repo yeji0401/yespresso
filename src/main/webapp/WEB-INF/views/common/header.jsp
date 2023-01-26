@@ -15,9 +15,7 @@
     <div id="container">
         <header>
             <div class="header_block">
-                <div class="header_logo_block">
-                    <a href="<%= request.getContextPath() %>"><img class="header_logo" src="image/logo_basic.png" alt="yespresso_LOGO"></a>
-                </div>
+                <div class="header_logo_block" onclick="location.href='<%= request.getContextPath() %>'"></div>
                 <!-- 메인 메뉴 시작 -->
                 <div class="main_block">
                     <ul class="main_nav">
@@ -31,7 +29,7 @@
                         <li class="cart"><a href="<%= request.getContextPath() %>">CART</a></li>
                     </ul>
                     <ul class="admin_block">
-                        <li class="admin"><a href="<%= request.getContextPath() %>">ADMIN</a></li>
+                        <li class="admin"><a href="<%= request.getContextPath() %>/admin/memberList">ADMIN</a></li>
                     </ul>
                 </nav>
                 <!-- 메인 메뉴 끝 -->
