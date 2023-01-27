@@ -230,6 +230,11 @@ CREATE TABLE ORDERS (
      comment on column ORDERS.TOTALPRICE is '주문총액';
      comment on column ORDERS.ORDER_STATE is '주문상태';
 
+-- order_state 컬럼 수정
+alter table ORDERS drop column ORDER_STATE;
+alter table ORDERS add ORDER_STATE CHAR(1) default 'B' not null;
+alter table ORDERS add constraint CK_ORDER_STATE check (ORDER_STATE in ('B', 'D', 'F'));
+
 -- sequence
 create sequence seq_order_no;
 
