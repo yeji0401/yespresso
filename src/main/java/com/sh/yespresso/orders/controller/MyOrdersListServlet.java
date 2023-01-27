@@ -13,7 +13,7 @@ import com.sh.yespresso.orders.model.service.OrdersService;
 /**
  * Servlet implementation class myOrdersListServlet
  */
-@WebServlet("/myPage/myOrders/myOrdersList")
+@WebServlet("/myPage/myOrdersList")
 public class MyOrdersListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private OrdersService ordersService = new OrdersService();
