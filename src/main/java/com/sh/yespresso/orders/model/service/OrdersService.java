@@ -38,6 +38,13 @@ public class OrdersService {
 		return myOrdersList;
 	}
 
+	public int selectTotalCount() {
+		Connection conn = getConnection();
+		int totalCount = ordersDao.selectTotalCount(conn);
+		close(conn);
+		return totalCount;
+	}
+
 	/**
 	 * awon end
 	 */

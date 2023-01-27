@@ -7,7 +7,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <section id=enroll-container>
 	<h2>나의 회원 정보</h2>
-	<form name="memberUpdateFrm" method="post" action="<%= request.getContextPath() %>/member/memberUpdate">
+	<form name="memberUpdateFrm" method="post" action="<%= request.getContextPath() %>/myPage/myAccountUpdate">
 		<table>
 			<tr>
 				<th>아이디<sup>*</sup></th>
@@ -61,7 +61,7 @@
 	</form>
 </section>
 
-<form action="<%= request.getContextPath() %>/member/memberDelete" method="POST" name="memberDeleteFrm"></form>
+<form action="<%= request.getContextPath() %>/myPage/myAccountDelete" method="POST" name="memberDeleteFrm"></form>
 <script>
 const deleteMember = () => {
 	if(confirm('정말 회원탈퇴하시겠습니까?')){
@@ -81,7 +81,7 @@ const deleteMember = () => {
  * 
  */
 const updatePassword = () => {
-	location.href = "<%= request.getContextPath() %>/member/updatePassword";
+	location.href = "<%= request.getContextPath() %>/myPage/updatePassword";
 };
 
 document.memberUpdateFrm.onsubmit = (e) => {

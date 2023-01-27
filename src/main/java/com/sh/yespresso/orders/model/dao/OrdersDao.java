@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.sh.yespresso.orders.model.dto.OrderState;
 import com.sh.yespresso.orders.model.dto.Orders;
 import com.sh.yespresso.orders.model.exception.OrdersException;
 
@@ -49,16 +50,29 @@ public class OrdersDao {
 	 */
 	// 마이페이지 - 주문리스트 보기.
 	public List<Orders> selectMyOrdersList(Connection conn, Map<String, Object> param, String orderMemberId) {
+		// selectMyOrdersList = select * from (select row_number() over(order by no
+		// desc) rnum, b.* from orders o where order_member_id = ?) where rnum between ?
+		// and ?
 		String sql = prop.getProperty("selectMyOrdersList");
 		List<Orders> myOrdersList = new ArrayList<>();
 
+		int page = (int) param.get("page");
+		int limit = (int) param.get("limit"); // 5
+
+		int start = (page - 1) * limit + 1; // 1, 6, 11, 16, ...
+		int end = page * limit; // 5, 10, 15, 20, ...
+
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, orderMemberId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while (rset.next()) {
 					Orders orders = handleOrdersResultSet(rset);
+
 					myOrdersList.add(orders);
+
 				}
 			}
 		} catch (SQLException e) {
@@ -67,9 +81,28 @@ public class OrdersDao {
 		return myOrdersList;
 	}
 
-	private Orders handleOrdersResultSet(ResultSet rset) {
-		// 1.26 여기 만들기.
-		return null;
+	private Orders handleOrdersResultSet(ResultSet rset) throws SQLException {
+		Orders orders = new Orders();
+		orders.setOrderNo(rset.getString("order_no"));
+		orders.setOrderMemberId(rset.getString("order_member_id"));
+		orders.setOrderDate(rset.getDate("order_date"));
+		orders.setTotalPrice(rset.getDouble("totalprice"));
+		orders.setOrderState(OrderState.valueOf(rset.getString("order_state")));
+		return orders;
+	}
+
+	public int selectTotalCount(Connection conn) {
+		String sql = prop.getProperty("selectTotalCount");
+		int totalCount = 0;
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rset = pstmt.executeQuery();) {
+			if (rset.next()) {
+				totalCount = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			throw new OrdersException("전체 주문내역 조회 오류!", e);
+		}
+		return totalCount;
 	}
 
 	/**

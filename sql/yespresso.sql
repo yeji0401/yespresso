@@ -597,6 +597,6 @@ from
     user_col_comments
 where
     table_name = 'QUESTION_ATTACHMENT';
-
-
-
+    
+SELECT * FROM    ALL_CONSTRAINTS
+WHERE    TABLE_NAME = 'order_detail';
