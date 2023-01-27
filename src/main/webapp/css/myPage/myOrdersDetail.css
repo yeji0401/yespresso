@@ -1,0 +1,15 @@
+@charset "UTF-8";
+body {
+	display : inline-block;
+}
+#orderInfo-container {
+	display : inline-block;
+	height : 0;
+	margin-left : 10%;
+}
+
+#ordered-product-container {
+		display : inline-block;
+	height : 0;
+	margin-left : 50%;
+}

@@ -5,7 +5,7 @@
 <%
 List<Orders> myOrdersList = (List<Orders>) request.getAttribute("myOrdersList");
 %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/orders.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/myPage/myOrdersList.css" />
 <section id="orders-container">
 	<h2>게시판</h2>
 
