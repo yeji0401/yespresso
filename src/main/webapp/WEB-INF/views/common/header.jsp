@@ -28,8 +28,11 @@
                         <li class="login"><a href="<%= request.getContextPath() %>/member/memberLogin">LOGIN</a></li>
                         <li class="cart"><a href="<%= request.getContextPath() %>">CART</a></li>
                     </ul>
-                    <ul class="admin_block">
-                        <li class="admin"><a href="<%= request.getContextPath() %>/admin/memberList">ADMIN</a></li>
+                  <ul class="admin_block">
+                  <!-- awon start -->
+                      <li class="login"><a href="<%= request.getContextPath() %>/myPage/myPageIndex">MYPAGE</a></li>
+                      <!-- awon end -->
+                       <li class="admin"><a href="<%= request.getContextPath() %>/admin/memberList">ADMIN</a></li>
                     </ul>
                 </nav>
                 <!-- 메인 메뉴 끝 -->
