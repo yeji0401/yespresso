@@ -72,7 +72,7 @@ public class MemberDao {
 
 	/** * jooh start */
 	public Member selectOneMember(Connection conn, String memberId) {
-		String sql = prop.getProperty("SelectOneMember");
+		String sql = prop.getProperty("selectOneMember");
 		Member member = null;
 		
 		// 1. PreparedStatement 객체 생성 및 미완성 쿼리 값대입
@@ -84,7 +84,19 @@ public class MemberDao {
 				
 				// 3. ResultSet -> dto 객체
 				while(rset.next()) {
-					member = handleMemberResultSet(rset);
+					member = new Member();
+					member.setMemberId(rset.getString("MEMBER_ID"));
+					member.setMemberRole(MemberRole.valueOf(rset.getString("FK_MEMBER_ROLE_ID")));
+					member.setPassword(rset.getString("PASSWORD"));
+					member.setMemberName(rset.getString("MEMBER_NAME"));
+					member.setBirthday(rset.getDate("BIRTHDAY"));
+					member.setGender(rset.getString("GENDER") != null ?
+										Gender.valueOf(rset.getString("GENDER")) : 
+											null);
+					member.setEmail(rset.getString("EMAIL"));
+					member.setPhone(rset.getString("PHONE"));
+					member.setAddress(rset.getString("ADDRESS"));
+					member.setEnrollDate(rset.getTimestamp("ENROLL_DATE"));
 				}
 			}
 		} catch(SQLException e) {
@@ -93,22 +105,7 @@ public class MemberDao {
 		return member;
 	}
 	
-	private Member handleMemberResultSet(ResultSet rset) throws SQLException {
-		Member member = new Member();
-		member.setMemberId(rset.getString("MEMBER_ID"));
-		member.setMemberRole(MemberRole.valueOf(rset.getString("FK_MEMBER_ROLE_ID")));
-		member.setPassword(rset.getString("PASSWORD"));
-		member.setMemberName(rset.getString("MEMBER_NAME"));
-		member.setBirthday(rset.getDate("BIRTHDAY"));
-		member.setGender(rset.getString("GENDER") != null ?
-							Gender.valueOf(rset.getString("GENDER")) : 
-								null);
-		member.setEmail(rset.getString("EMAIL"));
-		member.setPhone(rset.getString("PHONE"));
-		member.setAddress(rset.getString("ADDRESS"));
-		member.setEnrollDate(rset.getTimestamp("ENROLL_DATE"));
-		return member;
-	}
+
 	/** * jooh end */
 
 

@@ -1,12 +1,14 @@
 @charset "UTF-8";
 /* 로그인 컨테이너 */
+section#login-container {height: 880px;}
 #loginFrm table{margin: 10px auto; padding: 100px; width: 500px; height: 600px;}
 #loginFrm input[type=submit]{border-radius: 30px; width:415px;
-	height:40px; background:#A6BB8D; color:white; border: none; font-size:16px;}
+    height:40px; background:#A6BB8D; color:white; border: none; font-size:16px;}
 #loginFrm input[type=button]{border-radius: 30px; width:415px; 
-	height:40px; background:#A6BB8D; color: white; border: none; font-size:16px;}
+    height:40px; background:#A6BB8D; color: white; border: none; font-size:16px;}
 #loginFrm input[type=text]{border-radius: 30px; width:400px; height:30px; border:0.5px solid gray;}
 #loginFrm input[type=password]{border-radius: 30px; width:400px; height:30px; border:0.5px solid gray;}
 #loginFrm input[type=checkbox]{width:18px; height:18px; background: #3C6255; accent-color: #3C6255; }
-form.wrap {position:apsolute; margin:100px auto; border:none; width: 1519px; height:600px; background:#FFFBE9;} 
-
+form.wrap {position:absolute; margin:170px auto; border:none; width:100%; height:600px; background:#FFFBE9;}
+div.login-container table#logged-in{border-spacing:10px;}
+div.login-container table#logged-in input[type=button]{border-radius:3px;}
