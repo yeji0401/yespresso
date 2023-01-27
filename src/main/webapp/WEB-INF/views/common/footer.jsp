@@ -3,14 +3,14 @@
 </section>
 
 <footer>
-    <div class="footer_block">
+    <div class="footer-block">
         <div class="socials">
             <p>Follow Yespresso on</p>
             <div class="github" onclick="location.href='https://github.com/yeji0401/yespresso-app'"></div>
         </div>
         <div class="pagetop">Top of the Page ↑</div>
         <div class="copyright">
-            <div class="footer_logo" onclick="location.href='<%= request.getContextPath() %>'"></div>
+            <div class="footer-logo" onclick="location.href='<%= request.getContextPath() %>'"></div>
             <p>Yespresso 2023</p>
         </div>
     </div>
