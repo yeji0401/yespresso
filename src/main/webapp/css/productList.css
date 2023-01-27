@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+section#content {
+	width: 1000px;
+}
+/* 상단 꾸미기영역 */
+.addition {
+	margin: 10px auto;
+	position: relative;
+	text-align: center;
+}
+.addition img {
+	vertical-align: middle;
+}
+.add-text {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 25px;
+	color: #ffffff;
+}
+
+/* 카테고리 */
+.category-list {
+	text-allign: center;
+	padding: 0px;
+	margin: 0 auto;
+}
+.category-list ul{
+	list-style: none;
+	display: table;
+	padding: 0px;
+	margin: auto;
+}
+.category-list ul li{
+	float: left;
+	text-align: center;
+	background-color: #ffffff;
+	border-right: 1px solid #818181;
+	box-shadow: 1px 1px 8px #bbb;
+}
+.category-list ul li span {
+	display:  block;
+	padding-top: 7px;
+	text-decoration: none;
+}
