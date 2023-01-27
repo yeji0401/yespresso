@@ -33,6 +33,7 @@
                         <li class="login"><a href="<%= request.getContextPath() %>/member/memberLogin">LOGIN</a></li>
                         <li class="cart"><a href="<%= request.getContextPath() %>">CART</a></li>
                     </ul>
+                    
                     <ul class="main-block_3">
                     <% if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
                         <li class="myadmin"><a href="<%= request.getContextPath() %>/admin/memberList">ADMIN</a></li>
