@@ -7,25 +7,27 @@
 
 body {
     background-color: #DDD6C9;
-   	margin-top: 100px;
     font-family: 'Montserrat', sans-serif;
 }
 
 /***** header *****/
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 1300px;
+    height: 100px;
+}
+
 div.header-block {
-	width: 100%;
-    margin-top: 0.5%;
+    display: flex;
     position: fixed;
-    top: 0%;
-    left: 15%;
-    align-items: center;
+    z-index: 99999;
 }
 
 div.header-block .header-logo-block {
     background-image: url('/yespresso/images/logo_basic.png');
     background-repeat: no-repeat;
-    position: fixed;
-    margin-top: 1%;
     width: 250px;
     height: 50px; 
 }
@@ -34,14 +36,10 @@ div.header-block .header-logo-block {
 
 div.main-block {
     display: flex;
-    width: 15%;
-    margin-top: 0.7%;
-    margin-left: 14%;
 }
 
 div.main-block ul {
     display: flex;
-    margin-top: 3%;
 }
 
 div.main-block ul :first-child {
@@ -53,7 +51,6 @@ div.main-block ul :last-child {
 }
 
 div.main-block ul li.myadmin {
-	color: white;
     border-radius: 30px 30px 30px 30px;
 }
 
@@ -89,7 +86,7 @@ div.main-block ul:not(:nth-child(2)) li:hover a {
     color: #3C6255;
 }
 
-div.main_block ul:nth-child(2) li:hover a {
+div.main-block ul:nth-child(2) li:hover a {
     color: white;
 }
 
@@ -108,7 +105,7 @@ div.main-block ul:nth-child(2) a {
 div.footer-block {
     color: white;
     background-color: #3C6255;
-    width: 100%;
+    width: 1300px;
     height: 80px;
     display: flex;
     align-items: center;
@@ -142,5 +139,5 @@ div.footer-logo {
 }
 
 section {
-	height: 880px;
+	height: 750px;
 }

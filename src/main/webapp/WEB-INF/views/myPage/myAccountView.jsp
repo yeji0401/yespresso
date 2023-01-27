@@ -5,24 +5,6 @@
 <%@page import="com.sh.yespresso.member.model.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-<%
-Member loginMember = (Member)session.getAttribute("loginMember");
-String msg = (String) session.getAttribute("msg");
-if (msg != null)
-	session.removeAttribute("msg");
-
-Cookie[] cookies = request.getCookies();
-String saveId = null;
-if (cookies != null) {
-	for (Cookie cookie : cookies) {
-		String name = cookie.getName();
-		String value = cookie.getValue();
-		// System.out.println(name + "=" + value);
-		if ("saveId".equals(name))
-	saveId = value;
-	}
-}
-%>
 <section id=enroll-container>
 	<h2>나의 회원 정보</h2>
 	<form name="memberUpdateFrm" method="post" action="<%= request.getContextPath() %>/member/memberUpdate">
