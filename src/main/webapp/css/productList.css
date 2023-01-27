@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 section#content {
-	width: 1000px;
+	width: 1200px;
 }
 /* 상단 꾸미기영역 */
 .addition {
@@ -26,22 +26,68 @@ section#content {
 	text-allign: center;
 	padding: 0px;
 	margin: 0 auto;
+	top: -34px;
+	position: relative; /* 전체위치정렬 */
 }
 .category-list ul{
 	list-style: none;
 	display: table;
 	padding: 0px;
 	margin: auto;
+	box-shadow: 0px 1px 16px #2d2d2d5c;
 }
 .category-list ul li{
 	float: left;
 	text-align: center;
+	height: 57px;
+	width: 90px;
 	background-color: #ffffff;
-	border-right: 1px solid #818181;
-	box-shadow: 1px 1px 8px #bbb;
 }
+.category-list ul li:first-child{
+	border-right: 2px solid #E8EAE6;
+	font-weight: bold;
+	padding-left: 14px;
+	padding-right: 30px;
+	width: 60px;
+}
+.category-list ul li:first-child span{
+	color: #100F0F;
+}
+.pad1{
+	padding: 0 0 0 5px;
+}
+.pad2{
+	padding: 0 20px;
+}
+.category-list ul li:last-child{
+	border-left: 2px solid #E8EAE6;
+	font-weight: bold;
+	padding: 0 5px;
+}
+.category-list ul li:last-child span{
+	color: #100F0F;
+}
+
 .category-list ul li span {
 	display:  block;
-	padding-top: 7px;
+	padding-top: 19px;
 	text-decoration: none;
+	color: #636363;
+	font-size: 15px;
+}
+
+.material-symbols-outlined {
+	position: relative;
+	left: 25px;
+	top: -36px;
+	font-variation-settings:
+	  'FILL' 0,
+	  'wght' 600,
+	  'GRAD' 0,
+	  'opsz' 48
+}
+.category-list ul li:hover span {
+	font-weight: bold;
+	color: #100F0F;
+
 }
