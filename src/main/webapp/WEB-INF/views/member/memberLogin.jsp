@@ -2,11 +2,6 @@
 <%@page import="com.sh.yespresso.member.model.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	Member loginMember = (Member) session.getAttribute("loginMember");
-	String msg = (String) session.getAttribute("msg");
-	
-%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/login.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
