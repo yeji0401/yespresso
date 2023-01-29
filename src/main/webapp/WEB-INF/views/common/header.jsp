@@ -51,7 +51,7 @@
                     
                     <ul class="main-block_3">
                     <% if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
-                        <li class="myadmin"><a href="<%= request.getContextPath() %>/admin/memberList">ADMIN</a></li>
+                        <li class="myadmin"><a href="<%= request.getContextPath() %>/admin/adminMemberList">ADMIN</a></li>
                     <% } else if (loginMember != null && (loginMember.getMemberRole() == MemberRole.C || loginMember.getMemberRole() == MemberRole.V)){ %>
                         <li class="myadmin"><a href="<%= request.getContextPath() %>/myPage/myPage">MYPAGE</a></li>
                     <% } else { %>
