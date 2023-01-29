@@ -39,7 +39,7 @@
                 <!-- 메인 메뉴 시작 -->
                 <div class="main-block">
                     <ul class="main_nav">
-                        <li class="coffee"><a href="<%= request.getContextPath() %>/product/productList">COFFEE</a></li>
+                        <li class="coffee"><a href="<%= request.getContextPath() %>/product/coffeeList">COFFEE</a></li>
                         <li class="machine"><a href="<%= request.getContextPath() %>/product/productList">MACHINE</a></li>
                         <li class="accessories"><a href="<%= request.getContextPath() %>/product/productList">ACCESSORIES</a></li>
                         <li class="recipe"><a href="<%= request.getContextPath() %>">RECIPE</a></li>
