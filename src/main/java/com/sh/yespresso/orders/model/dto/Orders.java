@@ -1,6 +1,8 @@
 package com.sh.yespresso.orders.model.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * OrderDetailList
@@ -13,11 +15,23 @@ public class Orders {
 	private Date orderDate;
 	private double totalPrice;
 	private OrderState orderState; // b 결제완료 / d 배송중 / f 배송완료
+	private List<OrderDetail> orderDetailList = new ArrayList<>();
 
 	public Orders() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
+	public Orders(String orderNo, String orderMemberId, Date orderDate, double totalPrice, OrderState orderState,
+			List<OrderDetail> orderDetailList) {
+		super();
+		this.orderNo = orderNo;
+		this.orderMemberId = orderMemberId;
+		this.orderDate = orderDate;
+		this.totalPrice = totalPrice;
+		this.orderState = orderState;
+		this.orderDetailList = orderDetailList;
+	}
 	public Orders(String orderNo, String orderMemberId, Date orderDate, double totalPrice, OrderState orderState) {
 		super();
 		this.orderNo = orderNo;
@@ -67,10 +81,21 @@ public class Orders {
 		this.orderState = orderState;
 	}
 
+	public List<OrderDetail> getOrderDetailList() {
+		return orderDetailList;
+	}
+
+	public void setOrderDetailList(List<OrderDetail> orderDetailList) {
+		this.orderDetailList = orderDetailList;
+	}
+
 	@Override
 	public String toString() {
 		return "Orders [orderNo=" + orderNo + ", orderMemberId=" + orderMemberId + ", orderDate=" + orderDate
-				+ ", totalPrice=" + totalPrice + ", orderState=" + orderState + "]";
+				+ ", totalPrice=" + totalPrice + ", orderState=" + orderState + ", orderDetailList=" + orderDetailList
+				+ "]";
 	}
 
+	
+	
 }
