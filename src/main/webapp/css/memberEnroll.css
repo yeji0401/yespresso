@@ -1,8 +1,12 @@
 @charset "UTF-8";
 /* 회원가입페이지 */
-section#enroll-container {text-align:center;}
-section#enroll-container input{margin:3px;}
-section#enroll-container table{margin: 10px auto; padding: 200px; width: 70%; height: 700px;}
-section#enroll-container table th {padding:0 10px; text-align:right;}
-section#enroll-container table td {padding:0 10px; text-align:left;}
-section#enroll-container sup{color: red;}
+
+#memberEnrollFrm table{margin:auto; padding:50px; width: 500px; height: 600px;}
+#memberEnrollFrm input[type=submit]{border-radius: 30px; width:415px; 
+    height:40px; background:#A6BB8D; color:white; border: none; font-size:16px;}
+#memberEnrollFrm input[type=button]{border-radius: 30px; width:50px;
+    height:25px; background:#A6BB8D; color: white; border: none; font-size:10px;}
+#memberEnrollFrm input[type=text]{border-radius: 30px; width:400px; height:30px; border:0.5px solid gray;}
+#memberEnrollFrm input[type=password]{border-radius: 30px; width:400px; height:30px; border:0.5px solid gray;}
+#memberEnrollFrm input[type=email]{border-radius: 30px; width:400px; height:30px; border:0.5px solid gray;}
+#memberEnrollFrm input[type=tel]{border-radius: 30px; width:400px; height:30px; border:0.5px solid gray;}

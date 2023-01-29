@@ -131,6 +131,25 @@ public class MemberService {
 	}
 
 
+	public int insertMember(Member member) {
+		int result = 0;
+		//Connection생성
+		Connection conn = getConnection();
+		//dao요청
+		try {
+			result = memberDao.insertMember(conn,member);
+			// 트랜잭션 처리
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+
 	/** * jooh end */
 
 }
