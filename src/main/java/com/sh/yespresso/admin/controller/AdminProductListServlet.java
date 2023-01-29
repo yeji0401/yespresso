@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sh.yespresso.common.YespressoUtils;
-import com.sh.yespresso.member.model.dto.Member;
 import com.sh.yespresso.product.model.dto.Product;
 import com.sh.yespresso.product.model.service.ProductService;
 
@@ -43,18 +42,18 @@ public class AdminProductListServlet extends HttpServlet {
 		
 		// 2. 업무로직
 		// a. content 영역
-//		List<Product> products = productService.selectAllProduct(param);
-//		System.out.println(products);
-//		// b. pagebar 영역
-//		int totalCount = productService.selectTotalCount();
-//		System.out.println(totalCount);
-//		String url = request.getRequestURI(); // /yespresso/admin/adminProductList
-//		String pagebar = YespressoUtils.getPagebar(page, limit, totalCount, url);
-//		System.out.println(pagebar);
-//		
-//		// 3. view단 처리
-//		request.setAttribute("products", products);
-//		request.setAttribute("pagebar", pagebar);
+		List<Product> products = productService.selectAllProduct(param);
+		System.out.println(products);
+		// b. pagebar 영역
+		int totalCount = productService.selectTotalCount();
+		System.out.println(totalCount);
+		String url = request.getRequestURI(); // /yespresso/admin/adminProductList
+		String pagebar = YespressoUtils.getPagebar(page, limit, totalCount, url);
+		System.out.println(pagebar);
+		
+		// 3. view단 처리
+		request.setAttribute("products", products);
+		request.setAttribute("pagebar", pagebar);
 		
 		request.getRequestDispatcher("/WEB-INF/views/admin/adminProductList.jsp")
 		.forward(request, response);	

@@ -36,7 +36,7 @@ public class AdminUpdateMemberRoleServlet extends HttpServlet {
 			// 2. 업무로직 - DB 해당 회원 권한 수정
 			int result = memberService.updateMemberRole(memberId, memberRole);
 
-			// 2.5 사용자메세지 전송
+			// 2.5 사용자 메세지 전송
 			session.setAttribute("msg", "회원 권한을 성공적으로 변경했습니다.");
 
 		} catch (Exception e) {

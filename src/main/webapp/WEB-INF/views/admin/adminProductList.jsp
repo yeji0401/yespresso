@@ -11,6 +11,9 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <!-- 관리자용 admin.css link -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/admin.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 <style>
 </style>
 <script>
@@ -19,7 +22,7 @@
         <div id="admin-block">
             <ul class="admin-nav">
                 <li class="member"><a href="<%= request.getContextPath() %>/admin/adminMemberList">회원 관리</a></li>
-                <li class="product"><a href="">제품 관리</a></li>
+                <li class="product" style="font-weight: bold;"><a href="">제품 관리</a></li>
                 <li class="orders"><a href="<%= request.getContextPath() %>/admin/adminOrdersList">주문 관리</a></li>
             </ul>
         </div>
@@ -29,7 +32,7 @@
                 <option value="product_name">제품명</option>
             </select>
             <div id="search-product" class="search-type">
-                <form action="#">
+                <form action="<%= request.getContextPath() %>/admin/adminProductFinder">
                     <input type="hidden" name="searchType" value="product_name">
                     <input type="text" name="searchKeyword" size="25" placeholder="검색할 제품명을 입력하세요."
                         value="">
@@ -134,12 +137,11 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>제품번호</th>
+                    <th>제품사진</th>
                     <th>제품명</th>
                     <th>제품번호</th>
                     <th>가격</th>
                     <th>재고</th>
-                    <th>카테고리번호</th>
                     <th>판매량</th>
                     <th>제품등록일</th>
                     <th>제품 타입</th>
@@ -156,7 +158,7 @@
            <tbody>
 			<% if(products.isEmpty()){ %>
 				<tr>
-					<td colspan="15">조회된 제품이 없습니다.</td>
+					<td colspan="16">조회된 제품이 없습니다.</td>
 				</tr>
 			<% 
 			   } else { 
@@ -164,7 +166,18 @@
 			%>
 					<tr>
 						<td></td>
+						<td><img src="images/product/<%= product.getThumbnailFilename() %>.jpg" alt="" /></td>
+						<td><%= product.getProductName() %></td>
 						<td><%= product.getProductNo() %></td>
+						<td><%= product.getProductPrice() %></td>
+						<td><%= product.getProductStock() %></td>
+						<td><%= product.getProductSaleCnt() %></td>
+						<td><%= product.getProductDate() %></td>
+						<td><%= product.getType() %></td>
+						<td><%= product.getAroma() != null ? product.getAroma() : "" %></td>
+						<td><%= product.getAcidity() != 0 ? product.getAcidity() : "" %></td>
+						<td><%= product.getRoasting() != 0 ? product.getRoasting() : "" %></td>
+						<td><%= product.getCupSize() != null ? product.getCupSize() : "" %></td>
 						<td><input type="checkbox" name="" id=""></td>
 					</tr>
 			<%

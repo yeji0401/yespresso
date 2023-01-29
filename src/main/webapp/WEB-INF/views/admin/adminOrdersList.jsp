@@ -11,6 +11,9 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <!-- 관리자용 admin.css link -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/admin.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 <style>
 div#search-orderNo	 	  {display: <%= searchType == null || "order_no".equals(searchType) ? "inline-block" : "none" %>;}
 div#search-orderMemberId  {display: <%= "order_member_id".equals(searchType) ? "inline-block" : "none" %>;}
@@ -41,7 +44,7 @@ window.addEventListener('load', () => {
             <ul class="admin-nav">
                 <li class="member"><a href="<%= request.getContextPath() %>/admin/adminMemberList">회원 관리</a></li>
                 <li class="product"><a href="<%= request.getContextPath() %>/admin/adminProductList"">제품 관리</a></li>
-                <li class="orders"><a href="">주문 관리</a></li>
+                <li class="orders" style="font-weight: bold;"><a href="">주문 관리</a></li>
             </ul>
         </div>
         <h2>주문 관리</h2>
@@ -52,7 +55,7 @@ window.addEventListener('load', () => {
                 <option value="order_date">주문일자</option>
             </select>
             <div id="search-orderNo" class="search-type">
-                <form action="#">
+                <form action="<%= request.getContextPath() %>/admin/adminOrdersFinder">
                     <input type="hidden" name="searchType" value="order_no">
                     <input type="text" name="searchKeyword" size="25" placeholder="검색할 주문번호를 입력하세요."
                         value="">
@@ -60,7 +63,7 @@ window.addEventListener('load', () => {
                 </form>
             </div>
             <div id="search-orderMemberId" class="search-type">
-                <form action="#">
+                <form action="<%= request.getContextPath() %>/admin/adminOrdersFinder">
                     <input type="hidden" name="searchType" value="order_member_id">
                     <input type="text" name="searchKeyword" size="25" placeholder="검색할 주문아이디를 입력하세요."
                         value="">
@@ -68,7 +71,7 @@ window.addEventListener('load', () => {
                 </form>
             </div>
             <div id="search-orderDate" class="search-type">
-                <form action="#">
+                <form action="<%= request.getContextPath() %>/admin/adminOrdersFinder">
                     <input type="hidden" name="searchType" value="order_date">
                     <input type="text" name="searchKeyword" size="25" placeholder="검색할 주문일자를 입력하세요."
                         value="">

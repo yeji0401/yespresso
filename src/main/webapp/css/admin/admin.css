@@ -4,20 +4,22 @@
 
 * {
     margin: 0 auto;
+    font-family: 'Gothic A1', sans-serif;
+}
+
+section#admin-container {
+	margin-bottom: 30px;
 }
 
 div#admin-block {
+	display: flex;
     width: 600px;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: centent;
+    height: 70px;
 }
 
 div#admin-block ul {
-    display: flex;
+	display: flex;
     text-decoration: none;
-    padding: 0;
 }
 
 div#admin-block ul li {
@@ -37,6 +39,7 @@ div#admin-block ul li a {
 
 h2 {
     text-align: center;
+    margin-top: 30px;
     translate: -250px;
 }
 
@@ -45,14 +48,16 @@ div#search-block {
     height: 50px;
     text-align: center;
     margin-top: 30px;
+    background-color: white;
 }
 
 div#check-block {
     display: flex;
-    justify-content: space-between;
     width: 900px;
+    height: 200px;
     margin: 0 auto;
     margin-top: 30px;
+    background-color: white;
 }
 
 div#check-block p {
@@ -61,14 +66,19 @@ div#check-block p {
     margin-bottom: 10px;
 }
 
+div#member-sort {
+	width: 200px;
+	height: 100px;
+}
+
 /**** 테이블 리스트 관련 ****/
 
-table {height: 100px; margin: 0 auto; margin-top: 30px; text-align: center; border-collapse: collapse;}
+table {width: 1000px; height: 100px; margin: 0 auto; margin-top: 30px; text-align: center; border-collapse: collapse;}
 th {background-color: #E8EAE6;}
 th, td {padding: 10px;}
 
 /***** 페이지바 관련 *****/
-section#admin-container div#pagebar{margin-top:30px; margin-bottom: 30px; text-align:center;}
+section#admin-container div#pagebar{margin-top:30px; text-align:center;}
 section#admin-container div#pagebar span.cPage{margin-right: 5px;}
 section#admin-container div#pagebar a{margin-right: 5px; text-decoration: none;}
 section#admin-container div#pagebar a:hover {text-decoration: underline;}

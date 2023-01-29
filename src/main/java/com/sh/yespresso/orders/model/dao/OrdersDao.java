@@ -39,6 +39,58 @@ public class OrdersDao {
 	/**
 	 * yeji start
 	 */
+	public List<Orders> selectAllOrders(Connection conn, Map<String, Object> param) {
+		String sql = prop.getProperty("selectAllMember"); // select * from (select row_number() over(order by ORDER_DATE desc) rnum, o.* from ORDERS o) where rnum between ? and ?
+		List<Orders> orders = new ArrayList<>();
+		int page = (int) param.get("page");
+		int limit = (int) param.get("limit");
+		int start = (page - 1) * limit + 1; 
+		int end = page * limit;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			try(ResultSet rset = pstmt.executeQuery();){
+				
+				while(rset.next()) {
+					Orders order = handleOrdersResultSet(rset);
+					orders.add(order);
+				}
+			}
+			
+			
+		} catch (SQLException e) {
+			throw new OrdersException("관리자 주문 목록 조회 오류!", e);
+		}
+				
+		return orders;
+	}
+	
+	public List<Orders> searchOrders(Connection conn, Map<String, String> param) {
+		List<Orders> orders = new ArrayList<>();
+		String searchType = param.get("searchType"); // order_no | order_member_id | order_date
+		String searchKeyword = param.get("searchKeyword");
+		String sql = prop.getProperty("searchOrders"); // select * from ORDERS where # like ?
+		sql = sql.replace("#", searchType);
+		System.out.println(sql);
+		
+		// 1. PreaparedStatement 객체 생성 & 미완성쿼리 값대입
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, "%" + searchKeyword + "%"); 
+			// 2. 실행 & ResultSet 반환
+			try(ResultSet rset = pstmt.executeQuery()){				
+				// 3. ResultSet -> List<Orders>
+				while(rset.next())
+					orders.add(handleOrdersResultSet(rset));
+			}
+		} catch (SQLException e) {
+			throw new OrdersException("관리자 주문 검색 오류", e);
+		}
+		
+		return orders;
+	}
+	
 	/**
 	 * yeji end
 	 */
