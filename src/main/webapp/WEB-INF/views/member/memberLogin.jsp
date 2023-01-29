@@ -5,7 +5,24 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/login.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%
+	String msg = (String) session.getAttribute("msg");
+	if (msg != null)
+	session.removeAttribute("msg");
 
+	Cookie[] cookies = request.getCookies();
+	String saveId = null;
+	if (cookies != null) {
+		for (Cookie cookie : cookies) {
+			String name = cookie.getName();
+			String value = cookie.getValue();
+			// System.out.println(name + "=" + value);
+			if ("saveId".equals(name))
+		saveId = value;
+		}
+	}
+
+%>
 <script>
 window.addEventListener('load', () => {
 	
@@ -39,7 +56,7 @@ window.addEventListener('load', () => {
 </script>
     <div id="login-container">
    
-        <% if(loginMember == null) { %>
+       
 		
 				<!-- 로그인폼 시작 -->
        
@@ -47,7 +64,7 @@ window.addEventListener('load', () => {
 	        	class="wrap"
 	            id="loginFrm"
 	            name="loginFrm" 
-	            action="<%= request.getContextPath() %>/member/memberlogin"
+	            action="<%= request.getContextPath() %>/member/memberLogin"
 	            method="POST">
 	            
 	            <table>
@@ -62,7 +79,7 @@ window.addEventListener('load', () => {
 	                </tr>
 	                <tr>
 	                    <td>
-	                        &nbsp; <input type="checkbox" name="saveId" id="saveId"  /> 
+	                        &nbsp; <input type="checkbox" name="saveId" id="saveId" <%= saveId != null ? "checked" : "" %>  /> 
 	                        <label for="saveId" style="font-size: 12px; padding-left:2px;">아이디저장</label>
 	                    </td>
 	                </tr>
@@ -72,7 +89,7 @@ window.addEventListener('load', () => {
 	                </tr>
 	                
 	                <tr>
-	                    <td><p style="font-size: 12px; text-align: center;"> <br /> <u>예스프레소가 처음이신가요?</u></p> <br /> 
+	                    <td><p style="font-size: 12px; text-align: center;"> <br /> <u>예스프레소가 처음이신가요?</u></p> <br />
 	                    <input type="button" value="회원가입" onclick="location.href = '<%= request.getContextPath() %>/member/memberEnroll';" tabindex="4"></td>
 	                </tr>
 	            </table>
@@ -81,20 +98,8 @@ window.addEventListener('load', () => {
 	    </form>
    		<!-- 로그인폼 끝-->
 			
-			<% } else { %>
-				<table id="login">
-				<tr>
-						<td><%= loginMember.getMemberName() %>님, 안녕하세요😁</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="button" value="내정보보기" onclick="location.href = '<%= request.getContextPath() %>/member/memberView';"/>
-							<input type="button" value="로그아웃" onclick="location.href = '<%= request.getContextPath() %>/member/logout';"/>
-						</td>
-					</tr>
-				</table>
 			
-			<% } %>
+				
 			
 			</div>
     

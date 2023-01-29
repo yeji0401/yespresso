@@ -4,21 +4,7 @@
     pageEncoding="UTF-8"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
-	String msg = (String) session.getAttribute("msg");
-	if (msg != null)
-		session.removeAttribute("msg");
-	
-	Cookie[] cookies = request.getCookies();
-	String saveId = null;
-	if (cookies != null) {
-		for (Cookie cookie : cookies) {
-			String name = cookie.getName();
-			String value = cookie.getValue();
-			// System.out.println(name + "=" + value);
-			if ("saveId".equals(name))
-		saveId = value;
-		}
-	}
+
 %>
 <!DOCTYPE html>
 <html>
@@ -45,7 +31,11 @@
                         <li class="recipe"><a href="<%= request.getContextPath() %>">RECIPE</a></li>
                     </ul>
                     <ul class="main-block_2">
+                     <% if(loginMember == null) { %>
                         <li class="login"><a href="<%= request.getContextPath() %>/member/memberLogin">LOGIN</a></li>
+                     <% } else { %>  
+						 <li class="login"><a href="<%= request.getContextPath() %>/member/memberLogout">LOGOUT</a></li>
+					 <% } %>
                         <li class="cart"><a href="<%= request.getContextPath() %>">CART</a></li>
                     </ul>
                     
@@ -54,9 +44,9 @@
                         <li class="myadmin"><a href="<%= request.getContextPath() %>/admin/memberList">ADMIN</a></li>
                     <% } else if (loginMember != null && (loginMember.getMemberRole() == MemberRole.C || loginMember.getMemberRole() == MemberRole.V)){ %>
                         <li class="myadmin"><a href="<%= request.getContextPath() %>/myPage/myPage">MYPAGE</a></li>
-                    <% } else { %>
+                    <% } else { %> 
                     	<li class="myadmin">☕</li>
-                   	<% } %>
+                   	 <% } %> 
                     </ul>                    
                 <!-- 메인 메뉴 끝 -->
             	</div>

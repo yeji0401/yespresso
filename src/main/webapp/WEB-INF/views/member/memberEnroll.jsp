@@ -23,9 +23,13 @@ window.onload = function(){
 		method="POST" 
 		action="<%= request.getContextPath() %>/member/memberEnroll">
 		<table>
+			<th>
+				<th><p style="text-align = center;">회원가입</p></th>
+			</th>
+			
 			<tr>
-				<th>아이디<sup>*</sup></th>
 				<td>
+					아이디<sup>*</sup>
 					<input type="text" placeholder="4글자이상" name="memberId" id="_memberId" value="sinsa" required>
 					<input type="button" value="아이디 중복검사" onclick="checkIdDuplicate();"/>
 					<input type="hidden" id="idValid" name="idValid" value="0"/>
@@ -33,32 +37,32 @@ window.onload = function(){
 				</td>
 			</tr>
 			<tr>
-				<th>패스워드<sup>*</sup></th>
 				<td>
+					패스워드<sup>*</sup>
 					<input type="password" name="password" id="_password" value="1234" required><br>
 				</td>
 			</tr>
 			<tr>
-				<th>패스워드확인<sup>*</sup></th>
-				<td>	
+				<td>
+					패스워드확인<sup>*</sup>	
 					<input type="password" id="passwordCheck" value="1234" required><br>
 				</td>
 			</tr>  
 			<tr>
-				<th>이름<sup>*</sup></th>
-				<td>	
-				<input type="text"  name="memberName" id="memberName" value="신사임당" required><br>
+				<td>
+					이름<sup>*</sup>	
+					<input type="text"  name="memberName" id="memberName" value="신사임당" required><br>
 				</td>
 			</tr>
 			<tr>
-				<th>생년월일</th>
 				<td>	
+				생년월일
 				<input type="date" name="birthday" id="birthday" value="1988-08-08"><br />
 				</td>
 			</tr> 
 			<tr>
-				<th>성별 </th>
 				<td>
+					성별
 					<input type="radio" name="gender" id="gender0" value="M">
 					<label for="gender0">남</label>
 					<input type="radio" name="gender" id="gender1" value="F" checked>
@@ -66,20 +70,20 @@ window.onload = function(){
 				</td>
 			</tr>
 			<tr>
-				<th>이메일</th>
 				<td>	
+				    이메일
 					<input type="email" placeholder="abc@xyz.com" name="email" id="email" value="sinsa@naver.com"><br>
 				</td>
 			</tr>
 			<tr>
-				<th>휴대폰<sup>*</sup></th>
 				<td>	
+				    휴대폰<sup>*</sup>
 					<input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="01012344321" required><br>
 				</td>
 			</tr>
 			<tr>
-				<th>주소<sup>*</sup></th>
 				<td>	
+					주소<sup>*</sup>
 					<input type="text" placeholder="동까지 기입" name="address" id="address" readonly><br>
 					<input type="text" placeholder="상세주소" name="detail" id="detail" value="1016호" required/> <br />
 				</td>

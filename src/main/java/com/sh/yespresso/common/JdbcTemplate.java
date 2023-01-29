@@ -21,7 +21,7 @@ public class JdbcTemplate {
 		Properties prop = new Properties();
 		try {
 			prop.load(new FileReader(datasourceConfigPath));
-			driverClass = prop.getProperty("dirverClass");
+			driverClass = prop.getProperty("driverClass");
 			url =  prop.getProperty("url");
 			user = prop.getProperty("user");
 			password = prop.getProperty("password");
@@ -31,7 +31,7 @@ public class JdbcTemplate {
 		
 		try {
 			//1. driverClass 등록 : 프로그램 실행 시 최초 1회만 처리
-			Class<?> driverClassInstance = Class.forName(driverClass);
+			Class<?> driverClassInstance = Class.forName(driverClass); 
 			System.out.println(driverClassInstance);
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
@@ -44,7 +44,9 @@ public class JdbcTemplate {
 		try {
 			conn = DriverManager.getConnection(url, user, password);
 			conn.setAutoCommit(false);
+			System.out.println("2. conn생성 성공");
 		} catch (Exception e) {
+			System.out.println("2. conn실패");
 			e.printStackTrace();
 		}
 		return conn;
