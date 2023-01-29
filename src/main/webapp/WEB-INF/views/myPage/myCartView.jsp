@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Orders Detail</title>
+<title>My Cart View</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/myPage/myOrderDetail.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
