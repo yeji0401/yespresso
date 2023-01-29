@@ -192,11 +192,11 @@ public class MemberDao {
 
 	/** * jooh start */
 	public Member selectOneMember(Connection conn, String memberId) {
-		String sql = prop.getProperty("SelectOneMember");
+		String sql = prop.getProperty("selectOneMember");
 		Member member = null;
 		
 		// 1. PreparedStatement 객체 생성 및 미완성 쿼리 값대입
-		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
 			pstmt.setString(1, memberId);
 			
 			// 2. pstmt 실행 및 결과반환
@@ -213,7 +213,7 @@ public class MemberDao {
 		return member;
 	}
 	
-	private Member handleMemberResultSet(ResultSet rset) throws SQLException {
+	private Member handleMemberResultSet(ResultSet rset) throws SQLException{
 		Member member = new Member();
 		member.setMemberId(rset.getString("MEMBER_ID"));
 		member.setMemberRole(MemberRole.valueOf(rset.getString("FK_MEMBER_ROLE_ID")));
@@ -229,6 +229,29 @@ public class MemberDao {
 		member.setEnrollDate(rset.getTimestamp("ENROLL_DATE"));
 		return member;
 	}
+	
+	public int insertMember(Connection conn, Member member) {
+		String sql = prop.getProperty("insertMember");
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getPassword());
+			pstmt.setString(3, member.getMemberName());
+			pstmt.setDate(4, member.getBirthday());
+			pstmt.setString(5, member.getGender().name());
+			pstmt.setString(6, member.getEmail());
+			pstmt.setString(7, member.getPhone());
+			pstmt.setString(8, member.getAddress());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch(SQLException e) {
+			throw new MemberException("회원가입 오류",e);
+		}
+		return result;
+	}
+
 	/** * jooh end */
 
 

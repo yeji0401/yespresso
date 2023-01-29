@@ -48,9 +48,12 @@ public class JdbcTemplate {
 		try {
 			conn = DriverManager.getConnection(url, user, password);
 			conn.setAutoCommit(false);
+			
 			System.out.println("2. conn 생성 성공");
+
 		} catch (Exception e) {
 			System.out.println("2. conn 실패");
+
 			e.printStackTrace();
 		}
 		return conn;
