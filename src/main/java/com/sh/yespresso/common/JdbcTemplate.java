@@ -16,23 +16,15 @@ public class JdbcTemplate {
 	private static String url = "jdbc:oracle:thin:@IYQYIAJCFCLEVUSB_medium?TNS_ADMIN=C:\\Workspaces\\web_server_workspace\\Wallet_IYQYIAJCFCLEVUSB"; 
 	private static String user = "yespresso";
 	private static String password = "Qpwozmxn0118";
-	
-	static {
-
-		try {
-			Class<?> driverClassInstance = Class.forName(driverClass);
-			System.out.println(driverClassInstance);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
 
 	public static Connection getConnection() {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(url, user, password);
 			conn.setAutoCommit(false);
+			System.out.println("2. conn 생성 성공");
 		} catch (Exception e) {
+			System.out.println("2. conn 실패");
 			e.printStackTrace();
 		}
 		return conn;
@@ -82,5 +74,4 @@ public class JdbcTemplate {
 			e.printStackTrace();
 		}		
 	}
-	
 }

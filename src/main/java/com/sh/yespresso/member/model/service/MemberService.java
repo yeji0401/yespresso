@@ -1,10 +1,12 @@
 package com.sh.yespresso.member.model.service;
 
 import java.sql.Connection;
+import java.util.List;
+import java.util.Map;
 
 import static com.sh.yespresso.common.JdbcTemplate.close;
-import static com.sh.yespresso.common.JdbcTemplate.commit;
 import static com.sh.yespresso.common.JdbcTemplate.getConnection;
+import static com.sh.yespresso.common.JdbcTemplate.commit;
 import static com.sh.yespresso.common.JdbcTemplate.rollback;
 
 import com.sh.yespresso.member.model.dao.MemberDao;
@@ -23,6 +25,19 @@ public class MemberService {
 	/**
 	 * yeji start
 	 */
+	public List<Member> selectAllMember(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Member> members = memberDao.selectAllMember(conn, param);
+		close(conn);
+		return members;
+	}
+	
+	public int selectTotalCount() {
+		Connection conn = getConnection();
+		int totalCount = memberDao.selectTotalCount(conn);
+		close(conn);
+		return totalCount;
+	}
 	/**
 	 * yeji end
 	 */
