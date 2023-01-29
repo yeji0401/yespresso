@@ -24,7 +24,7 @@ public class JdbcTemplate {
 		try {
 			prop.load(new FileReader(datasourceConfigPath));
 			driverClass = prop.getProperty("driverClass");
-			url =  prop.getProperty("url");
+			url = prop.getProperty("url");
 			user = prop.getProperty("user");
 			password = prop.getProperty("password");
 		} catch (IOException e) {
@@ -40,6 +40,7 @@ public class JdbcTemplate {
 		}
 	}
 	
+
 
 	public static Connection getConnection() {
 		Connection conn = null;
