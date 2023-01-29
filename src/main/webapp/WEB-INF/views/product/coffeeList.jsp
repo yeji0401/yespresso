@@ -8,11 +8,12 @@
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/productList.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 <div class="productList-container">
 	<!-- 상단 꾸미기 영역 -->
 	<div class="addition">
 		<div class="add-img">
-			<img src="/yespresso/images/productList_coffee.jpg" style="width: 1200px;" />
+			<img src="<%= request.getContextPath() %>/images/product/productList_coffee.jpg" style="width: 1200px;" />
 		</div>
 		<div class="add-text">
 			<h2>COFFEE</h2>
@@ -33,28 +34,51 @@
 	</div>
 	<!-- 상품리스트 -->
 	
-<%
-	for(Product co : coffeeList){
 
-%>	
 	<div class="product-list">
-			<ul>
-				<li style="width:25%;">
-					<div class="productList-cont">
-						<div class="product-img"></div>
-						<div class="product-info">
-							<a href="">
-								<span class="product_name"><%= co.getProductName() %></span>
-							</a>
-							<span class="product_price"><%= co.getProductPrice() %>원</span>
+		<table id="coffee-list">
+			<tbody>
+<%
+	for(Product coffee : coffeeList){
+%>	
+				<tr>
+					<td>
+						<div class="prod-cont">
+							<div class="thumbnail">
+								<img src="<%= request.getContextPath() %>/images/product/<%= coffee.getThumbnailFilename() %>" alt="" style="width: 120px;"/>
+							</div>
+							<div class="prod-name"><%= coffee.getProductName() %></div>
+							<p class="price"><%= coffee.getProductPrice() %>원</p>
 						</div>
-					</div>
-				</li>
-			</ul>
-	</div>
+					</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+				</tr>
+				
+				<tr>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+				</tr>
+				
+				<tr>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+				</tr>
 <%
 	}
 %>
-
+			</tbody>			
+		</table>
+		
+	</div>
+	<div id="pagebar">
+	
+	</div>
+</section>
 </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

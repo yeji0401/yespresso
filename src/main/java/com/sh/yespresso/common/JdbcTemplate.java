@@ -12,20 +12,35 @@ import java.util.Properties;
 
 public class JdbcTemplate {
 	
-	private static String driverClass = "oracle.jdbc.OracleDriver";
-	private static String url = "jdbc:oracle:thin:@IYQYIAJCFCLEVUSB_medium?TNS_ADMIN=C:\\Workspaces\\web_server_workspace\\Wallet_IYQYIAJCFCLEVUSB"; 
-	private static String user = "yespresso";
-	private static String password = "Qpwozmxn0118";
+	private static String driverClass;
+	private static String url;
+	private static String user;
+	private static String password;
 	
 	static {
 
+		final String datasourceConfigPath = JdbcTemplate.class.getResource("/datasource.properties").getPath();
+		System.out.println(datasourceConfigPath);
+		Properties prop = new Properties();
 		try {
+			prop.load(new FileReader(datasourceConfigPath));
+			driverClass = prop.getProperty("driverClass");
+			url = prop.getProperty("url");
+			user = prop.getProperty("user");
+			password = prop.getProperty("password");
+		} catch (IOException e) {
+			e.printStackTrace();
+		};
+		
+		try {
+			// 1. driver class 등록 : 프로그램 실행시 최초 1회만 처리
 			Class<?> driverClassInstance = Class.forName(driverClass);
 			System.out.println(driverClassInstance);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
+
 
 	public static Connection getConnection() {
 		Connection conn = null;
