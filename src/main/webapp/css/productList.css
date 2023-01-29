@@ -43,6 +43,13 @@ section#content {
 	width: 90px;
 	background-color: #ffffff;
 }
+.category-list ul li span {
+	display:  block;
+	padding-top: 19px;
+	text-decoration: none;
+	color: #636363;
+	font-size: 15px;
+}
 .category-list ul li:first-child{
 	border-right: 2px solid #E8EAE6;
 	font-weight: bold;
@@ -67,15 +74,6 @@ section#content {
 .category-list ul li:last-child span{
 	color: #100F0F;
 }
-
-.category-list ul li span {
-	display:  block;
-	padding-top: 19px;
-	text-decoration: none;
-	color: #636363;
-	font-size: 15px;
-}
-
 .material-symbols-outlined {
 	position: relative;
 	left: 25px;
