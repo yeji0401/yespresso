@@ -2,6 +2,7 @@
 
 section#content {
 	width: 1200px;
+	padding: 0 0 100px 0;
 }
 /* 상단 꾸미기영역 */
 .addition {
@@ -87,5 +88,45 @@ section#content {
 .category-list ul li:hover span {
 	font-weight: bold;
 	color: #100F0F;
+}
 
+/* 제품목록 */
+.product-list{
+	padding-top: 8px;
+}
+.prod-cont{
+	border-radius: 10%;
+	background-color: white; 
+	height: 270px;
+	width: 225px;
+	margin: 5px;
+	border: 2px solid #E8EAE6;
+}
+.prod-cont:hover {
+	border: 2px solid #A6BB8D;
+}
+
+#coffee-list {
+	width: 900px;
+	border-collapse: collapse;
+}
+#coffee-list td {
+	padding: 0px;
+	text-align: center;
+	width: 225px;
+	height: 270px;
+}
+.thumbnail{
+	padding-top: 30px;
+}
+.prod-name{
+	padding-top: 20px;
+	color: #100F0F;
+	font-weight: bold;
+	font-size: 14px;
+}
+.price{
+	padding-top: 10px;
+	font-weight: bold;
+	color: #61876E;
 }

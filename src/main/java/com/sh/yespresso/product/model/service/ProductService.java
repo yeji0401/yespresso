@@ -16,19 +16,45 @@ public class ProductService {
 	private ProductDao productDao = new ProductDao();
 	
 	/**
-	 * hj start
+	 * **********************   hj start   **********************
 	 */
-	// 제품 LIST 반환 메소드
-	// 매개인자로 제품카테고리ID 받아옴 (CO, MA, AC)
-	public List<Product> selectAllProduct(String categoryID) {
+	/* DQL 페이지에 해당하는 카테고리별 제품 리스트 불러오기 */
+	// 1. 커피 제품 리스트
+	public List<Product> selectCoffeeList(Map<String, Object> param) {
 		Connection conn = getConnection();
-		List<Product> productList = productDao.selectAllProduct(conn, categoryID);
+		List<Product> coffeeList = productDao.selectCoffeeList(conn, param);
 		close(conn);
-		return productList;
+		return coffeeList;
 	}
+	// 2. 머신 제품 리스트
+	public List<Product> selectMachineList(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Product> machineList = productDao.selectMachineList(conn, param);
+		close(conn);
+		return machineList;
+	}
+	
+	// 3. 악세사리 제품 리스트 
+	public List<Product> selectAccList(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Product> accList = productDao.selectAccList(conn, param);
+		close(conn);
+		return accList;
+	}
+	
+	// DQL categoryId로 카테고리별 제품수 구하기
+	public int getTotalCntById(String categoryId) {
+		Connection conn = getConnection();
+		int totalCount = productDao.getTotalCntById(conn, categoryId);
+		close(conn);
+		return totalCount;
+	}
+	
 	/**
-	 * hj end
+	 * *********************   hj end   **********************
 	 */
+
+
 
 
 	/**
