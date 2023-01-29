@@ -28,7 +28,7 @@ public class AdminMemberListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자입력값 처리
-		final int limit = 10;
+		final int limit = 5;
 		int page = 1; // 기본값
 		try {
 			page = Integer.parseInt(request.getParameter("page"));			

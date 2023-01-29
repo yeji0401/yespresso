@@ -53,7 +53,6 @@
                     <label for="stock-A">재고 오름차순</label><br>
                     <input type="checkbox" name="stock-D" id="stock-D">
                     <label for="stock-D">재고 내림차순</label><br>
-                    <input type="checkbox" name="no-A" id="no-A">
                     <input type="checkbox" name="p-enroll-A" id="p-enroll-A">
                     <label for="p-enroll-A">제품등록일 오름차순</label><br>
                     <input type="checkbox" name="p-enroll-D" id="p-enroll-D">
@@ -154,8 +153,24 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
-
+           <tbody>
+			<% if(products.isEmpty()){ %>
+				<tr>
+					<td colspan="15">조회된 제품이 없습니다.</td>
+				</tr>
+			<% 
+			   } else { 
+				  for(Product product : products){
+			%>
+					<tr>
+						<td></td>
+						<td><%= product.getProductNo() %></td>
+						<td><input type="checkbox" name="" id=""></td>
+					</tr>
+			<%
+				  }			
+				} 
+			%>            
             </tbody>
         </table>
 		<div id="pagebar">

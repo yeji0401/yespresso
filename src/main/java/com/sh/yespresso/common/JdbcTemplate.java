@@ -9,14 +9,40 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import com.sh.yespresso.common.JdbcTemplate;
+
 
 public class JdbcTemplate {
 	
-	private static String driverClass = "oracle.jdbc.OracleDriver";
-	private static String url = "jdbc:oracle:thin:@IYQYIAJCFCLEVUSB_medium?TNS_ADMIN=C:\\Workspaces\\web_server_workspace\\Wallet_IYQYIAJCFCLEVUSB"; 
-	private static String user = "yespresso";
-	private static String password = "Qpwozmxn0118";
-
+	private static String driverClass;
+	private static String url; // 접속프로토콜@url:port:sid
+	private static String user;
+	private static String password;
+	
+	static {
+		// /build/classes/datasource.properties 내용 불러오기
+		// / -> /build/classes
+		final String datasourceConfigPath = JdbcTemplate.class.getResource("/datasource.properties").getPath();
+		System.out.println(datasourceConfigPath);
+		Properties prop = new Properties();
+		try {
+			prop.load(new FileReader(datasourceConfigPath));
+			driverClass = prop.getProperty("driverClass");
+			url = prop.getProperty("url");
+			user = prop.getProperty("user");
+			password = prop.getProperty("password");
+		} catch (IOException e) {
+			e.printStackTrace();
+		};
+		
+		try {
+			Class<?> driverClassInstance = Class.forName(driverClass);
+			System.out.println(driverClassInstance);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static Connection getConnection() {
 		Connection conn = null;
 		try {

@@ -115,7 +115,27 @@ window.addEventListener('load', () => {
                 </tr>
             </thead>
             <tbody>
-
+			<% if(orders.isEmpty()){ %>
+				<tr>
+					<td colspan="6">조회된 주문이 없습니다.</td>
+				</tr>
+			<% 
+			   } else {
+				  for(Orders order : orders){
+			%>
+					<tr>
+						<td></td>
+						<td><%= order.getOrderNo() %></td>
+						<td><%= order.getOrderMemberId() %></td>
+						<td><%= order.getOrderDate() %></td>
+						<td><%= order.getTotalPrice() %></td>
+						<td><%= order.getOrderState() %></td>
+						<td><input type="checkbox" name="" id=""></td>
+					</tr>
+			<%
+				  }			
+				} 
+			%>            
             </tbody>
         </table>
 		<div id="pagebar">

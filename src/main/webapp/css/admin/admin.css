@@ -42,7 +42,7 @@ h2 {
 
 div#search-block {
     width: 900px;
-    height: 100px;
+    height: 50px;
     text-align: center;
     margin-top: 30px;
 }
@@ -61,22 +61,14 @@ div#check-block p {
     margin-bottom: 10px;
 }
 
-div#roasting :not(:first-child()) {
-	display: flex;
-}
-
 /**** 테이블 리스트 관련 ****/
 
-table {
-    margin: 0 auto;
-    margin-top: 30px;
-    border-collapse: collapse;
-}
+table {height: 100px; margin: 0 auto; margin-top: 30px; text-align: center; border-collapse: collapse;}
+th {background-color: #E8EAE6;}
+th, td {padding: 10px;}
 
-th {
-    background-color: #E8EAE6;
-}
-
-th, td {
-    padding: 10px;
-}
+/***** 페이지바 관련 *****/
+section#admin-container div#pagebar{margin-top:30px; margin-bottom: 30px; text-align:center;}
+section#admin-container div#pagebar span.cPage{margin-right: 5px;}
+section#admin-container div#pagebar a{margin-right: 5px; text-decoration: none;}
+section#admin-container div#pagebar a:hover {text-decoration: underline;}

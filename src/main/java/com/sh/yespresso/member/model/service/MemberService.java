@@ -38,6 +38,13 @@ public class MemberService {
 		close(conn);
 		return totalCount;
 	}
+	
+	public List<Member> searchMember(Map<String, String> param) {
+		Connection conn = getConnection();
+		List<Member> members = memberDao.searchMember(conn, param);
+		close(conn);
+		return members;
+	}
 	/**
 	 * yeji end
 	 */

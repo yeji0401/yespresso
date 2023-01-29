@@ -48,18 +48,18 @@ window.addEventListener('load', () => {
                 <option value="member_name">이름</option>
             </select>
             <div id="search-memberId" class="search-type">
-                <form action="#">
+                <form action="<%=request.getContextPath()%>/admin/adminMemberFinder">
                     <input type="hidden" name="searchType" value="member_id">
                     <input type="text" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요."
-                        value="">
+                        value="<%= "member_id".equals(searchType) ? searchKeyword : "" %>">
                     <button type="submit">검색</button>
                 </form>
             </div>
             <div id="search-memberName" class="search-type">
-                <form action="#">
+                <form action="<%=request.getContextPath()%>/admin/adminMemberFinder">
                     <input type="hidden" name="searchType" value="member_name">
                     <input type="text" name="searchKeyword" size="25" placeholder="검색할 이름을 입력하세요."
-                        value="">
+                        value="<%= "member_name".equals(searchType) ? searchKeyword : "" %>">
                     <button type="submit">검색</button>
                 </form>
             </div>
@@ -116,7 +116,7 @@ window.addEventListener('load', () => {
 				  for(Member member : members){
 			%>
 					<tr>
-						<td>1</td>
+						<td></td>
 						<td><%= member.getMemberId() %></td>
 						<td>
 							<select class="member-role" data-member-id="<%= member.getMemberId() %>" data-member-birthday="<%= member.getBirthday() %>">
@@ -130,7 +130,7 @@ window.addEventListener('load', () => {
 						<td><%= member.getGender() != null ? member.getGender() : "" %></td>
 						<td><%= member.getPhone() %></td>
 						<td><%= member.getEmail() != null ? member.getEmail() : "" %></td>
-						<td><%= member.getAddress() %></td>
+						<td><%= member.getAddress() != null ? member.getAddress() : "" %></td>
 						<td><%= member.getEnrollDate() %></td>
 						<td><input type="checkbox" name="" id=""></td>
 					</tr>
@@ -142,5 +142,32 @@ window.addEventListener('load', () => {
         </table>
 		<div id="pagebar">
 			<%= request.getAttribute("pagebar") %>
-		</div>        
+		</div>
+		</section>
+<form action="<%= request.getContextPath() %>/admin/adminUpdateMemberRole" name="memberRoleUpdateFrm" method="POST">
+	<input type="hidden" name="memberId" />
+	<input type="hidden" name="memberRole" />
+</form>
+<script>
+document.querySelectorAll(".member-role").forEach((select) => {
+	select.addEventListener('change', (e) => {
+		console.log(e.target.value);
+		console.log(e.target.dataset.memberId);
+		const memberId = e.target.dataset.memberId;
+		const memberRole = e.target.value;
+		
+		if(confirm(`[\${memberId}]회원의 권한을 \${memberRole}로 변경하시겠습니까?`)){			
+			const frm = document.memberRoleUpdateFrm;
+			frm.memberId.value = memberId;
+			frm.memberRole.value = memberRole;
+			frm.submit();
+		}
+		else {
+			// e.target(select)하위의 selected 속성이 있는 option태그
+			e.target.querySelector("option[selected]").selected = true;
+		}
+		
+	});
+});
+</script>    
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
