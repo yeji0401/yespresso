@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
-	List<Product> productList = (List<Product>) request.getAttribute("productList");
+	List<Product> coffeeList = (List<Product>) request.getAttribute("coffeeList");
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/productList.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -32,6 +32,11 @@
 		</ul>
 	</div>
 	<!-- 상품리스트 -->
+	
+<%
+	for(Product co : coffeeList){
+
+%>	
 	<div class="product-list">
 			<ul>
 				<li style="width:25%;">
@@ -39,14 +44,17 @@
 						<div class="product-img"></div>
 						<div class="product-info">
 							<a href="">
-								<span class="product_name">디아볼리토</span>
+								<span class="product_name"><%= co.getProductName() %></span>
 							</a>
-							<span class="product_price">7,290원</span>
+							<span class="product_price"><%= co.getProductPrice() %>원</span>
 						</div>
 					</div>
 				</li>
 			</ul>
 	</div>
+<%
+	}
+%>
 
 </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
