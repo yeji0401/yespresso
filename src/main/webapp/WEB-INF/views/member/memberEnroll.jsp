@@ -23,9 +23,9 @@ window.onload = function(){
 		method="POST" 
 		action="<%= request.getContextPath() %>/member/memberEnroll">
 		<table>
-			<th>
-				<th><p style="text-align = center;">회원가입</p></th>
-			</th>
+			<tr>
+				<td><p style="text-align:center;">회원가입</p></td>
+			</tr>
 			
 			<tr>
 				<td>
