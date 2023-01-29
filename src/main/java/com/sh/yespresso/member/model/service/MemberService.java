@@ -1,10 +1,12 @@
 package com.sh.yespresso.member.model.service;
 
 import java.sql.Connection;
+import java.util.List;
+import java.util.Map;
 
 import static com.sh.yespresso.common.JdbcTemplate.close;
-import static com.sh.yespresso.common.JdbcTemplate.commit;
 import static com.sh.yespresso.common.JdbcTemplate.getConnection;
+import static com.sh.yespresso.common.JdbcTemplate.commit;
 import static com.sh.yespresso.common.JdbcTemplate.rollback;
 
 import com.sh.yespresso.member.model.dao.MemberDao;
@@ -23,6 +25,19 @@ public class MemberService {
 	/**
 	 * yeji start
 	 */
+	public List<Member> selectAllMember(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Member> members = memberDao.selectAllMember(conn, param);
+		close(conn);
+		return members;
+	}
+	
+	public int selectTotalCount() {
+		Connection conn = getConnection();
+		int totalCount = memberDao.selectTotalCount(conn);
+		close(conn);
+		return totalCount;
+	}
 	/**
 	 * yeji end
 	 */
@@ -113,6 +128,25 @@ public class MemberService {
 		//3. 반환
 		close(conn);
 		return member;
+	}
+
+
+	public int insertMember(Member member) {
+		int result = 0;
+		//Connection생성
+		Connection conn = getConnection();
+		//dao요청
+		try {
+			result = memberDao.insertMember(conn,member);
+			// 트랜잭션 처리
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
 	}
 
 

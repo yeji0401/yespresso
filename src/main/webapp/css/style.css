@@ -7,7 +7,6 @@
 
 body {
     background-color: #DDD6C9;
-    font-family: 'Montserrat', sans-serif;
 }
 
 /***** header *****/
@@ -17,6 +16,7 @@ header {
     justify-content: center;
     width: 1300px;
     height: 100px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 div.header-block {
@@ -102,11 +102,15 @@ div.main-block ul:nth-child(2) a {
 
 
 /***** footer *****/
+footer {
+	width: 1300px;
+	font-family: 'Montserrat', sans-serif;
+}
+
 div.footer-block {
+	height: 80px;
     color: white;
     background-color: #3C6255;
-    width: 1300px;
-    height: 80px;
     display: flex;
     align-items: center;
 }

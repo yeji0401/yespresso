@@ -13,12 +13,11 @@ import java.util.Properties;
 public class JdbcTemplate {
 	
 	private static String driverClass;
-	private static String url;
+	private static String url; // 접속프로토콜@url:port:sid
 	private static String user;
 	private static String password;
 	
 	static {
-
 		final String datasourceConfigPath = JdbcTemplate.class.getResource("/datasource.properties").getPath();
 		System.out.println(datasourceConfigPath);
 		Properties prop = new Properties();
@@ -33,13 +32,14 @@ public class JdbcTemplate {
 		};
 		
 		try {
-			// 1. driver class 등록 : 프로그램 실행시 최초 1회만 처리
-			Class<?> driverClassInstance = Class.forName(driverClass);
+			//1. driverClass 등록 : 프로그램 실행 시 최초 1회만 처리
+			Class<?> driverClassInstance = Class.forName(driverClass); 
 			System.out.println(driverClassInstance);
-		} catch (ClassNotFoundException e) {
+		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
+	
 
 
 	public static Connection getConnection() {
@@ -47,7 +47,12 @@ public class JdbcTemplate {
 		try {
 			conn = DriverManager.getConnection(url, user, password);
 			conn.setAutoCommit(false);
+			
+			System.out.println("2. conn 생성 성공");
+
 		} catch (Exception e) {
+			System.out.println("2. conn 실패");
+
 			e.printStackTrace();
 		}
 		return conn;
@@ -97,5 +102,4 @@ public class JdbcTemplate {
 			e.printStackTrace();
 		}		
 	}
-	
 }
