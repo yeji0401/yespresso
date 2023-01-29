@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import com.sh.yespresso.member.model.dto.Gender;
@@ -35,6 +38,51 @@ public class MemberDao {
 	/**
 	 * yeji start
 	 */
+	public List<Member> selectAllMember(Connection conn, Map<String, Object> param) {
+		String sql = prop.getProperty("selectAllMember"); // select * from (select row_number() over(order by enroll_date desc) rnum, m.* from member m) where rnum between ? and ?
+		List<Member> members = new ArrayList<>();
+		int page = (int) param.get("page");
+		int limit = (int) param.get("limit");
+		int start = (page - 1) * limit + 1; 
+		int end = page * limit;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			try(ResultSet rset = pstmt.executeQuery();){
+				
+				while(rset.next()) {
+					Member member = handleMemberResultSet(rset);
+					members.add(member);
+				}
+			}
+			
+			
+		} catch (SQLException e) {
+			throw new MemberException("관리자 회원 목록 조회 오류!", e);
+		}
+				
+		return members;
+	}
+	
+	public int selectTotalCount(Connection conn) {
+		String sql = prop.getProperty("selectTotalCount"); // select count(*) from member
+		int totalCount = 0;
+		
+		try(
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rset = pstmt.executeQuery();	
+		){
+			while(rset.next())
+				totalCount = rset.getInt(1);
+	
+		} catch (SQLException e) {
+			throw new MemberException("전체 사용자 수 조회 오류", e);
+		}	
+		
+		return totalCount;
+	}
 	/**
 	 * yeji end
 	 */

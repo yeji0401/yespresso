@@ -25,7 +25,7 @@
                 <!-- 메인 메뉴 시작 -->
                 <div class="main-block">
                     <ul class="main_nav">
-                        <li class="coffee"><a href="<%= request.getContextPath() %>/product/productList">COFFEE</a></li>
+                        <li class="coffee"><a href="<%= request.getContextPath() %>/product/coffeeList">COFFEE</a></li>
                         <li class="machine"><a href="<%= request.getContextPath() %>/product/productList">MACHINE</a></li>
                         <li class="accessories"><a href="<%= request.getContextPath() %>/product/productList">ACCESSORIES</a></li>
                         <li class="recipe"><a href="<%= request.getContextPath() %>">RECIPE</a></li>
@@ -41,7 +41,7 @@
                     
                     <ul class="main-block_3">
                     <% if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
-                        <li class="myadmin"><a href="<%= request.getContextPath() %>/admin/memberList">ADMIN</a></li>
+                        <li class="myadmin"><a href="<%= request.getContextPath() %>/admin/adminMemberList">ADMIN</a></li>
                     <% } else if (loginMember != null && (loginMember.getMemberRole() == MemberRole.C || loginMember.getMemberRole() == MemberRole.V)){ %>
                         <li class="myadmin"><a href="<%= request.getContextPath() %>/myPage/myPage">MYPAGE</a></li>
                     <% } else { %> 

@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+/***** 전체 섹션 *****/
+
+* {
+    margin: 0 auto;
+}
+
+div#admin-block {
+    width: 600px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: centent;
+}
+
+div#admin-block ul {
+    display: flex;
+    text-decoration: none;
+    padding: 0;
+}
+
+div#admin-block ul li {
+    list-style: none;
+    width: 100px;
+    line-height: 50px;
+    text-align: center;
+    margin: 10px;
+    background-color: #A6BB8D;
+    border-radius: 30px 0px 30px 0px;
+}
+
+div#admin-block ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+h2 {
+    text-align: center;
+    translate: -250px;
+}
+
+div#search-block {
+    width: 900px;
+    height: 100px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+div#check-block {
+    display: flex;
+    justify-content: space-between;
+    width: 900px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+div#check-block p {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+div#roasting :not(:first-child()) {
+	display: flex;
+}
+
+/**** 테이블 리스트 관련 ****/
+
+table {
+    margin: 0 auto;
+    margin-top: 30px;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #E8EAE6;
+}
+
+th, td {
+    padding: 10px;
+}
