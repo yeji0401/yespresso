@@ -5,6 +5,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/login.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="<%= request.getContextPath() %>/js/jquery-3.6.1.js"></script>
 <%
 	String msg = (String) session.getAttribute("msg");
 	if (msg != null)
@@ -35,14 +36,14 @@ window.addEventListener('load', () => {
 		const memberId = document.querySelector("#memberId");
 		const password = document.querySelector("#password");
 		
-		if(!/^\w{4,}$/.test(memberId.value)){
+		if(!/^[A-Za-z0-9]{4,}$/.test(memberId.value)){
 			alert("유효한 아이디를 입력하세요.");
 			memberId.select();
 			e.preventDefault(); // 폼제출방지
 			return; // 조기리턴
 		}
 		
-		if(!/^\w{4,}$/.test(password.value)){
+		if(!/^[A-Za-z0-9!@#$%]{4,}$/.test(password.value)){
 			alert("유효한 비밀번호를 입력하세요");
 			password.select();
 			e.preventDefault();
