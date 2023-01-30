@@ -31,7 +31,7 @@ List<Orders> myOrdersList = (List<Orders>) request.getAttribute("myOrdersList");
 			for (Orders orders : myOrdersList) {
 			%>
 			<tr>
-				<td><a href="<%=request.getContextPath()%>/myPage/myOrdersDetail?no=<%=orders.getOrderNo()%>"><%=orders.getOrderNo()%></a></td>
+				<td><a href="<%=request.getContextPath()%>/myPage/myOrderDetail?no=<%=orders.getOrderNo()%>"><%=orders.getOrderNo()%></a></td>
 				<td><%=orders.getOrderMemberId()%></td>
 				<td><%=orders.getOrderDate()%></td>
 				<td><%=orders.getTotalPrice()%></td>

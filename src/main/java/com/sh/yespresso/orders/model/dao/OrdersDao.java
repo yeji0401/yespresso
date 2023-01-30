@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.sh.yespresso.orders.model.dto.OrderDetail;
 import com.sh.yespresso.orders.model.dto.OrderState;
 import com.sh.yespresso.orders.model.dto.Orders;
 import com.sh.yespresso.orders.model.exception.OrdersException;
@@ -20,7 +21,7 @@ public class OrdersDao {
 
 	public OrdersDao() {
 		System.out.println("path 가져오기 시도 중");
-		String path = OrdersDao.class.getResource("/sql/orders/orders-query.properties").getPath();
+		String path = OrdersDao.class.getResource("/sql/order/orders-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch (IOException e) {
@@ -144,17 +145,45 @@ public class OrdersDao {
 	}
 
 	public int selectTotalCount(Connection conn) {
-		String sql = prop.getProperty("selectTotalCount");
+		String sql = prop.getProperty("selectTotalCount"); // select count(*) from orders
 		int totalCount = 0;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rset = pstmt.executeQuery();) {
-			if (rset.next()) {
+			while (rset.next()) {
 				totalCount = rset.getInt(1);
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			throw new OrdersException("전체 주문내역 조회 오류!", e);
 		}
 		return totalCount;
+	}
+
+	public List<OrderDetail> selectMyOrderDetail(Connection conn, String orderMemberId) {
+		String sql = prop.getProperty("selectMyOrderDetail");
+		List<OrderDetail> myOrderDetail = new ArrayList<>();
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, orderMemberId);
+
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next()) {
+					OrderDetail od = handleOrderDetailResultSet(rset);
+					myOrderDetail.add(od);
+				}
+			}
+		} catch (Exception e) {
+			throw new OrdersException("주문 상세 내역 조회 오류!", e);
+		}
+
+		return myOrderDetail;
+	}
+
+	private OrderDetail handleOrderDetailResultSet(ResultSet rset) throws SQLException {
+		OrderDetail od = new OrderDetail();
+		od.setDetailProductNo(rset.getString("order_detail_no"));
+		od.setOrderDetailNo(rset.getInt("order_detail_no"));
+		od.setOrderDetailAmount(rset.getInt("order_detail_amount"));
+		od.setOrderNo(rset.getString("order_no"));
+		return od;
 	}
 
 	/**
