@@ -169,7 +169,7 @@
 			%>
 					<tr>
 						<td></td>
-						<td><img src="<%= request.getContextPath() %>/images/product/<%= product.getThumbnailFilename() %>" alt="" style="width: 80px;"/> </td>
+						<td><img src="<%= request.getContextPath() %>/upload/product/<%= product.getThumbnailFilename() %>" alt="" style="width: 80px;"/> </td>
 						<td><%= product.getProductName() %></td>
 						<td><%= product.getProductNo() %></td>
 						<td>&#8361;<%= product.getProductPrice() %></td>

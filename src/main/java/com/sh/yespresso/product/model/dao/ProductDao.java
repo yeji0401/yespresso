@@ -53,10 +53,18 @@ public class ProductDao {
 		product.setProductDate(rset.getDate("PRODUCT_DATE"));
 		product.setThumbnailFilename(rset.getString("THUMBNAIL_FILENAME"));
 		product.setType(Type.valueOf(rset.getString("TYPE")));
-		product.setAroma(Aroma.valueOf(rset.getString("AROMA")));
+		if(product.getAroma() != null) {
+			product.setAroma(Aroma.valueOf(rset.getString("AROMA")));
+		} else {
+			product.setAroma(Aroma.valueOf("none"));
+		}
 		product.setAcidity(rset.getInt("ACIDITY"));
 		product.setRoasting(rset.getInt("ROASTING"));
-		product.setCupSize(CupSize.valueOf(rset.getString("CUP_SIZE")));
+		if(product.getCupSize() != null) {
+			product.setCupSize(CupSize.valueOf(rset.getString("CUP_SIZE")));
+		} else {
+			 product.setCupSize(CupSize.valueOf("none"));
+		}
 		
 		return product;
 	}
