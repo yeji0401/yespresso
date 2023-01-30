@@ -53,17 +53,34 @@ public class ProductDao {
 		product.setProductDate(rset.getDate("PRODUCT_DATE"));
 		product.setThumbnailFilename(rset.getString("THUMBNAIL_FILENAME"));
 		product.setType(Type.valueOf(rset.getString("TYPE")));
-		if(product.getAroma() != null) {
-			product.setAroma(Aroma.valueOf(rset.getString("AROMA")));
+		
+		String aroma = rset.getString("AROMA");
+		int acidity = rset.getInt("ACIDITY");
+		int roasting = rset.getInt("ROASTING");
+		String cupSize = rset.getString("CUP_SIZE");
+
+		if(aroma != null) {
+			product.setAroma(Aroma.valueOf(rset.getString("AROMA")));	
 		} else {
-			product.setAroma(Aroma.valueOf("none"));
+			product.setAroma(Aroma.valueOf("none")); // enum - null인경우 none으로 처리
 		}
-		product.setAcidity(rset.getInt("ACIDITY"));
-		product.setRoasting(rset.getInt("ROASTING"));
-		if(product.getCupSize() != null) {
-			product.setCupSize(CupSize.valueOf(rset.getString("CUP_SIZE")));
+		
+		if(acidity == 0) { // NUM null일때는 0으로 받아짐
+			product.setAcidity(0);
 		} else {
-			 product.setCupSize(CupSize.valueOf("none"));
+			product.setAcidity(rset.getInt("ACIDITY"));
+		}
+
+		if(roasting == 0) { // NUM null일때는 0으로 받아짐
+			product.setRoasting(0);
+		} else {
+			product.setRoasting(rset.getInt("ROASTING"));			
+		}
+		
+		if(cupSize != null) {
+			product.setCupSize(CupSize.valueOf(rset.getString("CUP_SIZE")));	
+		} else {
+			product.setCupSize(CupSize.valueOf("none")); // enum - null인경우 none으로 처리
 		}
 		
 		return product;
