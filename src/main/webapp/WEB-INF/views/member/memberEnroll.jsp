@@ -2,20 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/memberEnroll.css" />
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
+<!--<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>-->
+<!--<script>
 window.onload = function(){
     document.getElementById("address").addEventListener("click", function(){ //주소입력칸을 클릭하면
         //카카오 지도 발생
         new daum.Postcode({
             oncomplete: function(data) { //선택시 입력값 세팅
                 document.getElementById("address").value = data.address; // 주소 넣기
-                document.querySelector("input[name=detail]").focus(); //상세입력 포커싱
+                document.querySelector("input[name=address]").focus(); //상세입력 포커싱
             }
         }).open();
     });
 }
-</script>
+</script>-->
 <section id=enroll-container>
 	<form 
 		id="memberEnrollFrm"
@@ -30,7 +30,7 @@ window.onload = function(){
 			<tr>
 				<td>
 					아이디<sup>*</sup>
-					<input type="text" placeholder="4글자이상" name="memberId" id="_memberId" value="sinsa" required>
+					<input type="text" placeholder="4글자이상" name="memberId" id="_memberId" value="test" required>
 					<input type="button" value="아이디 중복검사" onclick="checkIdDuplicate();"/>
 					<input type="hidden" id="idValid" name="idValid" value="0"/>
 					<%-- 사용가능한 아이디인 경우 1, 이미 사용중인 아이디인 경우 0 --%>
@@ -51,13 +51,13 @@ window.onload = function(){
 			<tr>
 				<td>
 					이름<sup>*</sup>	
-					<input type="text"  name="memberName" id="memberName" value="신사임당" required><br>
+					<input type="text"  name="memberName" id="memberName" value="김예시" required><br>
 				</td>
 			</tr>
 			<tr>
 				<td>	
 				생년월일
-				<input type="date" name="birthday" id="birthday" value="1988-08-08"><br />
+				<input type="date" name="birthday" id="birthday" value="1990-01-05"><br />
 				</td>
 			</tr> 
 			<tr>
@@ -72,7 +72,7 @@ window.onload = function(){
 			<tr>
 				<td>	
 				    이메일
-					<input type="email" placeholder="abc@xyz.com" name="email" id="email" value="sinsa@naver.com"><br>
+					<input type="email" placeholder="abc@xyz.com" name="email" id="email" value="test@naver.com"><br>
 				</td>
 			</tr>
 			<tr>
@@ -84,8 +84,7 @@ window.onload = function(){
 			<tr>
 				<td>	
 					주소<sup>*</sup>
-					<input type="text" placeholder="동까지 기입" name="address" id="address" readonly><br>
-					<input type="text" placeholder="상세주소" name="detail" id="detail" value="1016호" required/> <br />
+					<input type="text" placeholder="동까지 기입" name="address" id="address" required><br>
 				</td>
 			</tr>
 			<tr>
