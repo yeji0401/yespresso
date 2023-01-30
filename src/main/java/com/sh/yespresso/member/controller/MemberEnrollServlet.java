@@ -38,11 +38,12 @@ public class MemberEnrollServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		
 		try {
+			request.setCharacterEncoding("utf-8");
 			//사용자 입력값 가져오기
 			String memberId = request.getParameter("memberId");
 			String password = YespressoUtils.getEncryptedPassword(request.getParameter("password"), memberId);
 			String memberName = request.getParameter("memberName");
-			String _birthday = request.getParameter("birthday"); // "" "1988-08-08"
+			String _birthday = request.getParameter("birthday"); 
 			String _gender = request.getParameter("gender");
 			String email = request.getParameter("email");
 			String phone = request.getParameter("phone");
