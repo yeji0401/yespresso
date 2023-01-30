@@ -51,7 +51,7 @@ window.addEventListener('load', () => {
 	                <option value="member_name">이름</option>
 	            </select>
 	            <div id="search-memberId" class="search-type">
-	                <form action="<%=request.getContextPath()%>/admin/adminMemberFinder">
+	                <form action="<%= request.getContextPath()%>/admin/adminMemberFinder">
 	                    <input type="hidden" name="searchType" value="member_id">
 	                    <input type="text" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요."
 	                        value="<%= "member_id".equals(searchType) ? searchKeyword : "" %>">
@@ -67,7 +67,7 @@ window.addEventListener('load', () => {
 	                </form>
 	            </div>
 	        </div>
-	            <div id="check-block">
+	            <div id="member-check-block">
 	                <div id="member-sort" class="sorting">
 	                    <p>정렬순</p>
 	                    <input type="checkbox" name="enroll-A" id="enroll-A">
@@ -135,7 +135,7 @@ window.addEventListener('load', () => {
 							<td><%= member.getEmail() != null ? member.getEmail() : "" %></td>
 							<td><%= member.getAddress() != null ? member.getAddress() : "" %></td>
 							<td><%= member.getEnrollDate() %></td>
-							<td><input type="checkbox" name="" id=""></td>
+							<td><input type="checkbox" name="<%= member.getMemberId() %>" id=""></td>
 						</tr>
 				<%
 					  }			

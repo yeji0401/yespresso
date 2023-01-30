@@ -28,17 +28,13 @@
         </div>
         <h2>제품 관리</h2>
         <div id="search-block">
-            <select id="searchType">
-                <option value="product_name">제품명</option>
-            </select>
             <div id="search-product" class="search-type">
                 <form action="<%= request.getContextPath() %>/admin/adminProductFinder">
                     <input type="hidden" name="searchType" value="product_name">
                     <input type="text" name="searchKeyword" size="25" placeholder="검색할 제품명을 입력하세요."
-                        value="">
+                        value="<%= "product_name".equals(searchType) ? searchKeyword : "" %>">
                     <button type="submit">검색</button>
                 </form>
-                <button>제품 등록</button>
             </div>
         </div>
             <div id="check-block">
@@ -92,35 +88,37 @@
                 </div>
                 <div id="roasting">
                     <p>로스팅</p>
-                    <div id="roasting-w">
-                        <input type="checkbox" name="rw-1" id="rw-1">
-                        <label for="rw-1">1(약)</label><br>
-                        <input type="checkbox" name="rw-2" id="rw-2">
-                        <label for="rw-2">2(약)</label><br>
-                        <input type="checkbox" name="rw-3" id="rw-3">
-                        <label for="rw-3">3(약)</label><br>
-                        <input type="checkbox" name="rw-4" id="rw-4">
-                        <label for="rw-4">4(약)</label><br>
-                        <input type="checkbox" name="rw-5" id="rw-5">
-                        <label for="rw-5">5(약)</label><br>
-                        <input type="checkbox" name="rw-6" id="rw-6">
-                        <label for="rw-6">6(약)</label>
-                    </div>
-                    <div id="roasting-s">
-                        <input type="checkbox" name="rs-7" id="rs-7">
-                        <label for="rs-7">7(강)</label><br>
-                        <input type="checkbox" name="rs-8" id="rs-8">
-                        <label for="rs-8">8(강)</label><br>
-                        <input type="checkbox" name="rs-9" id="rs-9">
-                        <label for="rs-9">9(강)</label><br>
-                        <input type="checkbox" name="rs-10" id="rs-10">
-                        <label for="rs-10">10(강)</label><br>
-                        <input type="checkbox" name="rs-11" id="rs-11">
-                        <label for="rs-11">11(강)</label><br>
-                        <input type="checkbox" name="rs-12" id="rs-12">
-                        <label for="rs-12">12(강)</label><br>
-                        <input type="checkbox" name="rs-13" id="rs-13">
-                        <label for="rs-13">13(강)</label>
+                    <div id="roasting-c">
+	                    <div id="roasting-w">
+	                        <input type="checkbox" name="rw-1" id="rw-1">
+	                        <label for="rw-1">1(약)</label><br>
+	                        <input type="checkbox" name="rw-2" id="rw-2">
+	                        <label for="rw-2">2(약)</label><br>
+	                        <input type="checkbox" name="rw-3" id="rw-3">
+	                        <label for="rw-3">3(약)</label><br>
+	                        <input type="checkbox" name="rw-4" id="rw-4">
+	                        <label for="rw-4">4(약)</label><br>
+	                        <input type="checkbox" name="rw-5" id="rw-5">
+	                        <label for="rw-5">5(약)</label><br>
+	                        <input type="checkbox" name="rw-6" id="rw-6">
+	                        <label for="rw-6">6(약)</label>
+	                    </div>
+	                    <div id="roasting-s">
+	                        <input type="checkbox" name="rs-7" id="rs-7">
+	                        <label for="rs-7">7(강)</label><br>
+	                        <input type="checkbox" name="rs-8" id="rs-8">
+	                        <label for="rs-8">8(강)</label><br>
+	                        <input type="checkbox" name="rs-9" id="rs-9">
+	                        <label for="rs-9">9(강)</label><br>
+	                        <input type="checkbox" name="rs-10" id="rs-10">
+	                        <label for="rs-10">10(강)</label><br>
+	                        <input type="checkbox" name="rs-11" id="rs-11">
+	                        <label for="rs-11">11(강)</label><br>
+	                        <input type="checkbox" name="rs-12" id="rs-12">
+	                        <label for="rs-12">12(강)</label><br>
+	                        <input type="checkbox" name="rs-13" id="rs-13">
+	                        <label for="rs-13">13(강)</label>
+	                    </div>
                     </div>
                 </div>
                 <div id="cup-size">
@@ -166,10 +164,10 @@
 			%>
 					<tr>
 						<td></td>
-						<td><img src="images/product/<%= product.getThumbnailFilename() %>.jpg" alt="" /></td>
+						<td><img src="<%= request.getContextPath() %>/images/product/<%= product.getThumbnailFilename() %>" alt="" style="width: 80px;"/> </td>
 						<td><%= product.getProductName() %></td>
 						<td><%= product.getProductNo() %></td>
-						<td><%= product.getProductPrice() %></td>
+						<td>&#8361;<%= product.getProductPrice() %></td>
 						<td><%= product.getProductStock() %></td>
 						<td><%= product.getProductSaleCnt() %></td>
 						<td><%= product.getProductDate() %></td>
@@ -178,7 +176,7 @@
 						<td><%= product.getAcidity() != 0 ? product.getAcidity() : "" %></td>
 						<td><%= product.getRoasting() != 0 ? product.getRoasting() : "" %></td>
 						<td><%= product.getCupSize() != null ? product.getCupSize() : "" %></td>
-						<td><input type="checkbox" name="" id=""></td>
+						<td><input type="checkbox" name="<%= product.getProductNo() %>" id=""></td>
 					</tr>
 			<%
 				  }			

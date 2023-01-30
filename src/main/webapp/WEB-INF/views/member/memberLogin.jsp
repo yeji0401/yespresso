@@ -97,10 +97,10 @@ window.addEventListener('load', () => {
 	    
 	    </form>
    		<!-- 로그인폼 끝-->
+   		
+   		</div>
 			
 			
-				
 			
-			</div>
     
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
