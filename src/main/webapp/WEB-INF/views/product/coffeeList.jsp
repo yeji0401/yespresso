@@ -34,6 +34,13 @@
 	</div>
 	<!-- 상품리스트 -->
 	
+<%
+	for(int i = 0; i < coffeeList.size(); i++){
+		coffeeList.get(i); // 첫번째 제품
+	}
+
+%>
+
 
 	<div class="product-list">
 		<table id="coffee-list">
