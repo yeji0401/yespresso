@@ -6,7 +6,7 @@ public class ReviewEntity {
 	private int reviewNo;
 	private String reviewMemberId;
 	private String reviewOrderNo;
-	private String productNo;
+	private String reviewProductNo;
 	private String reviewTitle;
 	private String reviewContent;
 	private int reviewRating;
@@ -17,13 +17,13 @@ public class ReviewEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ReviewEntity(int reviewNo, String reviewMemberId, String reviewOrderNo, String productNo, String reviewTitle,
+	public ReviewEntity(int reviewNo, String reviewMemberId, String reviewOrderNo, String reviewProductNo, String reviewTitle,
 			String reviewContent, int reviewRating, Date reviewDate) {
 		super();
 		this.reviewNo = reviewNo;
 		this.reviewMemberId = reviewMemberId;
 		this.reviewOrderNo = reviewOrderNo;
-		this.productNo = productNo;
+		this.reviewProductNo = reviewProductNo;
 		this.reviewTitle = reviewTitle;
 		this.reviewContent = reviewContent;
 		this.reviewRating = reviewRating;
@@ -54,12 +54,12 @@ public class ReviewEntity {
 		this.reviewOrderNo = reviewOrderNo;
 	}
 
-	public String getProductNo() {
-		return productNo;
+	public String getReviewProductNo() {
+		return reviewProductNo;
 	}
 
-	public void setProductNo(String productNo) {
-		this.productNo = productNo;
+	public void setReviewProductNo(String productNo) {
+		this.reviewProductNo = reviewProductNo;
 	}
 
 	public String getReviewTitle() {
@@ -97,7 +97,7 @@ public class ReviewEntity {
 	@Override
 	public String toString() {
 		return "ReviewEntity [reviewNo=" + reviewNo + ", reviewMemberId=" + reviewMemberId + ", reviewOrderNo="
-				+ reviewOrderNo + ", productNo=" + productNo + ", reviewTitle=" + reviewTitle + ", reviewContent="
+				+ reviewOrderNo + ", reviewProductNo=" + reviewProductNo + ", reviewTitle=" + reviewTitle + ", reviewContent="
 				+ reviewContent + ", reviewRating=" + reviewRating + ", reviewDate=" + reviewDate + "]";
 	}
 

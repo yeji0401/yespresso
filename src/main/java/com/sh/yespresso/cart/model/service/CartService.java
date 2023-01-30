@@ -1,7 +1,9 @@
 package com.sh.yespresso.cart.model.service;
 
 import static com.sh.yespresso.common.JdbcTemplate.close;
+import static com.sh.yespresso.common.JdbcTemplate.commit;
 import static com.sh.yespresso.common.JdbcTemplate.getConnection;
+import static com.sh.yespresso.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -32,15 +34,35 @@ public class CartService {
 	 * 
 	 * @param orderMemberId
 	 */
-//	public List<Cart> selectAllCart(String orderMemberId) {
-//		Connection conn = getConnection();
-//		List<Cart> myCartList = cartDao.selectMyCartList(conn, orderMemberId);
-//		close(conn);
-//		return myCartList;
-//	}
+	public List<Cart> selectMyCartList(String cartMemberId) {
+		Connection conn = getConnection();
+		List<Cart> myCartList = cartDao.selectMyCartList(conn, cartMemberId);
+
+		close(conn);
+		return myCartList;
+	}
+	
+
+	public int deleteCart(int cartProductNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			// dao요청
+			result = cartDao.deleteCart(conn, cartProductNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+	
 	/**
 	 * awon end
 	 */
+
 
 	/**
 	 * jooh start

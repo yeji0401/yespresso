@@ -15,23 +15,21 @@ import com.sh.yespresso.cart.model.service.CartService;
 /**
  * Servlet implementation class MyCartViewServlet
  */
-@WebServlet("/myPage/myCartView")
+@WebServlet("/cart/cart")
 public class MyCartViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CartService cartService = new CartService();
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//
-//		List<Cart> myCartList = cartService.selectAllCart("cartMemberId");
-//		String cartMemberId = request.getParameter("cartMemberId");
-//		// jsp 포워딩
-//		request.getRequestDispatcher("/WEB-INF/views/myPage/myCartView.jsp")
-//			.forward(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		List<Cart> myCartList = cartService.selectMyCartList("cartMemberId");
+		String cartMemberId = request.getParameter("cartMemberId");
+		// jsp 포워딩
+		request.getRequestDispatcher("/WEB-INF/views/cart/cart.jsp").forward(request, response);
 	}
-
-	
 
 }

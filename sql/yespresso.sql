@@ -589,7 +589,7 @@ comment on column QUESTION_ATTACHMENT.QUESTION_FILE_DATE is '업로드일시';
 
 -- sequence
 create sequence seq_question_attachment_no;
-
+select 
 -- 확인
 select
     *

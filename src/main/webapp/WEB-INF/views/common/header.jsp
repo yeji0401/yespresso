@@ -36,7 +36,7 @@
                      <% } else { %>  
 						 <li class="login"><a href="<%= request.getContextPath() %>/member/memberLogout">LOGOUT</a></li>
 					 <% } %>
-                        <li class="cart"><a href="<%= request.getContextPath() %>">CART</a></li>
+                        <li class="cart"><a href="<%= request.getContextPath() %>/cart/cart">CART</a></li>
                     </ul>
                     
                     <ul class="main-block_3">

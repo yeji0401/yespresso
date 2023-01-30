@@ -81,7 +81,7 @@ const deleteMember = () => {
  * 
  */
 const updatePassword = () => {
-	location.href = "<%= request.getContextPath() %>/myPage/updatePassword";
+	location.href = "<%= request.getContextPath() %>/myPage/myPasswordUpdate";
 };
 
 document.memberUpdateFrm.onsubmit = (e) => {

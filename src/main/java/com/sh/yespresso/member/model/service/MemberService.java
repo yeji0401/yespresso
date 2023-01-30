@@ -50,7 +50,7 @@ public class MemberService {
 		int result = 0;
 		Connection conn = getConnection();
 		try {
-			result = memberDao.UpdateMember(conn, member);
+			result = memberDao.updateMember(conn, member);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -74,22 +74,6 @@ public class MemberService {
 		} finally {
 			close(conn);
 		}
-		return result;
-	}
-
-	public int updateMemberRole(String memberId, String memberRole) {
-		Connection conn = getConnection();
-		int result = 0;
-		try {
-			result = memberDao.updateMemberRole(conn, memberId, memberRole);
-			commit(conn);
-		} catch (Exception e) {
-			rollback(conn);
-			throw e;
-		} finally {
-			close(conn);
-		}
-		
 		return result;
 	}
 	

@@ -87,7 +87,7 @@
     <td>X</td>
     <td>amount</td>
     <td>₩6,990</td>
-    <td>button</td>
+    <td>button "/myPage/myReviewEnroll" 삽입하기.</td>
   </tr>
   <tr>
     <td colspan="2">productCategory(total amount)</td>
