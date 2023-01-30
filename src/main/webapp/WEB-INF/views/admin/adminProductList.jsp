@@ -27,13 +27,18 @@
             </ul>
         </div>
         <h2>제품 관리</h2>
-        <div id="search-block">
+        <div id="product-search-block">
             <div id="search-product" class="search-type">
                 <form action="<%= request.getContextPath() %>/admin/adminProductFinder">
                     <input type="hidden" name="searchType" value="product_name">
                     <input type="text" name="searchKeyword" size="25" placeholder="검색할 제품명을 입력하세요."
                         value="<%= "product_name".equals(searchType) ? searchKeyword : "" %>">
                     <button type="submit">검색</button>
+                </form>
+            </div>
+            <div id="enroll-product">
+                <form action="<%= request.getContextPath() %>/admin/adminProductEnroll">
+                    <button type="submit">제품 등록</button>
                 </form>
             </div>
         </div>

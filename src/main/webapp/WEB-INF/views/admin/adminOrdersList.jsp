@@ -114,13 +114,12 @@ window.addEventListener('load', () => {
                     <th>주문일자</th>
                     <th>주문총액</th>
                     <th>주문상태</th>
-                    <th><button type="submit">삭제</button></th>
                 </tr>
             </thead>
             <tbody>
 			<% if(orders.isEmpty()){ %>
 				<tr>
-					<td colspan="6">조회된 주문이 없습니다.</td>
+					<td colspan="5">조회된 주문이 없습니다.</td>
 				</tr>
 			<% 
 			   } else {
@@ -133,7 +132,6 @@ window.addEventListener('load', () => {
 						<td><%= order.getOrderDate() %></td>
 						<td><%= order.getTotalPrice() %></td>
 						<td><%= order.getOrderState() %></td>
-						<td><input type="checkbox" name="" id=""></td>
 					</tr>
 			<%
 				  }			
