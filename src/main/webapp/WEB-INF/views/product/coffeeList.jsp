@@ -45,7 +45,7 @@
 					<td>
 						<div class="prod-cont">
 							<div class="thumbnail">
-								<img src="<%= request.getContextPath() %>/images/product/<%= coffee.getThumbnailFilename() %>" alt="" style="width: 120px;"/>
+								<img src="<%= request.getContextPath() %>/upload/product/<%= coffee.getThumbnailFilename() %>" alt="" style="width: 120px;"/>
 							</div>
 							<div class="prod-name"><%= coffee.getProductName() %></div>
 							<p class="price"><%= coffee.getProductPrice() %>원</p>
@@ -79,6 +79,5 @@
 	<div id="pagebar">
 	
 	</div>
-</section>
 </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
