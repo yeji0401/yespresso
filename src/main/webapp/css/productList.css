@@ -4,6 +4,39 @@ section#content {
 	width: 1200px;
 	padding: 0 0 100px 0;
 }
+
+/* 페이지바 */
+div#pagebar{
+	margin-top:40px; 
+	text-align:center; 
+	}
+div#pagebar span.cPage{
+	display: inline-block;
+	width: 50px; height: 50px;
+	color: white; 
+	margin-right: 5px;
+	background-color: #3C6255;
+	text-align: center;
+	line-height: 50px;
+	border-radius: 50%;
+	}
+div#pagebar a{
+	margin-right: 5px;
+	display: inline-block;
+	width: 50px; height: 50px;
+	color: #100F0F; 
+	margin-right: 5px;
+	background-color: white;
+	text-align: center;
+	line-height: 50px;
+	border-radius: 50%;
+	text-decoration: none;
+	}
+div#pagebar a:hover{
+	color: white; 
+	background-color: #A6BB8D;
+}
+
 /* 상단 꾸미기영역 */
 .addition {
 	margin: 10px auto;
@@ -92,7 +125,7 @@ section#content {
 
 /* 제품목록 */
 .product-list{
-	padding-top: 8px;
+	padding-top: 15px;
 }
 .prod-cont{
 	border-radius: 10%;
