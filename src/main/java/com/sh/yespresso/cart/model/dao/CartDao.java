@@ -56,6 +56,7 @@ public class CartDao {
 				while (rset.next()) {
 					Cart cart = handleCartResultSet(rset);
 					myCartList.add(cart);
+					System.out.println(myCartList);
 				}
 			}
 
