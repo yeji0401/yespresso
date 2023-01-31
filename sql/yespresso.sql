@@ -250,7 +250,6 @@ where
 -- yes-230119-0001
 'yes-' || to_char(sysdate, 'yymmdd') || '-' || lpad(seq_order_no.nextval ,4,'0')
 
-
 --===========================
 -- ORDER_DETAIL
 --===========================
@@ -601,3 +600,47 @@ where
 SELECT * FROM    ALL_CONSTRAINTS
 WHERE    TABLE_NAME = 'order_detail';
 
+select * from cart where cart_member_id = 'gurumi';
+insert into cart 
+values (
+seq_cart_no.nextval,
+'gurumi',
+'p0002',
+4
+);
+
+insert into 
+    PRODUCT
+values (
+    'p' || lpad(seq_product_no.nextval, 4, '0'),
+    'CO',
+    '인피니망 더블 에스프레소',
+    '10390',
+    default,
+    default, 
+    default,
+    'p' || lpad(seq_product_no.nextval, 4, '0') || '.jpg',
+    'vertuo',
+    'fruit',
+    '3',
+    '6',
+    'M'
+);
+
+
+-- 장바구니 조회 쿼리
+select
+    p.thumbnail_filename,
+    p.product_name,
+    p.product_price,
+    c.amount,
+    (p.product_price * c.amount)
+from
+    cart c join member m
+        on c.cart_member_id = m.member_id
+        join product p on c.cart_product_no = p.product_no
+where
+   m.member_id = 'gurumi';
+   
+   select * from cart;
+   
