@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import com.sh.yespresso.common.JdbcTemplate;
+
 
 public class JdbcTemplate {
 	
@@ -18,6 +20,8 @@ public class JdbcTemplate {
 	private static String password;
 	
 	static {
+		// /build/classes/datasource.properties 내용 불러오기
+		// / -> /build/classes
 		final String datasourceConfigPath = JdbcTemplate.class.getResource("/datasource.properties").getPath();
 		System.out.println(datasourceConfigPath);
 		Properties prop = new Properties();
@@ -32,16 +36,13 @@ public class JdbcTemplate {
 		};
 		
 		try {
-			//1. driverClass 등록 : 프로그램 실행 시 최초 1회만 처리
-			Class<?> driverClassInstance = Class.forName(driverClass); 
+			Class<?> driverClassInstance = Class.forName(driverClass);
 			System.out.println(driverClassInstance);
-		} catch(ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 	
-
-
 	public static Connection getConnection() {
 		Connection conn = null;
 		try {
