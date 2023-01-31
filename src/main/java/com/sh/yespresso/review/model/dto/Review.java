@@ -43,7 +43,7 @@ public class Review extends ReviewEntity {
 
 	@Override
 	public String toString() {
-		return "Review [attachCnt=" + attachCnt + ", reviewAttachment=" + reviewAttachments + "]";
+		return "Review [attachCnt=" + attachCnt + ", reviewAttachment=" + reviewAttachments  + ", toString()=" + super.toString() + "]";
 	}
 
 	/**

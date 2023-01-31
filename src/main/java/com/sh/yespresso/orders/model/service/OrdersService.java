@@ -38,7 +38,7 @@ public class OrdersService {
 		close(conn);
 		return myOrdersList;
 	}
-
+	//나의 주문 내역 리스트 보기
 	public int selectTotalCount() {
 		Connection conn = getConnection();
 		int totalCount = ordersDao.selectTotalCount(conn);
@@ -47,11 +47,11 @@ public class OrdersService {
 	}
 	
 	// 나의 주문 상세 내역 보기
-	public List<OrderDetail> selectMyOrderDetail(String orderMemberId) {
+	public List<OrderDetail> selectMyOrdersDetail(String orderNo) {
 		Connection conn = getConnection();
-		List<OrderDetail> myOrderDetail = ordersDao.selectMyOrderDetail(conn, orderMemberId);
+		List<OrderDetail> myOrdersDetail = ordersDao.selectMyOrdersDetail(conn, orderNo);
 		close(conn);
-		return myOrderDetail;
+		return myOrdersDetail;
 	}
 
 	/**

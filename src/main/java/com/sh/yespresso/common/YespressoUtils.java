@@ -1,16 +1,24 @@
 package com.sh.yespresso.common;
 
 import java.util.Base64;
+import java.util.Map;
 import java.util.Base64.Encoder;
+
+import javax.websocket.Session;
+import javax.websocket.RemoteEndpoint.Basic;
+
+import com.google.gson.Gson;
+
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class YespressoUtils {
-	
+
 	public static String getEncryptedPassword(String rawPassword, String salt) {
 		String encryptedPassword = null;
-		
+
 		try {
 			// 1. 암호화 MessageDigest
 			MessageDigest md = MessageDigest.getInstance("SHA-512");
@@ -18,25 +26,23 @@ public class YespressoUtils {
 			byte[] _rawPassword = rawPassword.getBytes("utf-8");
 			md.update(_salt);
 			byte[] _encryptedPassword = md.digest(_rawPassword);
-			
+
 			System.out.println(new String(_encryptedPassword));
-			
+
 			// 2. 인코딩 Base64Encoder (영문자, 숫자, +, /) padding =
 			Encoder encoder = Base64.getEncoder();
-			encryptedPassword =  encoder.encodeToString(_encryptedPassword);
-			
+			encryptedPassword = encoder.encodeToString(_encryptedPassword);
+
 			System.out.println(encryptedPassword);
-		} catch(NoSuchAlgorithmException | UnsupportedEncodingException e) {
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		return encryptedPassword;
 	}
-	
-	
-	
-/**
- * awon start
- */
+
+	/**
+	 * awon start
+	 */
 	/**
 	 * totalPage 전체 몇 페이지 pagebarSize 페이지바의 링크 몇개? pageNo 증감변수 pageStart ~ pageEnd
 	 * 증감변수 범위
@@ -92,6 +98,33 @@ public class YespressoUtils {
 		}
 
 		return pagebar.toString();
+	}
+
+	public static String convertLineFeedToBr(String str) {
+		return str.replaceAll("\\n", "<br/>");
+	}
+
+	/**
+	 * XSS 공격대비
+	 */
+	public static String escapeHtml(String str) {
+		return str.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+	}
+
+	public static boolean isConnected(String memberId) {
+		return YespressoWebSocket.clientMap.containsKey(memberId);
+	}
+
+	public static void sendNotification(String to, Map<String, Object> data) {
+		Session sess = YespressoWebSocket.clientMap.get(to);
+		if (sess != null) {
+			Basic basic = sess.getBasicRemote();
+			try {
+				basic.sendText(new Gson().toJson(data));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

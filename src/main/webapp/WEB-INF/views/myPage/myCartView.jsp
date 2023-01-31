@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>My Cart View</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/myPage/myOrderDetail.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/myPage/myOrdersDetail.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;400;600;700;900&display=swap" rel="stylesheet">

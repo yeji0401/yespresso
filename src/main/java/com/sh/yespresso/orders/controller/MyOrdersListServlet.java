@@ -37,7 +37,7 @@ public class MyOrdersListServlet extends HttpServlet {
 				} catch (NumberFormatException e) {}
 				
 				Map<String, Object> param = new HashMap<>();
-				String orderMemberId = request.getParameter("order_member_id");
+				String orderMemberId = request.getParameter("memberId"); 
 				param.put("page", page);
 				param.put("limit", limit);
 				
@@ -46,7 +46,7 @@ public class MyOrdersListServlet extends HttpServlet {
 				List<Orders> myOrdersList = ordersService.selectMyOrdersList(param, orderMemberId);
 				System.out.println(myOrdersList);
 				// b. 페이지바
-				int totalCount = ordersService.selectTotalCount(); // select count(*) from board
+				int totalCount = ordersService.selectTotalCount(); // select count(*) from orders
 				System.out.println(totalCount);
 				
 				String url = request.getRequestURI();
