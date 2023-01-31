@@ -1,5 +1,8 @@
 package com.sh.yespresso.product.model.dao;
 
+import static com.sh.yespresso.common.JdbcTemplate.close;
+import static com.sh.yespresso.common.JdbcTemplate.getConnection;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.sh.yespresso.member.model.dto.Member;
+import com.sh.yespresso.member.model.exception.MemberException;
 import com.sh.yespresso.product.model.dto.Aroma;
 import com.sh.yespresso.product.model.dto.CupSize;
 import com.sh.yespresso.product.model.dto.Product;
@@ -206,6 +211,75 @@ public class ProductDao {
 	/**
 	 * yeji start
 	 */
+	public List<Product> selectAllProduct(Connection conn, Map<String, Object> param) {
+		String sql = prop.getProperty("selectAllProduct"); // select * from (select row_number() over(order by product_date desc) rnum, p.* from PRODUCT p) where rnum between ? and ?
+		List<Product> products = new ArrayList<>();
+		int page = (int) param.get("page");
+		int limit = (int) param.get("limit");
+		int start = (page - 1) * limit + 1; 
+		int end = page * limit;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			try(ResultSet rset = pstmt.executeQuery();){
+				
+				while(rset.next()) {
+					Product product = handleProductResultSet(rset);
+					products.add(product);
+				}
+			}
+			
+			
+		} catch (SQLException e) {
+			throw new ProductException("관리자 제품 목록 조회 오류!", e);
+		}
+				
+		return products;
+	}
+	
+	public int selectTotalCount(Connection conn) {
+		String sql = prop.getProperty("selectTotalCount"); // select COUNT(*) from PRODUCT
+		int totalCount = 0;
+		
+		try(
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rset = pstmt.executeQuery();	
+		){
+			while(rset.next())
+				totalCount = rset.getInt(1);
+	
+		} catch (SQLException e) {
+			throw new ProductException("전체 제품 수 조회 오류", e);
+		}	
+		
+		return totalCount;
+	}
+	
+	public List<Product> searchProduct(Connection conn, Map<String, String> param) {
+		List<Product> products = new ArrayList<>();
+		String searchType = param.get("searchType"); // product_name
+		String searchKeyword = param.get("searchKeyword");
+		String sql = prop.getProperty("searchProduct"); // select * from PRODUCT where PRODUCT_NAME like ?
+		System.out.println(sql);
+		
+		// 1. PreaparedStatement 객체 생성 & 미완성 쿼리 값대입
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, "%" + searchKeyword + "%"); 
+			// 2. 실행 & ResultSet 반환
+			try(ResultSet rset = pstmt.executeQuery()){				
+				// 3. ResultSet -> List<Product>
+				while(rset.next())
+					products.add(handleProductResultSet(rset));
+			}
+		} catch (SQLException e) {
+			throw new MemberException("관리자 회원 검색 오류", e);
+		}
+		
+		return products;
+	}
+	
 	/**
 	 * yeji end
 	 */

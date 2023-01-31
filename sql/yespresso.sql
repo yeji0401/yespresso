@@ -250,7 +250,6 @@ where
 -- yes-230119-0001
 'yes-' || to_char(sysdate, 'yymmdd') || '-' || lpad(seq_order_no.nextval ,4,'0')
 
-
 --===========================
 -- ORDER_DETAIL
 --===========================

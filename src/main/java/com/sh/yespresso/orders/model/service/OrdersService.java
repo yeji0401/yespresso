@@ -24,6 +24,19 @@ public class OrdersService {
 	/**
 	 * yeji start
 	 */
+	public List<Orders> selectAllOrders(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Orders> orders = ordersDao.selectAllOrders(conn, param);
+		close(conn);
+		return orders;
+	}
+	
+	public List<Orders> searchOrders(Map<String, String> param) {
+		Connection conn = getConnection();
+		List<Orders> orders = ordersDao.searchOrders(conn, param);
+		close(conn);
+		return orders;
+	}
 	/**
 	 * yeji end
 	 */

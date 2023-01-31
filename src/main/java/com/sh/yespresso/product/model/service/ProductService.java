@@ -60,6 +60,26 @@ public class ProductService {
 	/**
 	 * yeji start
 	 */
+	public List<Product> selectAllProduct(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Product> products = productDao.selectAllProduct(conn, param);
+		close(conn);
+		return products;
+	}
+	
+	public int selectTotalCount() {
+		Connection conn = getConnection();
+		int totalCount = productDao.selectTotalCount(conn);
+		close(conn);
+		return totalCount;
+	}
+	
+	public List<Product> searchProduct(Map<String, String> param) {
+		Connection conn = getConnection();
+		List<Product> products = productDao.searchProduct(conn, param);
+		close(conn);
+		return products;
+	}
 	/**
 	 * yeji end
 	 */

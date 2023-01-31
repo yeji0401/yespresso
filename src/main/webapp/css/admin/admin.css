@@ -3,21 +3,25 @@
 /***** 전체 섹션 *****/
 
 * {
-    margin: 0 auto;
+	margin: 0 auto;
+    font-family: 'Gothic A1', sans-serif;
+}
+
+section#admin-container {
+	width: 1200px;
+	margin-bottom: 30px;
 }
 
 div#admin-block {
-    width: 600px;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: centent;
+	display: flex;
+    width: 1000px;
+    height: 70px;
+    margin-top: 30px;
 }
 
 div#admin-block ul {
-    display: flex;
+	display: flex;
     text-decoration: none;
-    padding: 0;
 }
 
 div#admin-block ul li {
@@ -28,6 +32,7 @@ div#admin-block ul li {
     margin: 10px;
     background-color: #A6BB8D;
     border-radius: 30px 0px 30px 0px;
+    box-shadow: 1px 1px 1px gray;
 }
 
 div#admin-block ul li a {
@@ -37,46 +42,62 @@ div#admin-block ul li a {
 
 h2 {
     text-align: center;
+    margin-top: 30px;
     translate: -250px;
 }
 
 div#search-block {
-    width: 900px;
-    height: 100px;
+	width: 500px;
+    height: 30px;
     text-align: center;
     margin-top: 30px;
 }
 
+div#product-search-block {
+	display: flex;
+	width: 350px;
+    height: 30px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+div#member-check-block {
+	display: flex;
+	width: 500px;
+	height: 170px;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
 div#check-block {
     display: flex;
-    justify-content: space-between;
     width: 900px;
+    height: 200px;
     margin: 0 auto;
     margin-top: 30px;
 }
 
-div#check-block p {
+div p {
     text-align: center;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-div#roasting :not(:first-child()) {
+div#check-block div#roasting-c {
 	display: flex;
 }
 
+button {height: 20px; background-color: white; border: none; font-weight: bold;}
+button:hover {text-decoration: underline;}
+
 /**** 테이블 리스트 관련 ****/
 
-table {
-    margin: 0 auto;
-    margin-top: 30px;
-    border-collapse: collapse;
-}
+table {width: 1200px; height: 100px; margin: 0 auto; margin-top: 30px; text-align: center; border-collapse: collapse;}
+th {background-color: #E8EAE6;}
+th, td {padding: 7px;}
 
-th {
-    background-color: #E8EAE6;
-}
-
-th, td {
-    padding: 10px;
-}
+/***** 페이지바 관련 *****/
+section#admin-container div#pagebar{width: 200px; height: 50px; margin-top:30px; text-align:center;}
+div#pagebar span.cPage{display: inline-block; width: 30px; height: 30px; color: white; margin-right: 5px; background-color: #3C6255; text-align: center; line-height: 30px; border-radius: 50%;}
+div#pagebar a{margin-right: 5px; display: inline-block; width: 30px; height: 30px; color: #100F0F; margin-right: 5px; background-color: white; text-align: center; line-height: 30px; border-radius: 50%; text-decoration: none;}
+div#pagebar a:hover{color: white; background-color: #A6BB8D;}
