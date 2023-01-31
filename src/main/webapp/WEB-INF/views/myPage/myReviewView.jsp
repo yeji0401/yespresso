@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>나의 리뷰 리스트를 보시궛서요?</h2>
-<a href="<%=%>/myPage/myReviewView">내 리뷰 보기(삭제버튼 추가)</a>
+<button><a href="/myPage/myReviewDelete"></a>삭제</button>
+
 </body>
 </html>

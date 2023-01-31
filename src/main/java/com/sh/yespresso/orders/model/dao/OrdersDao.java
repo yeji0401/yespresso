@@ -123,7 +123,6 @@ public class OrdersDao {
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while (rset.next()) {
 					Orders orders = handleOrdersResultSet(rset);
-
 					myOrdersList.add(orders);
 
 				}
@@ -158,23 +157,24 @@ public class OrdersDao {
 		return totalCount;
 	}
 
-	public List<OrderDetail> selectMyOrderDetail(Connection conn, String orderMemberId) {
-		String sql = prop.getProperty("selectMyOrderDetail");
-		List<OrderDetail> myOrderDetail = new ArrayList<>();
+	// 주문 상세내역 보기
+	public List<OrderDetail> selectMyOrdersDetail(Connection conn, String orderNo) {
+		String sql = prop.getProperty("selectMyOrdersDetail");
+		List<OrderDetail> myOrdersDetail = new ArrayList<>();
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, orderMemberId);
+			pstmt.setString(1, orderNo);
 
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while (rset.next()) {
 					OrderDetail od = handleOrderDetailResultSet(rset);
-					myOrderDetail.add(od);
+					myOrdersDetail.add(od);
 				}
 			}
 		} catch (Exception e) {
 			throw new OrdersException("주문 상세 내역 조회 오류!", e);
 		}
 
-		return myOrderDetail;
+		return myOrdersDetail;
 	}
 
 	private OrderDetail handleOrderDetailResultSet(ResultSet rset) throws SQLException {

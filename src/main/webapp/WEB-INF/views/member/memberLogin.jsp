@@ -55,7 +55,7 @@ window.addEventListener('load', () => {
 });
 
 </script>
-    <div id="login-container">
+    <section id="login-container">
    
        
 		
@@ -100,8 +100,5 @@ window.addEventListener('load', () => {
    		<!-- 로그인폼 끝-->
    		
    		</div>
-			
-			
-			
     
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

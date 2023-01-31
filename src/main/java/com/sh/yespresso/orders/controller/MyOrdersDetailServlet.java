@@ -12,11 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.sh.yespresso.orders.model.dto.OrderDetail;
 import com.sh.yespresso.orders.model.service.OrdersService;
 
-/**
- * Servlet implementation class MyOrderDetailServlet
- */
-@WebServlet("/myPage/myOrderDetail")
-public class MyOrderDetailServlet extends HttpServlet {
+
+@WebServlet("/myPage/myOrdersDetail")
+public class MyOrdersDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	OrdersService ordersService = new OrdersService();
        
@@ -25,10 +23,10 @@ public class MyOrderDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<OrderDetail> myOrderDetail = ordersService.selectMyOrderDetail("orderMemberId");
-		String orderMemberId = request.getParameter("orderMemberId");
+		List<OrderDetail> myOrdersDetail = ordersService.selectMyOrdersDetail("orderNo");
+		String orderNo = request.getParameter("orderNo");
 		// jsp 포워딩
-		request.getRequestDispatcher("/WEB-INF/views/myPage/myOrderDetail.jsp")
+		request.getRequestDispatcher("/WEB-INF/views/myPage/myOrdersDetail.jsp")
 			.forward(request, response);
 	}
 

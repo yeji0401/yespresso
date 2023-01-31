@@ -45,45 +45,7 @@ public class MemberService {
 		close(conn);
 		return members;
 	}
-	/**
-	 * yeji end
-	 */
-
-
-	/**
-	 * awon start
-	 */
-	public int updateMember(Member member) {
-		int result = 0;
-		Connection conn = getConnection();
-		try {
-			result = memberDao.UpdateMember(conn, member);
-			commit(conn);
-		} catch (Exception e) {
-			rollback(conn);
-			throw e;
-		} finally {
-			close(conn);
-		}
-		return result;
-	}
-
 	
-	public int updatePassword(Member member) {
-		Connection conn = getConnection();
-		int result = 0;;
-		try {
-			result = memberDao.updatePassword(conn, member);
-			commit(conn);
-		} catch (Exception e) {
-			rollback(conn);
-			throw e;
-		} finally {
-			close(conn);
-		}
-		return result;
-	}
-
 	public int updateMemberRole(String memberId, String memberRole) {
 		Connection conn = getConnection();
 		int result = 0;
@@ -99,14 +61,52 @@ public class MemberService {
 		
 		return result;
 	}
+	/**
+	 * yeji end
+	 */
+
+
+	/**
+	 * awon start
+	 */
+	public int updateMyAccount(Member member) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = memberDao.updateMyAccount(conn, member);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 	
-	public int deleteMember(String memberId) {
+	public int myPasswordUpdate(Member member) {
+		Connection conn = getConnection();
+		int result = 0;;
+		try {
+			result = memberDao.myPasswordUpdate(conn, member);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+	
+	public int myAccountDelete(String memberId) {
 		int result = 0;
 		// 1. Connection객체 생성
 		Connection conn = getConnection();
 		try {
 			// 2. dao 요청
-			result = memberDao.deleteMember(conn, memberId);
+			result = memberDao.myAccountDelete(conn, memberId);
 			// 3. 트랜잭션 처리
 			commit(conn);
 		} catch (Exception e) {
