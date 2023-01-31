@@ -32,59 +32,72 @@
 			<li class="pad1"><span>정렬</span></li>
 		</ul>
 	</div>
+
+
 	<!-- 상품리스트 -->
 	
-<%
-	for(int i = 0; i < coffeeList.size(); i++){
-		coffeeList.get(i); // 첫번째 제품
-	}
-
-%>
-
-
 	<div class="product-list">
 		<table id="coffee-list">
 			<tbody>
+				<tr class="pdlist1">
 <%
-	for(Product coffee : coffeeList){
-%>	
-				<tr>
+	for(int i = 0; i < 4; i++){
+%>
 					<td>
 						<div class="prod-cont">
 							<div class="thumbnail">
-								<img src="<%= request.getContextPath() %>/upload/product/<%= coffee.getThumbnailFilename() %>" alt="" style="width: 120px;"/>
+								<img src="<%= request.getContextPath() %>/upload/product/<%= coffeeList.get(i).getThumbnailFilename() %>" alt="" style="width: 120px;"/>
 							</div>
-							<div class="prod-name"><%= coffee.getProductName() %></div>
-							<p class="price"><%= coffee.getProductPrice() %>원</p>
+							<div class="prod-name"><%= coffeeList.get(i).getProductName() %></div>
+							<p class="price"><%= coffeeList.get(i).getProductPrice() %>원</p>
 						</div>
 					</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-				</tr>
-				
-				<tr>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-				</tr>
-				
-				<tr>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-				</tr>
 <%
 	}
 %>
+				</tr>	
+				<tr class="pdlist2">
+<%
+	for(int i = 4; i < 8; i++){
+%>
+					<td>
+						<div class="prod-cont">
+							<div class="thumbnail">
+								<img src="<%= request.getContextPath() %>/upload/product/<%= coffeeList.get(i).getThumbnailFilename() %>" alt="" style="width: 120px;"/>
+							</div>
+							<div class="prod-name"><%= coffeeList.get(i).getProductName() %></div>
+							<p class="price"><%= coffeeList.get(i).getProductPrice() %>원</p>
+						</div>
+					</td>
+<%
+	}
+%>					
+				</tr>
+				<tr class="pdlist3">
+<%
+	for(int i = 8; i < 12; i++){
+%>
+					<td>
+						<div class="prod-cont">
+							<div class="thumbnail">
+								<img src="<%= request.getContextPath() %>/upload/product/<%= coffeeList.get(i).getThumbnailFilename() %>" alt="" style="width: 120px;"/>
+							</div>
+							<div class="prod-name"><%= coffeeList.get(i).getProductName() %></div>
+							<p class="price"><%= coffeeList.get(i).getProductPrice() %>원</p>
+						</div>
+					</td>
+<%
+	}
+%>					
+				
+				</tr>
 			</tbody>			
 		</table>
-		
 	</div>
+
 	<div id="pagebar">
-	
+		<%= request.getAttribute("pagebar") %>
 	</div>
 </div>
+
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
