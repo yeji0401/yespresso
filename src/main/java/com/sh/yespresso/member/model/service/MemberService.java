@@ -46,11 +46,11 @@ public class MemberService {
 	/**
 	 * awon start
 	 */
-	public int updateMember(Member member) {
+	public int updateMyAccount(Member member) {
 		int result = 0;
 		Connection conn = getConnection();
 		try {
-			result = memberDao.updateMember(conn, member);
+			result = memberDao.updateMyAccount(conn, member);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -62,11 +62,11 @@ public class MemberService {
 	}
 
 	
-	public int updatePassword(Member member) {
+	public int myPasswordUpdate(Member member) {
 		Connection conn = getConnection();
 		int result = 0;;
 		try {
-			result = memberDao.updatePassword(conn, member);
+			result = memberDao.myPasswordUpdate(conn, member);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -77,13 +77,13 @@ public class MemberService {
 		return result;
 	}
 	
-	public int deleteMember(String memberId) {
+	public int myAccountDelete(String memberId) {
 		int result = 0;
 		// 1. Connection객체 생성
 		Connection conn = getConnection();
 		try {
 			// 2. dao 요청
-			result = memberDao.deleteMember(conn, memberId);
+			result = memberDao.myAccountDelete(conn, memberId);
 			// 3. 트랜잭션 처리
 			commit(conn);
 		} catch (Exception e) {

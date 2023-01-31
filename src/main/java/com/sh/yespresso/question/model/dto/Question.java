@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sh.yespresso.review.model.dto.ReviewAttachment;
-
 public class Question extends QuestionEntity {
 
 	private int attachCnt;

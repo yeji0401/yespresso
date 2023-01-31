@@ -26,8 +26,8 @@ public class MyCartViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Cart> myCartList = cartService.selectMyCartList("cartMemberId");
-		String cartMemberId = request.getParameter("cartMemberId");
+		String cartMemberId = request.getParameter("memberId");
+		List<Cart> myCartList = cartService.selectMyCartList(cartMemberId);
 		// jsp 포워딩
 		request.getRequestDispatcher("/WEB-INF/views/cart/cart.jsp").forward(request, response);
 	}

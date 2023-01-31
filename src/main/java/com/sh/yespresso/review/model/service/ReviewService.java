@@ -7,6 +7,7 @@ import static com.sh.yespresso.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import com.sh.yespresso.review.model.dao.ReviewDao;
 import com.sh.yespresso.review.model.dto.Review;
@@ -63,6 +64,53 @@ public class ReviewService {
 		}
 		return result;
 	}
+
+	public List<Review> selectMyReviewsList(Map<String, Object> param, String reviewMemberId) {
+		Connection conn = getConnection();
+		List<Review> myReviewsList = reviewDao.selectMyReviewsList(conn, param, reviewMemberId);
+		close(conn);
+		return myReviewsList;
+	}
+
+	public int selectTotalCount() {
+		Connection conn = getConnection();
+		int totalCount = reviewDao.selectTotalCount(conn);
+		close(conn);
+		return totalCount;
+	}
+
+	public Review selectOneReview(int reviewNo) {
+		Connection conn = getConnection();
+		Review review = reviewDao.selectOneReview(conn, reviewNo);
+		List<ReviewAttachment> reviewAttachments = reviewDao.selectAttachmentByReviewNo(conn, reviewNo);
+		review.setReviewAttachment(reviewAttachments);
+		close(conn);
+		return review;
+	}
+
+	public List<ReviewAttachment> selectAttachmentByReviewNo(int reviewNo) {
+		Connection conn = getConnection();
+		List<ReviewAttachment> reviewAttachments = reviewDao.selectAttachmentByReviewNo(conn, reviewNo);
+		close(conn);
+		return reviewAttachments;
+	}
+
+	public int deleteMyReview(int reviewNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			// dao요청
+			result = reviewDao.deleteMyReview(conn, reviewNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 	/**
 	 * awon end
 	 */

@@ -43,12 +43,12 @@ public class CartService {
 	}
 	
 
-	public int deleteCart(int cartProductNo) {
+	public int deleteMyCartListbyProductNo(int cartProductNo) {
 		Connection conn = getConnection();
 		int result = 0;
 		try {
 			// dao요청
-			result = cartDao.deleteCart(conn, cartProductNo);
+			result = cartDao.deleteMyCartListbyProductNo(conn, cartProductNo);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);

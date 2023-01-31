@@ -600,3 +600,4 @@ where
     
 SELECT * FROM    ALL_CONSTRAINTS
 WHERE    TABLE_NAME = 'order_detail';
+

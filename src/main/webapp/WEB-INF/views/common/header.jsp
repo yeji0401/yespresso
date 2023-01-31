@@ -43,7 +43,7 @@
                     <% if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
                         <li class="myadmin"><a href="<%= request.getContextPath() %>/admin/adminMemberList">ADMIN</a></li>
                     <% } else if (loginMember != null && (loginMember.getMemberRole() == MemberRole.C || loginMember.getMemberRole() == MemberRole.V)){ %>
-                        <li class="myadmin"><a href="<%= request.getContextPath() %>/myPage/myPage">MYPAGE</a></li>
+                        <li class="myadmin"><a href="<%= request.getContextPath() %>/myPage/myPageIndex">MYPAGE</a></li>
                     <% } else { %> 
                     	<li class="myadmin">☕</li>
                    	 <% } %> 

@@ -91,19 +91,19 @@ public class MemberDao {
 	 * awon start
 	 */
 
-	public int updateMember(Connection conn, Member member) {
-		// updateMember = update member set member_name = ?, birthday = ?, email = ?,
+	public int updateMyAccount(Connection conn, Member member) {
+		// updateMyAccount = update member set member_name = ?, birthday = ?, email = ?,
 		// phone = ?, address = ? where member_id = ?
-		String sql = prop.getProperty("updateMember");
+		String sql = prop.getProperty("updateMyAccount");
 		int result = 0;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, member.getMemberName());
-			pstmt.setDate(3, member.getBirthday());
-			pstmt.setString(4, member.getEmail());
-			pstmt.setString(5, member.getPhone());
-			pstmt.setString(6, member.getAddress());
-			pstmt.setString(7, member.getMemberId());
+			pstmt.setDate(2, member.getBirthday());
+			pstmt.setString(3, member.getEmail());
+			pstmt.setString(4, member.getPhone());
+			pstmt.setString(5, member.getAddress());
+			pstmt.setString(6, member.getMemberId());
 
 			result = pstmt.executeUpdate();
 
@@ -113,9 +113,9 @@ public class MemberDao {
 		return result;
 	}
 
-	public int updatePassword(Connection conn, Member member) {
+	public int myPasswordUpdate(Connection conn, Member member) {
 		int result = 0;
-		String sql = prop.getProperty("updatePassword");
+		String sql = prop.getProperty("myPasswordUpdate");
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setString(1, member.getPassword());
@@ -130,9 +130,9 @@ public class MemberDao {
 		return result;
 	}
 
-	public int deleteMember(Connection conn, String memberId) {
+	public int myAccountDelete(Connection conn, String memberId) {
 		int result = 0;
-		String sql = prop.getProperty("deleteMember");
+		String sql = prop.getProperty("myAccountDelete");
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setString(1, memberId);

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sh.yespresso.common.YespressoUtils;
 import com.sh.yespresso.member.model.dto.Gender;
 import com.sh.yespresso.member.model.dto.Member;
 import com.sh.yespresso.member.model.service.MemberService;
@@ -18,16 +17,11 @@ import com.sh.yespresso.member.model.service.MemberService;
 /**
  * Servlet implementation class MemberUpdateServlet
  */
-@WebServlet("/myPage/myAccontUpdate")
-public class MyAccontUpdateServlet extends HttpServlet {
+@WebServlet("/myPage/myAccountUpdate")
+public class MyAccountUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
 
-	/**
-	 * sql
-	 * 
-	 *
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -38,7 +32,6 @@ public class MyAccontUpdateServlet extends HttpServlet {
 
 			// 사용자 입력값 가져오기
 			String memberId = request.getParameter("memberId");
-			String password = YespressoUtils.getEncryptedPassword(request.getParameter("password"), memberId);
 			String memberName = request.getParameter("memberName");
 			String _birthday = request.getParameter("birthday"); // "" "1988-08-08"
 			String _gender = request.getParameter("gender");
@@ -50,12 +43,12 @@ public class MyAccontUpdateServlet extends HttpServlet {
 			Date birthday = !"".equals(_birthday) ? Date.valueOf(_birthday) : null;
 			Gender gender = _gender != null ? Gender.valueOf(_gender) : null;
 
-			Member member = new Member(memberId, null, password, memberName, birthday, gender, email, phone, address,
-					null);
+			Member member = new Member(memberId, null, null, memberName, birthday, gender, email, phone, address,
+					null); // null : 회원등급, 비밀번호, 가입일
 			System.out.println(member);
 
 			// 3. 업무로직 - db update
-			int result = memberService.updateMember(member);
+			int result = memberService.updateMyAccount(member);
 			System.out.println("result = " + result);
 
 			if (result > 0) {

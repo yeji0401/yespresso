@@ -35,7 +35,7 @@ public class MyAccountDeleteServlet extends HttpServlet {
 			String memberId = loginMember.getMemberId();
 
 			// 2. 서비스로직호출
-			int result = memberService.deleteMember(memberId);
+			int result = memberService.myAccountDelete(memberId);
 
 			// 모든 속성 제거하기
 			Enumeration<String> names = session.getAttributeNames();
@@ -45,7 +45,7 @@ public class MyAccountDeleteServlet extends HttpServlet {
 			}
 			// saveId cookie 제거
 			Cookie c = new Cookie("saveId", memberId);
-			c.setPath(request.getContextPath()); // /mvc
+			c.setPath(request.getContextPath()); // /
 			c.setMaxAge(0); // 쿠키의 유효기간 0=> 즉시삭제
 			response.addCookie(c);
 

@@ -8,5 +8,6 @@
 </head>
 <body>
 <h2>나의 질문을 보시겟어용???</h2>
+/myPage/myQuestionView
 </body>
 </html>

@@ -30,7 +30,7 @@ public class MyQuestionsListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 1. 사용자입력값 처리
-		String questionMemberId = request.getParameter("questionMemberId");
+		String questionMemberId = request.getParameter("memberId");
 		final int limit = 5;
 		int page = 1;
 		try {
@@ -44,10 +44,10 @@ public class MyQuestionsListServlet extends HttpServlet {
 
 		// 2. 업무로직
 		// a. db에서 목록조회(페이징)
-		List<Question> questionList = questionService.selectQuestionList(param, questionMemberId);
+		List<Question> questionList = questionService.selectMyQuestionsList(param, questionMemberId);
 		System.out.println(questionList);
 		// b. 페이지바
-		int totalCount = questionService.selectTotalCount(); // select count(*) from board
+		int totalCount = questionService.selectTotalCount(); // select count(*) from question
 		System.out.println(totalCount);
 
 		String url = request.getRequestURI(); // /yespresso/myPage/myQuestionsList
@@ -55,7 +55,7 @@ public class MyQuestionsListServlet extends HttpServlet {
 		System.out.println(pagebar);
 
 		// 3. view단 위임.
-		request.setAttribute("queestionList", questionList);
+		request.setAttribute("questionList", questionList);
 		request.setAttribute("pagebar", pagebar);
 		request.getRequestDispatcher("/WEB-INF/views/myPage/myQuestionsList.jsp").forward(request, response);
 	}

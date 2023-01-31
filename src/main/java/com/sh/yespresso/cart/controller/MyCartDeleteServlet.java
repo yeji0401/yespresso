@@ -1,25 +1,19 @@
 package com.sh.yespresso.cart.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.sh.yespresso.cart.model.dto.Cart;
 import com.sh.yespresso.cart.model.service.CartService;
 
 /**
  * Servlet implementation class MyCartDeleteServlet
  */
-@WebServlet("/cart/cartDelete")
+@WebServlet("/cart/deleteMyCartList")
 public class MyCartDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CartService cartService = new CartService();
@@ -34,9 +28,9 @@ public class MyCartDeleteServlet extends HttpServlet {
 		int cartProductNo = Integer.parseInt(request.getParameter("cartProductNo"));
 		System.out.println("cartProductNo = " + cartProductNo);
 
-		int result = cartService.deleteCart(cartProductNo);
+		int result = cartService.deleteMyCartListbyProductNo(cartProductNo);
 
-		// 3. redirect : /board/boardList
+		// 3. redirect : /cart/cart
 		request.getSession().setAttribute("msg", "품목을 성공적으로 삭제했습니다.");
 		response.sendRedirect(request.getContextPath() + "/cart/cart");
 

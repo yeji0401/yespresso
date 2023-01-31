@@ -76,8 +76,8 @@ public class CartDao {
 		return cart;
 	}
 
-	public int deleteCart(Connection conn, int cartProductNo) {
-		String sql = prop.getProperty("deleteCart"); // delete from cart where cartProductNo = ?
+	public int deleteMyCartListbyProductNo(Connection conn, int cartProductNo) {
+		String sql = prop.getProperty("deleteMyCartListbyProductNo"); // delete from cart where cartProductNo = ?
 		int result = 0;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {

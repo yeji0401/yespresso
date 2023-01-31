@@ -16,7 +16,7 @@ import com.sh.yespresso.member.model.service.MemberService;
 /**
  * Servlet implementation class MemberUpdatePasswordServlet
  */
-@WebServlet("/myPage/updatePassword")
+@WebServlet("/myPage/myPasswordUpdate")
 public class MyPasswordUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
@@ -27,7 +27,7 @@ public class MyPasswordUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/member/updatePassword.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/myPage/myPasswordUpdate.jsp").forward(request, response);
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class MyPasswordUpdateServlet extends HttpServlet {
 
 		try {
 			Member loginMember = (Member) session.getAttribute("loginMember");
-			String location = request.getContextPath(); // /mvc
+			String location = request.getContextPath(); //
 			String msg = null;
 
 			// 1. 사용자입력값 가져오기
@@ -49,7 +49,6 @@ public class MyPasswordUpdateServlet extends HttpServlet {
 			String newPassword = YespressoUtils.getEncryptedPassword(request.getParameter("newPassword"), memberId);
 
 			// 2. 기존비밀번호 일치여부 검사
-			// db에 있는 비밀번호와 비교 / session의 비밀번호와 비교
 			boolean pass = oldPassword.equals(loginMember.getPassword());
 
 			// 3. 업무로직 : 기존비밀번호가 일치한 경우만 신규비밀번호로 업데이트한다.
@@ -57,18 +56,15 @@ public class MyPasswordUpdateServlet extends HttpServlet {
 				// 4. 세션의 정보는 db의 정보 일치하는가? Yes
 				loginMember.setPassword(newPassword);
 
-				int result = memberService.updatePassword(loginMember);
+				int result = memberService.myPasswordUpdate(loginMember);
 				msg = "비밀번호를 성공적으로 변경했습니다.";
-				location += "/member/memberView";
+				location += "/myPage/myAccountView";
 			} else {
 				msg = "비밀번호가 일치하지 않습니다.";
-				location += "/member/updatePassword";
+				location += "/myPage/myPasswordUpdate";
 			}
 
 			// 4. 사용자경고창 및 리다이렉트 처리
-			// 기존비밀번호가 일치하지 않았다면, "비밀번호가 일치하지 않습니다." 안내 && /mvc/member/updatePassword 리다이렉트
-			// 기존비밀번호가 일치하고, 신규비밀번호 변경에 성공했다면, "비밀번호를 성공적으로 변경했습니다." 안내 &&
-			// /mvc/member/memberView 리다이렉트
 			session.setAttribute("msg", msg);
 			response.sendRedirect(location);
 

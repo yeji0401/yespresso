@@ -41,7 +41,7 @@ public class MyReviewEnrollServlet extends HttpServlet {
 
 		try {
 			// 0. MultipartRequest객체 생성 - 요청메세지에서 파일을 읽어(Input), 서버컴퓨터에 저장(Output)까지 처리
-			String saveDirectory = getServletContext().getRealPath("/upload/board"); // 웹루트디렉토리(src/main/webapp)부터 탐색
+			String saveDirectory = getServletContext().getRealPath("/upload/review"); // 웹루트디렉토리(src/main/webapp)부터 탐색
 			System.out.println(saveDirectory);
 
 			int maxPostSize = 10 * 1024 * 1024; // byte단위 : 1kb-1024, 1mb-1024*1kb
@@ -58,7 +58,7 @@ public class MyReviewEnrollServlet extends HttpServlet {
 
 			// 1. 사용자입력값 처리 - request가 아닌 MultipartRequest에서 값 꺼내기
 			String reviewTitle = multiReq.getParameter("reviewTitle");
-			String reviewMemberId = multiReq.getParameter("reviewMemberId");
+			String reviewMemberId = multiReq.getParameter("memberId");
 			String reviewContent = multiReq.getParameter("reviewContent");
 
 			Review review = new Review();
@@ -68,7 +68,6 @@ public class MyReviewEnrollServlet extends HttpServlet {
 
 			// 업로드한 파일처리
 			if (multiReq.getFile("upFile1") != null) {
-//				this.reviewAttachments.add(reviewAttach);
 				ReviewAttachment reviewAttach = new ReviewAttachment();
 				reviewAttach.setReviewFileName(multiReq.getOriginalFileName("upFile1"));
 				reviewAttach.setReReviewFileName(multiReq.getFilesystemName("upFile1"));
@@ -95,7 +94,7 @@ public class MyReviewEnrollServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.getSession().setAttribute("msg", "리뷰 등록중 오류가 발생했습니다.");
-			response.sendRedirect(request.getContextPath() + "/review/myReviewsList");
+			response.sendRedirect(request.getContextPath() + "/myPage/myReviewsList");
 		}
 
 	}
