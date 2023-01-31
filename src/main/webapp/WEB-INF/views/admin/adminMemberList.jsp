@@ -18,6 +18,24 @@ div#search-memberId	 {display: <%= searchType == null || "member_id".equals(sear
 div#search-memberName{display: <%= "member_name".equals(searchType) ? "inline-block" : "none" %>;}
 </style>
 <script>
+$(document).ready(function() {
+	 $('input[type="checkbox"][name="member-sort"]').click(function(){
+	  if($(this).prop('checked')){
+	     $('input[type="checkbox"][name="member-sort"]').prop('checked',false);
+	     $(this).prop('checked',true);
+	    }	  
+	});
+});
+
+$(document).ready(function() {
+	 $('input[type="checkbox"][name="member-role"]').click(function(){
+	  if($(this).prop('checked')){
+	     $('input[type="checkbox"][name="member-role"]').prop('checked',false);
+	     $(this).prop('checked',true);
+	    }	  
+	});
+});
+
 window.addEventListener('load', () => {
 	document.querySelector("#searchType").addEventListener('change', (e) => {
 		console.log(e.target.value); // member_id, member_name
@@ -68,28 +86,28 @@ window.addEventListener('load', () => {
 	            </div>
 	        </div>
 	            <div id="member-check-block">
-	                <div id="member-sort" class="sorting">
+	                <div id="member-sort">
 	                    <p>정렬순</p>
-	                    <input type="checkbox" name="enroll-A" id="enroll-A">
+	                    <input type="checkbox" name="member-sort" value="enroll-A">
 	                    <label for="enroll-A">가입일자 오름차순</label><br>
-	                    <input type="checkbox" name="enroll-D" id="enroll-D">
+	                    <input type="checkbox" name="member-sort" value="enroll-D" checked>
 	                    <label for="enroll-D">가입일자 내림차순</label><br>
-	                    <input type="checkbox" name="id-A" id="id-A">
+	                    <input type="checkbox" name="member-sort" value="id-A">
 	                    <label for="id-A">아이디 오름차순</label><br>
-	                    <input type="checkbox" name="id-D" id="id-D">
+	                    <input type="checkbox" name="member-sort" value="id-D">
 	                    <label for="id-D">아이디 내림차순</label><br>
-	                    <input type="checkbox" name="name-A" id="name-A">
+	                    <input type="checkbox" name="member-sort" value="name-A">
 	                    <label for="name-A">이름 오름차순</label><br>
-	                    <input type="checkbox" name="name-D" id="name-D">
+	                    <input type="checkbox" name="member-sort" value="name-D">
 	                    <label for="name-D">이름 내림차순</label>
 	                </div>
-	                <div id="member-role" class="sorting">
+	                <div id="member-role">
 	                    <p>회원 권한</p>
-	                    <input type="checkbox" name="ADMIN" id="ADMIN">
+	                    <input type="checkbox" name="member-role" value="ADMIN">
 	                    <label for="ADMIN">ADMIN</label><br>
-	                    <input type="checkbox" name="COMMON" id="COMMON">
+	                    <input type="checkbox" name="member-role" value="COMMON">
 	                    <label for="COMMON">COMMON</label><br>
-	                    <input type="checkbox" name="VIP" id="VIP">
+	                    <input type="checkbox" name="member-role" value="VIP">
 	                    <label for="VIP">VIP</label>
 	                </div>
 	            </div>        
@@ -106,7 +124,11 @@ window.addEventListener('load', () => {
 	                    <th>이메일</th>
 	                    <th>주소</th>
 	                    <th>가입일자</th>
-	                    <th><button type="submit">삭제</button></th>
+	                    <th>
+	                    <form action="">
+	                    	<button type="submit">삭제</button>
+	                    </form>
+						</th>
 	                </tr>
 	            </thead>
 	            <tbody>

@@ -47,8 +47,8 @@ h2 {
 }
 
 div#search-block {
-	width: 700px;
-    height: 50px;
+	width: 500px;
+    height: 30px;
     text-align: center;
     margin-top: 30px;
 }
@@ -56,7 +56,7 @@ div#search-block {
 div#product-search-block {
 	display: flex;
 	width: 350px;
-    height: 50px;
+    height: 30px;
     text-align: center;
     margin-top: 30px;
 }
@@ -87,6 +87,9 @@ div#check-block div#roasting-c {
 	display: flex;
 }
 
+button {height: 20px; background-color: white; border: none; font-weight: bold;}
+button:hover {text-decoration: underline;}
+
 /**** 테이블 리스트 관련 ****/
 
 table {width: 1200px; height: 100px; margin: 0 auto; margin-top: 30px; text-align: center; border-collapse: collapse;}
@@ -94,7 +97,7 @@ th {background-color: #E8EAE6;}
 th, td {padding: 7px;}
 
 /***** 페이지바 관련 *****/
-section#admin-container div#pagebar{height: 15px; margin-top:30px; text-align:center;}
-section#admin-container div#pagebar span.cPage{margin-right: 5px;}
-section#admin-container div#pagebar a{margin-right: 5px; text-decoration: none;}
-section#admin-container div#pagebar a:hover {text-decoration: underline;}
+section#admin-container div#pagebar{width: 200px; height: 50px; margin-top:30px; text-align:center;}
+div#pagebar span.cPage{display: inline-block; width: 30px; height: 30px; color: white; margin-right: 5px; background-color: #3C6255; text-align: center; line-height: 30px; border-radius: 50%;}
+div#pagebar a{margin-right: 5px; display: inline-block; width: 30px; height: 30px; color: #100F0F; margin-right: 5px; background-color: white; text-align: center; line-height: 30px; border-radius: 50%; text-decoration: none;}
+div#pagebar a:hover{color: white; background-color: #A6BB8D;}

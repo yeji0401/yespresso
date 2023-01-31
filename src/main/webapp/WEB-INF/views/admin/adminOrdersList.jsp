@@ -82,26 +82,26 @@ window.addEventListener('load', () => {
             <div id="check-block">
                 <div id="order-sort" class="sorting">
                     <p>정렬순</p>
-                    <input type="checkbox" name="orderNo-A" id="orderNo-A">
+                    <input type="checkbox" name="order-sort" value="orderNo-A">
                     <label for="orderNo-A">주문번호 오름차순</label><br>
-                    <input type="checkbox" name="orderNo-D" id="orderNo-D">
+                    <input type="checkbox" name="order-sort" value="orderNo-D">
                     <label for="orderNo-D">주문번호 내림차순</label><br>
-                    <input type="checkbox" name="totalprice-A" id="totalprice-A">
+                    <input type="checkbox" name="order-sort" value="totalprice-A">
                     <label for="totalprice-A">주문총액 오름차순</label><br>
-                    <input type="checkbox" name="totalprice-D" id="totalprice-D">
+                    <input type="checkbox" name="order-sort" value="totalprice-D">
                     <label for="totalprice-D">주문총액 내림차순</label><br>
-                    <input type="checkbox" name="orderMemberId-A" id="orderMemberId-A">
+                    <input type="checkbox" name="order-sort" value="orderMemberId-A">
                     <label for="orderMemberId-A">주문아이디 오름차순</label><br>
-                    <input type="checkbox" name="orderMemberId-D" id="orderMemberId-D">
+                    <input type="checkbox" name="order-sort" value="orderMemberId-D">
                     <label for="orderMemberId-D">주문아이디 내림차순</label>
                 </div>
                 <div id="order-state" class="sorting">
                     <p>주문상태</p>
-                    <input type="checkbox" name="" id="">
+                    <input type="checkbox" name="order-state" value="before">
                     <label for="">결제완료</label><br>
-                    <input type="checkbox" name="" id="">
+                    <input type="checkbox" name="order-state" value="delivery">
                     <label for="">배송중</label><br>
-                    <input type="checkbox" name="" id="">
+                    <input type="checkbox" name="order-state" value="finish">
                     <label for="">배송완료</label>
                 </div>
             </div>        
