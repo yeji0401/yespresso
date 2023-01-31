@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.sh.yespresso.common.YespressoUtils;
 import com.sh.yespresso.product.model.dto.Product;
 import com.sh.yespresso.product.model.service.ProductService;
@@ -40,15 +41,14 @@ public class CoffeeListServlet extends HttpServlet {
 		
 		// 1. DB에서 목록조회
 		List<Product> coffeeList = productService.selectCoffeeList(param);
-		System.out.println(coffeeList);
-		
+			
 		// 2. 페이지바
 		int totalCount = productService.getTotalCntById("CO");
-		System.out.println(totalCount);
+//		System.out.println(totalCount);
 		
 		String url = request.getRequestURI(); // yespresso/product/productList 
 		String pagebar = YespressoUtils.getPagebar(page, limit, totalCount, url);
-		System.out.println(pagebar);
+//		System.out.println(pagebar);
 
 		// 3. view단 위임
 		request.setAttribute("coffeeList", coffeeList);
