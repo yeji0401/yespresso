@@ -1,1 +1,17 @@
 @charset "UTF-8";
+.fade-out-box{
+	display : inline-block;
+	background : white;
+	padding : 10px;
+	animation: fadeout 3s;
+	-webkit-animation : fadeout 3s;
+	animation-fill-mode:forwards;
+}
+@keyframes fadeout {
+	from{
+		opacity:1;
+	}
+	to{
+		opacity:0;
+	}
+}
