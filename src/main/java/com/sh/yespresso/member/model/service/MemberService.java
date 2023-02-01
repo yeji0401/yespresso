@@ -61,6 +61,25 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	public int deleteMember(String memberId) {
+		int result = 0;
+		// 1. Connection 객체 생성
+		Connection conn = getConnection();
+		try {
+			// 2. dao 요청
+			result = memberDao.deleteMember(conn, memberId);
+			// 3. 트랜잭션 처리
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e; // controller 통보용
+		} finally {
+			// 4. Connection 객체 반환
+			close(conn);
+		}
+		return result;
+	}
 	/**
 	 * yeji end
 	 */

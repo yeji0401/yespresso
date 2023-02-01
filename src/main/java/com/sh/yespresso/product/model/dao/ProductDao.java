@@ -280,6 +280,31 @@ public class ProductDao {
 		return products;
 	}
 	
+	public int insertProduct(Connection conn, Product product) {
+		
+		// insert into PRODUCT values 
+		// ('p' || lpad(seq_product_no.nextval, 4, '0'), ?, ?, ?, default, default, default, 'p' || lpad(seq_product_no.nextval, 4, '0') || '.png', ?, ?, ?, ?, ?)
+		String sql = prop.getProperty("insertProduct"); 
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, product.getProductCategory().name());
+			pstmt.setString(2, product.getProductName());
+			pstmt.setInt(3, product.getProductPrice());
+			pstmt.setString(4, product.getType().name());
+			pstmt.setString(5, product.getAroma().name());
+			pstmt.setInt(6, product.getAcidity());
+			pstmt.setInt(7, product.getRoasting());
+			pstmt.setString(8, product.getCupSize().name());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new ProductException("제품 등록 오류", e);
+		}
+		return result;
+	}
+	
 	/**
 	 * yeji end
 	 */

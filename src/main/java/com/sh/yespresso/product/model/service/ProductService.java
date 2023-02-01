@@ -80,6 +80,21 @@ public class ProductService {
 		close(conn);
 		return products;
 	}
+	
+	public int insertProduct(Product product) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = productDao.insertProduct(conn, product);
+			commit(conn);			
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
 	/**
 	 * yeji end
 	 */
