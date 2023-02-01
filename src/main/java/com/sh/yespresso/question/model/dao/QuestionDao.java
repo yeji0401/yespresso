@@ -190,6 +190,25 @@ public class QuestionDao {
 		return answersList;
 	}
 
+	public QuestionAttachment selectOneAttachment(Connection conn, int questionNo) {
+		String sql = prop.getProperty("selectOneAttachment");
+		QuestionAttachment questionAttach = null;
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, questionNo);
+			try (ResultSet rset = pstmt.executeQuery()) {
+				if (rset.next()) {
+					questionAttach = handleAttachmentResultSet(rset);
+				}
+			}
+
+		} catch (SQLException e) {
+			throw new QuestionException("첨부파일 한건 조회 오류", e);
+		}
+
+		return questionAttach;
+	}
+
 	/**
 	 * awon end
 	 */

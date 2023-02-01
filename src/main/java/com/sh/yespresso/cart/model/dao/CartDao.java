@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.sh.yespresso.cart.model.dto.Cart;
+import com.sh.yespresso.cart.model.dto.CartProduct;
 import com.sh.yespresso.cart.model.exception.CartException;
 
 public class CartDao {
@@ -44,9 +44,9 @@ public class CartDao {
 	/**
 	 * awon start
 	 */
-	public List<Cart> selectMyCartList(Connection conn, String cartMemberId) {
+	public List<CartProduct> selectMyCartList(Connection conn, String cartMemberId) {
 		String sql = prop.getProperty("selectMyCartList");
-		List<Cart> myCartList = new ArrayList<>();
+		List<CartProduct> myCartList = new ArrayList<>();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, cartMemberId);
@@ -54,7 +54,7 @@ public class CartDao {
 			try (ResultSet rset = pstmt.executeQuery()) {
 
 				while (rset.next()) {
-					Cart cart = handleCartResultSet(rset);
+					CartProduct cart = handleCartResultSet(rset);
 					myCartList.add(cart);
 					System.out.println(myCartList);
 				}
@@ -68,12 +68,15 @@ public class CartDao {
 
 	}
 
-	private Cart handleCartResultSet(ResultSet rset) throws SQLException {
-		Cart cart = new Cart();
-		cart.setCartNo(rset.getInt("cart_no"));
-		cart.setCartMemberId(rset.getString("cart_member_id"));
+	private CartProduct handleCartResultSet(ResultSet rset) throws SQLException {
+		CartProduct cart = new CartProduct();
+		cart.setCartNo(rset.getInt("cart_list_no"));
+		cart.setProductName("product_name");
+		cart.setProductPrice(rset.getInt("product_price"));
+		cart.setCartMemberId(rset.getString("cart_list_member_id"));
+		cart.setCartProductNo(rset.getString("product_no"));
 		cart.setAmount(rset.getInt("amount"));
-		cart.setCartProductNo(rset.getString("cart_product_no"));
+		cart.setTotalPrice(rset.getInt("total_price"));
 		return cart;
 	}
 
