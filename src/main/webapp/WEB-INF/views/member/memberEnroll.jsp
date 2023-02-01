@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/memberEnroll.css" />
-<!--<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>-->
-<!--<script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
 window.onload = function(){
     document.getElementById("address").addEventListener("click", function(){ //주소입력칸을 클릭하면
         //카카오 지도 발생
@@ -15,80 +15,81 @@ window.onload = function(){
         }).open();
     });
 }
-</script>-->
+</script>
 <section id=enroll-container>
 	<form 
+		class="enrollwrap"
 		id="memberEnrollFrm"
 		name="memberEnrollFrm" 
 		method="POST" 
 		action="<%= request.getContextPath() %>/member/memberEnroll">
 		<table>
 			<tr>
-				<td><p style="text-align:center;">회원가입</p></td>
+				<th><p style=" font-size:30px; text-align:center; color: #3C6255;">회원가입</p></th>
 			</tr>
 			
 			<tr>
 				<td>
-					아이디<sup>*</sup>
-					<input type="text" placeholder="4글자이상" name="memberId" id="_memberId" value="test" required>
-					<input type="button" value="아이디 중복검사" onclick="checkIdDuplicate();"/>
+					<p style="font-size: 17px;">아이디<sup>*</sup></p>
+					<input type="text" placeholder="4글자이상" name="memberId" id="_memberId" required>
+					<input type="button" value="중복검사" onclick="checkIdDuplicate();" style="paading-right:10px;"/>
 					<input type="hidden" id="idValid" name="idValid" value="0"/>
 					<%-- 사용가능한 아이디인 경우 1, 이미 사용중인 아이디인 경우 0 --%>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					패스워드<sup>*</sup>
-					<input type="password" name="password" id="_password" value="1234" required><br>
+					<p style="font-size: 17px; ">패스워드<sup>*</sup></p>
+					<input type="password" name="password" id="_password" placeholder="영문자/숫자/특수문자포함 4글자 이상" required><br>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					패스워드확인<sup>*</sup>	
-					<input type="password" id="passwordCheck" value="1234" required><br>
+					<p style="font-size: 17px; ;">패스워드 확인<sup>*</sup></p>
+					<input type="password" id="passwordCheck" required><br>
 				</td>
 			</tr>  
 			<tr>
 				<td>
-					이름<sup>*</sup>	
-					<input type="text"  name="memberName" id="memberName" value="김예시" required><br>
+					<p style="font-size: 17px; ">이름<sup>*</sup></p>
+					<input type="text"  name="memberName" id="memberName" required><br>
 				</td>
 			</tr>
 			<tr>
 				<td>	
-				생년월일
-				<input type="date" name="birthday" id="birthday" value="1990-01-05"><br />
+				<p style="font-size: 17px; padding-top:10px;">생일</p>
+				<input type="date" name="birthday" id="birthday"><br />
 				</td>
 			</tr> 
 			<tr>
 				<td>
-					성별
+					<p style="font-size: 17px;padding-top:10px;">성별</p>
 					<input type="radio" name="gender" id="gender0" value="M">
 					<label for="gender0">남</label>
-					<input type="radio" name="gender" id="gender1" value="F" checked>
+					<input type="radio" name="gender" id="gender1" value="F" >
 					<label for="gender1">여</label>
 				</td>
 			</tr>
 			<tr>
 				<td>	
-				    이메일
-					<input type="email" placeholder="abc@xyz.com" name="email" id="email" value="test@naver.com"><br>
+				    <p style="font-size: 17px; padding-top:10px;">이메일</p>
+					<input type="email" placeholder="yespresso@naver.com" name="email" id="email" ><br>
 				</td>
 			</tr>
 			<tr>
 				<td>	
-				    휴대폰<sup>*</sup>
-					<input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="01012344321" required><br>
+				    <p style="font-size: 17px; ">휴대폰번호<sup>*</sup></p>
+					<input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" required><br>
 				</td>
 			</tr>
 			<tr>
 				<td>	
-					주소<sup>*</sup>
+					<p style="font-size: 17px; ">주소<sup>*</sup></p>
 					<input type="text" placeholder="동까지 기입" name="address" id="address" required><br>
 				</td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="가입" ></td>
+				<td style="padding-top: 10px;"><input type="submit" value="가입" > <br /><br /><br /><br /></td>
 			</tr>
 		
 		</table>

@@ -62,7 +62,7 @@ window.addEventListener('load', () => {
 				<!-- 로그인폼 시작 -->
        
 	        <form 
-	        	class="wrap"
+	        	class="loginwrap"
 	            id="loginFrm"
 	            name="loginFrm" 
 	            action="<%= request.getContextPath() %>/member/memberLogin"

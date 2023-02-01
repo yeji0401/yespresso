@@ -1,12 +1,17 @@
 @charset "UTF-8";
 /* 회원가입페이지 */
 
-#memberEnrollFrm table{margin:auto; padding:50px; width: 500px; height: 600px;}
+#memberEnrollFrm table{margin:auto; padding:10px; width: 600px; height: 600px;}
 #memberEnrollFrm input[type=submit]{border-radius: 30px; width:415px; 
     height:40px; background:#A6BB8D; color:white; border: none; font-size:16px;}
 #memberEnrollFrm input[type=button]{border-radius: 30px; width:50px;
     height:25px; background:#A6BB8D; color: white; border: none; font-size:10px;}
-#memberEnrollFrm input[type=text]{border-radius: 30px; width:400px; height:30px; border:0.5px solid gray;}
-#memberEnrollFrm input[type=password]{border-radius: 30px; width:400px; height:30px; border:0.5px solid gray;}
-#memberEnrollFrm input[type=email]{border-radius: 30px; width:400px; height:30px; border:0.5px solid gray;}
-#memberEnrollFrm input[type=tel]{border-radius: 30px; width:400px; height:30px; border:0.5px solid gray;}
+#memberEnrollFrm input[type=text]{border-radius: 30px; width:400px; height:30px; border:0.5px none gray;}
+#memberEnrollFrm input[type=password]{border-radius: 30px; width:400px; height:30px; border:0.5px none gray;}
+#memberEnrollFrm input[type=email]{border-radius: 30px; width:400px; height:30px; border:0.5px none gray;}
+#memberEnrollFrm input[type=tel]{border-radius: 30px; width:400px; height:30px; border:0.5px none gray;}
+section#enroll-container sup{font-size:20px; color: red;}
+td{padding-left:90px;}
+input{padding-left:10px;}
+#memberEnrollFrm label{font-size:13px;}
+form.enrollwrap{position:relative; margin:20px auto; border:none; width: 100%; height:720px; background:#FFFBE9;}
