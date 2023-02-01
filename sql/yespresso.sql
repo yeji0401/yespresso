@@ -84,6 +84,9 @@ values (
 select * from member
 order by
     FK_MEMBER_ROLE_ID asc;
+    
+select * from member
+where FK_MEMBER_ROLE_ID = 'A';
 
 
 select
@@ -250,6 +253,14 @@ where
 -- yes-230119-0001
 'yes-' || to_char(sysdate, 'yymmdd') || '-' || lpad(seq_order_no.nextval ,4,'0')
 
+select * from orders;
+
+insert into orders values ('yes-' || to_char(sysdate, 'yymmdd') || '-' || lpad(seq_order_no.nextval ,4,'0'), 'honggd', default, 12345, default);
+
+select * from (select row_number() over(order by ORDER_DATE desc) rnum, o.* from ORDERS o) where rnum between 1 and 5;
+
+COMMIT;
+
 --===========================
 -- ORDER_DETAIL
 --===========================
@@ -401,6 +412,8 @@ comment on column PRODUCT.CUP_SIZE is '컵사이즈';
 -- sequence
 create sequence seq_product_no;
 
+select * from all_sequences where sequence_name = 'seq_product_no';
+
 -- p001 
 insert into 
     PRODUCT
@@ -456,6 +469,8 @@ from
     user_col_comments
 where
     table_name = 'PRODUCT_DETAIL';
+    
+select * from product_detail;
 
 commit;
 

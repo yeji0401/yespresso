@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
-	List<Product> coffeeList = (List<Product>) request.getAttribute("coffeeList");
+	int totalPage = (int) request.getAttribute("totalPage");
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/productList.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -35,69 +35,154 @@
 
 
 	<!-- 상품리스트 -->
-	
 	<div class="product-list">
 		<table id="coffee-list">
 			<tbody>
 				<tr class="pdlist1">
-<%
-	for(int i = 0; i < 4; i++){
-%>
-					<td>
-						<div class="prod-cont">
-							<div class="thumbnail">
-								<img src="<%= request.getContextPath() %>/upload/product/<%= coffeeList.get(i).getThumbnailFilename() %>" alt="" style="width: 120px;"/>
-							</div>
-							<div class="prod-name"><%= coffeeList.get(i).getProductName() %></div>
-							<p class="price"><%= coffeeList.get(i).getProductPrice() %>원</p>
-						</div>
-					</td>
-<%
-	}
-%>
 				</tr>	
-				<tr class="pdlist2">
-<%
-	for(int i = 4; i < 8; i++){
-%>
-					<td>
-						<div class="prod-cont">
-							<div class="thumbnail">
-								<img src="<%= request.getContextPath() %>/upload/product/<%= coffeeList.get(i).getThumbnailFilename() %>" alt="" style="width: 120px;"/>
-							</div>
-							<div class="prod-name"><%= coffeeList.get(i).getProductName() %></div>
-							<p class="price"><%= coffeeList.get(i).getProductPrice() %>원</p>
-						</div>
-					</td>
-<%
-	}
-%>					
+				<tr class="pdlist2">				
 				</tr>
-				<tr class="pdlist3">
-<%
-	for(int i = 8; i < 12; i++){
-%>
-					<td>
-						<div class="prod-cont">
-							<div class="thumbnail">
-								<img src="<%= request.getContextPath() %>/upload/product/<%= coffeeList.get(i).getThumbnailFilename() %>" alt="" style="width: 120px;"/>
-							</div>
-							<div class="prod-name"><%= coffeeList.get(i).getProductName() %></div>
-							<p class="price"><%= coffeeList.get(i).getProductPrice() %>원</p>
-						</div>
-					</td>
-<%
-	}
-%>					
-				
+				<tr class="pdlist3">	
 				</tr>
 			</tbody>			
 		</table>
 	</div>
 
 	<div id="pagebar">
-		<%= request.getAttribute("pagebar") %>
+		<div class="page-btn">1</div>
+<%
+		for(int i = 2; i < totalPage; i++){
+%>
+		<div class="page-btn"><%= i %></div>
+<% 			
+		}
+%>
+		<div class="page-btn"><%= totalPage %></div>
 	</div>
 </div>
+<script>
+window.addEventListener('load', () => {
+	// 첫페이지 로드
+	getPage(1);
+});
+
+
+document.querySelectorAll("#pagebar div").forEach((page) => {
+	page.addEventListener('click', (e) => {
+		const page = e.target;
+		console.log(page.innerText);
+		getPage(Number(page.innerText)); 
+		
+
+//		const pbtn = document.querySelectorAll(".page-btn");
+//		for(let i = 0; i < pbtn.length; i++){
+//			if(page.innerText == pbtn[i].innertext){
+//				pbtn[i].classList.add("clicked");
+//			} else {
+//				pbtn[i].classList.remove("clicked");
+//			}
+//		}
+	});
+});
+
+
+const getPage = (page) => {
+	$.ajax({
+		url : "<%= request.getContextPath() %>/coffee/morePage",
+		data : {page}, // 단축속성등록 {page: 1}
+		dataType : "json",
+		success(data){
+			console.log(data);
+			
+			const pd1 = document.querySelector(".pdlist1");
+			const pd2 = document.querySelector(".pdlist2");
+			const pd3 = document.querySelector(".pdlist3");
+			pd1.innerHTML = "";
+			pd2.innerHTML = "";
+			pd3.innerHTML = "";
+			
+			for(let i = 0; i < data.length; i++){
+				
+				const td = document.createElement("td");
+				const div1 = document.createElement("div");
+				const img = document.createElement("img");
+				const div2 = document.createElement("div");
+				const p = document.createElement("p");
+				const a = document.createElement("a");
+
+				
+				if(i >= 0 && i < 4){
+					div1.classList.add("prod-cont");
+					a.setAttribute("href", `<%= request.getContextPath() %>/product/coffeeDetails?no=\${data[i].productNo}`);
+					
+					img.src = `<%= request.getContextPath() %>/upload/product/\${data[i].thumbnailFilename}`;
+					a.append(img);
+					
+					div2.classList.add("prod-name");
+					div2.append(data[i].productName);
+					a.append(div2);
+
+					p.classList.add("price");
+					p.append(data[i].productPrice);
+					a.append(p);
+					
+					div1.append(a);
+					td.append(div1);
+					
+					pd1.append(td);
+					
+				}
+				else if (i >= 4 && i < 8){
+					div1.classList.add("prod-cont");
+					a.setAttribute("href", `<%= request.getContextPath() %>/product/coffeeDetails?no=\${data[i].productNo}`);
+
+					img.src = `<%= request.getContextPath() %>/upload/product/\${data[i].thumbnailFilename}`;
+					a.append(img);
+					
+					div2.classList.add("prod-name");
+					div2.append(data[i].productName);
+					a.append(div2);
+
+					p.classList.add("price");
+					p.append(data[i].productPrice);
+					a.append(p);
+					
+					div1.append(a);
+					td.append(div1);
+						
+					pd2.append(td);
+					
+				}
+				else {
+					div1.classList.add("prod-cont");
+					a.setAttribute("href", `<%= request.getContextPath() %>/product/coffeeDetails?no=\${data[i].productNo}`);
+					
+					img.src = `<%= request.getContextPath() %>/upload/product/\${data[i].thumbnailFilename}`;
+					a.append(img);
+					
+					div2.classList.add("prod-name");
+					div2.append(data[i].productName);
+					a.append(div2);
+
+					p.classList.add("price");
+					p.append(data[i].productPrice);
+					a.append(p);
+					
+					div1.append(a);
+					td.append(div1);
+					
+					pd3.append(td);
+					
+				}
+			}
+			
+			
+
+		},
+		error : console.log
+	});
+}
+</script>
+
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

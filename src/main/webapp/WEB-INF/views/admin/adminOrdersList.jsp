@@ -108,7 +108,6 @@ window.addEventListener('load', () => {
         <table id="tbl-orders" class="tbl">
             <thead>
                 <tr>
-                    <th>No</th>
                     <th>주문번호</th>
                     <th>주문아이디</th>
                     <th>주문일자</th>
@@ -119,14 +118,13 @@ window.addEventListener('load', () => {
             <tbody>
 			<% if(orders.isEmpty()){ %>
 				<tr>
-					<td colspan="5">조회된 주문이 없습니다.</td>
+					<td colspan="4">조회된 주문이 없습니다.</td>
 				</tr>
 			<% 
 			   } else {
 				  for(Orders order : orders){
 			%>
 					<tr>
-						<td></td>
 						<td><%= order.getOrderNo() %></td>
 						<td><%= order.getOrderMemberId() %></td>
 						<td><%= order.getOrderDate() %></td>

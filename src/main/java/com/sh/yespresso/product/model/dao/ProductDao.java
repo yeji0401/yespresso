@@ -20,6 +20,7 @@ import com.sh.yespresso.product.model.dto.Aroma;
 import com.sh.yespresso.product.model.dto.CupSize;
 import com.sh.yespresso.product.model.dto.Product;
 import com.sh.yespresso.product.model.dto.ProductCategory;
+import com.sh.yespresso.product.model.dto.ProductDetail;
 import com.sh.yespresso.product.model.dto.Type;
 import com.sh.yespresso.product.model.exception.ProductException;
 
@@ -28,7 +29,7 @@ public class ProductDao {
 	private Properties prop = new Properties();
 	
 	public ProductDao() {
-		
+													// build path
 		String path = ProductDao.class.getResource("/sql/product/product-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
@@ -88,19 +89,13 @@ public class ProductDao {
 	
 	/* DQL 페이지에 해당하는 카테고리별 제품 리스트 불러오기 */
 	// 1. 커피 제품 리스트
-	public List<Product> selectCoffeeList(Connection conn, Map<String, Object> param) {
+	public List<Product> selectCoffeeList(Connection conn, Map<String, Integer> param) {
 		String sql = prop.getProperty("selectCoffeeList");
 		List<Product> coffeeList = new ArrayList<>();
 
-		int page = (int) param.get("page");
-		int limit = (int) param.get("limit");
-
-		int start = (page - 1) * limit + 1;
-		int end = page * limit;
-
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			pstmt.setInt(1, param.get("start"));
+			pstmt.setInt(2, param.get("end"));
 
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while (rset.next()) {
@@ -109,25 +104,19 @@ public class ProductDao {
 				}
 			}
 		} catch (SQLException e) {
-			throw new ProductException("제품 목록 조회 오류!", e);
+			throw new ProductException("커피페이지 조회 오류!", e);
 		}
 		return coffeeList;
 	}
 
 	// 2. 머신 제품 리스트
-	public List<Product> selectMachineList(Connection conn, Map<String, Object> param) {
+	public List<Product> selectMachineList(Connection conn, Map<String, Integer> param) {
 		String sql = prop.getProperty("selectMachineList");
 		List<Product> machineList = new ArrayList<>();
 
-		int page = (int) param.get("page");
-		int limit = (int) param.get("limit");
-
-		int start = (page - 1) * limit + 1;
-		int end = page * limit;
-
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			pstmt.setInt(1, param.get("start"));
+			pstmt.setInt(2, param.get("end"));
 
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while (rset.next()) {
@@ -136,25 +125,20 @@ public class ProductDao {
 				}
 			}
 		} catch (SQLException e) {
-			throw new ProductException("제품 목록 조회 오류!", e);
+			throw new ProductException("머신페이지 조회 오류!", e);
 		}
 		return machineList;
 	}
 
 	// 3. 악세사리 제품 리스트 
-	public List<Product> selectAccList(Connection conn, Map<String, Object> param) {
+	public List<Product> selectAccList(Connection conn, Map<String, Integer> param) {
 		String sql = prop.getProperty("selectAccList");
 		List<Product> accList = new ArrayList<>();
 
-		int page = (int) param.get("page");
-		int limit = (int) param.get("limit");
-
-		int start = (page - 1) * limit + 1;
-		int end = page * limit;
-
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			pstmt.setInt(1, param.get("start"));
+			pstmt.setInt(2, param.get("end"));
+
 
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while (rset.next()) {
@@ -163,7 +147,7 @@ public class ProductDao {
 				}
 			}
 		} catch (SQLException e) {
-			throw new ProductException("제품 목록 조회 오류!", e);
+			throw new ProductException("악세페이지 조회 오류!", e);
 		}
 		return accList;
 	}
@@ -198,6 +182,50 @@ public class ProductDao {
 			}
 			return totalCount;
 		}
+
+	// DQL product_no로 제품 하나 가져오기
+	public Product selectOneProduct(Connection conn, String prodNo) {
+		String sql = prop.getProperty("selectOneProduct");
+		Product product = null;
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, prodNo);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					product = handleProductResultSet(rset);
+				}
+			}
+		} catch (Exception e) {
+			throw new ProductException("제품 한개 조회 오류!", e);
+		}
+		
+		return product;
+	}
+
+	// DQL product_no로 첨부파일 가져오기 
+	public List<ProductDetail> selectDetailByProductNo(Connection conn, String prodNo) {
+		String sql = prop.getProperty("selectDetailByProductNo");
+		List<ProductDetail> attachments = new ArrayList<>();
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, prodNo);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					ProductDetail detail = new ProductDetail();
+					detail.setDetailsNo(rset.getInt("DETAILS_NO"));
+					detail.setProductAttachmentNo(rset.getString("PRODUCT_ATTACHMENT_NO"));
+					detail.setProductFilename(rset.getString("PRODUCT_FILENAME"));
+					detail.setReProductFilename(rset.getString("RE_PRODUCT_FILENAME"));
+					detail.setProductFileDate(rset.getDate("PRODUCT_FILE_DATE"));
+					attachments.add(detail);
+				}
+			}
+		} catch (Exception e) {
+			throw new ProductException("제품 한개 조회 오류!", e);
+		}
+		
+		return attachments;
+	}
 
 
 
@@ -278,6 +306,31 @@ public class ProductDao {
 		}
 		
 		return products;
+	}
+	
+	public int insertProduct(Connection conn, Product product) {
+		
+		// insert into PRODUCT values 
+		// ('p' || lpad(seq_product_no.nextval, 4, '0'), ?, ?, ?, default, default, default, 'p' || lpad(seq_product_no.nextval, 4, '0') || '.png', ?, ?, ?, ?, ?)
+		String sql = prop.getProperty("insertProduct"); 
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, product.getProductCategory().name());
+			pstmt.setString(2, product.getProductName());
+			pstmt.setInt(3, product.getProductPrice());
+			pstmt.setString(4, product.getType().name());
+			pstmt.setString(5, product.getAroma().name());
+			pstmt.setInt(6, product.getAcidity());
+			pstmt.setInt(7, product.getRoasting());
+			pstmt.setString(8, product.getCupSize().name());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new ProductException("제품 등록 오류", e);
+		}
+		return result;
 	}
 	
 	/**
