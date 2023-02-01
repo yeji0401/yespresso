@@ -88,4 +88,27 @@ section#product-container{
 
 </section>
 
+<script>
+window.addEventListener('load', () => {
+	getReview("<%= product.getProductNo() %>");
+});
+
+const getReview = (pdNo) => {
+	$.ajax({
+		url: "<%= request.getContextPath() %>/coffee/review",
+		data : {pdNo},
+		dataType : "json",
+		success(data){
+			console.log(data);
+		},
+		error : console.log
+	})
+	
+}
+
+</script>
+
+
+
+<%@ include file="/WEB-INF/views/product/productReview.jsp" %>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
