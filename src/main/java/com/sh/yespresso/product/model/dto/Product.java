@@ -11,14 +11,14 @@ public class Product {
 	private int productSaleCnt; // 판매량
 	private Date productDate; // 제품등록일
 	private String thumbnailFilename; // 썸네일파일
-	
+
 	private Type type; // 제품타입 (ENUM)
 	private Aroma aroma; // 아로마 (ENUM)
 	private int acidity; // 산미감
 	private int roasting; // 강도
 	private CupSize cupSize; // 컵사이즈 (ENUM)
-	
-	public Product() {
+
+	public Product(String productNo, String productName, int productPrice, String thumbnailFilename) {
 		super();
 	}
 
@@ -39,6 +39,14 @@ public class Product {
 		this.acidity = acidity;
 		this.roasting = roasting;
 		this.cupSize = cupSize;
+	}
+
+	public Product() {
+	}
+
+	public Product(String productName, int productPrice) {
+		this.productName = productName;
+		this.productPrice = productPrice;
 	}
 
 	public String getProductNo() {
@@ -153,6 +161,5 @@ public class Product {
 				+ thumbnailFilename + ", type=" + type + ", aroma=" + aroma + ", acidity=" + acidity + ", roasting="
 				+ roasting + ", cupSize=" + cupSize + "]";
 	}
-	
-	
+
 }

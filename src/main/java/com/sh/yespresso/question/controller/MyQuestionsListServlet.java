@@ -10,8 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sh.yespresso.common.YespressoUtils;
+import com.sh.yespresso.member.model.dto.Member;
 import com.sh.yespresso.question.model.dto.Question;
 import com.sh.yespresso.question.model.service.QuestionService;
 
@@ -30,7 +32,9 @@ public class MyQuestionsListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 1. 사용자입력값 처리
-		String questionMemberId = request.getParameter("memberId");
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String questionMemberId = loginMember.getMemberId();
 		final int limit = 5;
 		int page = 1;
 		try {
@@ -44,8 +48,11 @@ public class MyQuestionsListServlet extends HttpServlet {
 
 		// 2. 업무로직
 		// a. db에서 목록조회(페이징)
-		List<Question> questionList = questionService.selectMyQuestionsList(param, questionMemberId);
-		System.out.println(questionList);
+		
+		List<Question> myQuestionsList = questionService.selectMyQuestionsList(param, questionMemberId);
+		request.setAttribute("questionMemberId", questionMemberId);
+		request.setAttribute("myQuestionsList", myQuestionsList);
+		System.out.println(myQuestionsList);
 		// b. 페이지바
 		int totalCount = questionService.selectTotalCount(); // select count(*) from question
 		System.out.println(totalCount);
@@ -55,7 +62,7 @@ public class MyQuestionsListServlet extends HttpServlet {
 		System.out.println(pagebar);
 
 		// 3. view단 위임.
-		request.setAttribute("questionList", questionList);
+		request.setAttribute("myQuestionsList", myQuestionsList);
 		request.setAttribute("pagebar", pagebar);
 		request.getRequestDispatcher("/WEB-INF/views/myPage/myQuestionsList.jsp").forward(request, response);
 	}

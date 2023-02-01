@@ -10,8 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sh.yespresso.common.YespressoUtils;
+import com.sh.yespresso.member.model.dto.Member;
 import com.sh.yespresso.orders.model.dto.Orders;
 import com.sh.yespresso.orders.model.service.OrdersService;
 
@@ -37,7 +39,9 @@ public class MyOrdersListServlet extends HttpServlet {
 				} catch (NumberFormatException e) {}
 				
 				Map<String, Object> param = new HashMap<>();
-				String orderMemberId = request.getParameter("memberId"); 
+				HttpSession session = request.getSession();
+				Member loginMember = (Member) session.getAttribute("loginMember");
+				String orderMemberId = loginMember.getMemberId();
 				param.put("page", page);
 				param.put("limit", limit);
 				
@@ -56,7 +60,7 @@ public class MyOrdersListServlet extends HttpServlet {
 				// 3. view단 위임.
 				request.setAttribute("myOrdersList", myOrdersList);
 				request.setAttribute("pagebar", pagebar);
-				request.getRequestDispatcher("/WEB-INF/views/myPage/MyOrdersList.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/views/myPage/myOrdersList.jsp").forward(request, response);
 
 	}
 
