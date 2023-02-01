@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.sh.yespresso.member.model.dto.Member;
 import com.sh.yespresso.orders.model.dto.OrderDetail;
 import com.sh.yespresso.orders.model.service.OrdersService;
 
@@ -23,6 +25,9 @@ public class MyOrdersDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String orderMemberId = loginMember.getMemberId();
 		List<OrderDetail> myOrdersDetail = ordersService.selectMyOrdersDetail("orderNo");
 		String orderNo = request.getParameter("orderNo");
 		// jsp 포워딩

@@ -45,7 +45,8 @@ public class QuestionService {
 		close(conn);
 		return totalCount;
 	}
-	//질문중 하나 선택.
+
+	// 질문중 하나 선택.
 	public Question selectOneQuestion(int questionNo) {
 		Connection conn = getConnection();
 		Question question = questionDao.selectOneQuestion(conn, questionNo);
@@ -62,6 +63,13 @@ public class QuestionService {
 		List<Question> answersList = questionDao.selectAnswerList(conn, questionNo);
 		close(conn);
 		return answersList;
+	}
+
+	public QuestionAttachment selectOneAttachment(int questionNo) {
+		Connection conn = getConnection();
+		QuestionAttachment questionAttach = questionDao.selectOneAttachment(conn, questionNo);
+		close(conn);
+		return questionAttach;
 	}
 
 	/**

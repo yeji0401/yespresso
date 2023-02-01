@@ -55,7 +55,7 @@ public class YespressoUtils {
 	 */
 	public static String getPagebar(int page, int limit, int totalCount, String url) {
 		StringBuilder pagebar = new StringBuilder();
-		url += "?page="; // /yespresso/orders/myOrdersList?page=
+		url += "?page="; // /yespresso/orders/myPage/myOrdersList?page=
 
 		// 전체페이지수
 		int totalPage = (int) Math.ceil((double) totalCount / limit); // 11.4 -> 12.0 -> 12

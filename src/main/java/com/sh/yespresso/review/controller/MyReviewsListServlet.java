@@ -10,8 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sh.yespresso.common.YespressoUtils;
+import com.sh.yespresso.member.model.dto.Member;
 import com.sh.yespresso.review.model.dto.Review;
 import com.sh.yespresso.review.model.service.ReviewService;
 
@@ -24,7 +26,9 @@ public class MyReviewsListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자입력값 처리
-		String reviewMemberId = request.getParameter("memberId");
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String reviewMemberId = loginMember.getMemberId();
 		final int limit = 5;
 		int page = 1;
 		try {

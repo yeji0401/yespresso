@@ -54,17 +54,7 @@ const deleteMember = () => {
 	}
 };
 
-/**
- * 기존비밀번호입력
- * 새비밀번호/비밀번호 확인
- * 
- * 기존비밀번호가 일치하면, 새비밀번호 업데이트
- * 기존비밀번호가 일치하면, 새비밀번호 업데이트 취소
- * 
- * GET /mvc/member/updatePassword 비밀번호 변경폼 요청
- * POST /mvc/member/updatePassword db비밀번호 변경 요청
- * 
- */
+
  const updatePassword = () => {
 		location.href = "<%= request.getContextPath() %>/myPage/myPasswordUpdate";
 	};

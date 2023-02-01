@@ -2,148 +2,147 @@
 
 /***** 전체 컨테이너 *****/
 * {
-    margin: 0 auto;   
+  margin: 0 auto;
 }
 
 body {
-    background-color: #DDD6C9;
+  background-color: #ddd6c9;
 }
 
 /***** header *****/
 header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 1300px;
-    height: 100px;
-    font-family: 'Montserrat', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 1300px;
+  height: 100px;
+  font-family: "Montserrat", sans-serif;
 }
 
 div.header-block {
-    display: flex;
-    position: fixed;
-    z-index: 99999;
+  display: flex;
+  position: fixed;
+  z-index: 99999;
 }
 
 div.header-block .header-logo-block {
-    background-image: url('/yespresso/images/logo_basic.png');
-    background-repeat: no-repeat;
-    width: 250px;
-    height: 50px; 
+  background-image: url("/yespresso/images/logo_basic.png");
+  background-repeat: no-repeat;
+  width: 250px;
+  height: 50px;
 }
 
 /***** 메뉴 스타일 *****/
 
 div.main-block {
-    display: flex;
+  display: flex;
 }
 
 div.main-block ul {
-    display: flex;
+  display: flex;
 }
 
 div.main-block ul :first-child {
-    border-radius: 30px 0px 0px 30px;
+  border-radius: 30px 0px 0px 30px;
 }
 
 div.main-block ul :last-child {
-    border-radius: 0px 30px 30px 0px;
+  border-radius: 0px 30px 30px 0px;
 }
 
 div.main-block ul li.myadmin {
-    border-radius: 30px 30px 30px 30px;
+  border-radius: 30px 30px 30px 30px;
 }
 
 div.main-block ul:not(:nth-child(2)) li {
-    width: 130px;
-    line-height: 50px;
-    text-align: center;
-    list-style-type: none;
-    background-color: #3C6255;
+  width: 130px;
+  line-height: 50px;
+  text-align: center;
+  list-style-type: none;
+  background-color: #3c6255;
 }
 
 div.main-block ul:nth-child(2) li {
-    width: 130px;
-    line-height: 50px;
-    text-align: center;
-    list-style-type: none;
-    background-color: white;
+  width: 130px;
+  line-height: 50px;
+  text-align: center;
+  list-style-type: none;
+  background-color: white;
 }
 
 div.main-block ul li:not(:last-child) {
-    margin-right: 3px;
+  margin-right: 3px;
 }
 
 div.main-block ul:not(:nth-child(2)) li:hover {
-    background-color: white;
+  background-color: white;
 }
 
 div.main-block ul li:hover {
-    background-color: #3C6255;
+  background-color: #3c6255;
 }
 
 div.main-block ul:not(:nth-child(2)) li:hover a {
-    color: #3C6255;
+  color: #3c6255;
 }
 
 div.main-block ul:nth-child(2) li:hover a {
-    color: white;
+  color: white;
 }
 
 div.main-block ul:not(:nth-child(2)) a {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 div.main-block ul:nth-child(2) a {
-    color: #3C6255;
-    text-decoration: none;
+  color: #3c6255;
+  text-decoration: none;
 }
-
 
 /***** footer *****/
 footer {
-	width: 1300px;
-	font-family: 'Montserrat', sans-serif;
+  width: 1300px;
+  font-family: "Montserrat", sans-serif;
 }
 
 div.footer-block {
-	height: 80px;
-    color: white;
-    background-color: #3C6255;
-    display: flex;
-    align-items: center;
+  height: 80px;
+  color: white;
+  background-color: #3c6255;
+  display: flex;
+  align-items: center;
 }
 
 div.footer-block :not(:nth-child(2)) {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 div.footer-block p {
-    opacity: 80%;
-    margin: 15px;
+  opacity: 80%;
+  margin: 15px;
 }
 
 div.github {
-    background-image: url('/yespresso/images/github_white.png');
-    width: 30px;
-    height: 30px;
+  background-image: url("/yespresso/images/github_white.png");
+  width: 30px;
+  height: 30px;
 }
 
 div.pagetop {
-    margin: 0px;
-    cursor: pointer;
+  margin: 0px;
+  cursor: pointer;
 }
 
 div.footer-logo {
-    background-image: url('/yespresso/images/logo_white.png');
-    width: 120px;
-    height: 24px;
+  background-image: url("/yespresso/images/logo_white.png");
+  width: 120px;
+  height: 24px;
 }
-
 
 section {
 	height: 770px;
 
 }
+

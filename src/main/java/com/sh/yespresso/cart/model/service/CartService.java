@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.sh.yespresso.cart.model.dao.CartDao;
 import com.sh.yespresso.cart.model.dto.Cart;
+import com.sh.yespresso.cart.model.dto.CartProduct;
 
 public class CartService {
 
@@ -34,9 +35,9 @@ public class CartService {
 	 * 
 	 * @param orderMemberId
 	 */
-	public List<Cart> selectMyCartList(String cartMemberId) {
+	public List<CartProduct> selectMyCartList(String cartMemberId) {
 		Connection conn = getConnection();
-		List<Cart> myCartList = cartDao.selectMyCartList(conn, cartMemberId);
+		List<CartProduct> myCartList = cartDao.selectMyCartList(conn, cartMemberId);
 
 		close(conn);
 		return myCartList;
