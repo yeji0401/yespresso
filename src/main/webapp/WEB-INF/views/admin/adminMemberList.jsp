@@ -86,35 +86,36 @@ window.addEventListener('load', () => {
 	            </div>
 	        </div>
 	            <div id="member-check-block">
-	                <div id="member-sort">
-	                    <p>정렬순</p>
-	                    <input type="checkbox" name="member-sort" value="enroll-A">
-	                    <label for="enroll-A">가입일자 오름차순</label><br>
-	                    <input type="checkbox" name="member-sort" value="enroll-D" checked>
-	                    <label for="enroll-D">가입일자 내림차순</label><br>
-	                    <input type="checkbox" name="member-sort" value="id-A">
-	                    <label for="id-A">아이디 오름차순</label><br>
-	                    <input type="checkbox" name="member-sort" value="id-D">
-	                    <label for="id-D">아이디 내림차순</label><br>
-	                    <input type="checkbox" name="member-sort" value="name-A">
-	                    <label for="name-A">이름 오름차순</label><br>
-	                    <input type="checkbox" name="member-sort" value="name-D">
-	                    <label for="name-D">이름 내림차순</label>
-	                </div>
-	                <div id="member-role">
+	            	<form action="<%= request.getContextPath() %>/admin/adminMemberSort">
+		                    <p>정렬순</p>
+		                    <input type="radio" name="memberSort" value="enroll_date asc">
+		                    <label for="enroll-A">가입일자 오름차순</label><br>
+		                    <input type="radio" name="memberSort" value="enroll_date desc" checked>
+		                    <label for="enroll-D">가입일자 내림차순</label><br>
+		                    <input type="radio" name="memberSort" value="member_id asc">
+		                    <label for="id-A">아이디 오름차순</label><br>
+		                    <input type="radio" name="memberSort" value="member_id desc">
+		                    <label for="id-D">아이디 내림차순</label><br>
+		                    <input type="radio" name="memberSort" value="member_name asc">
+		                    <label for="name-A">이름 오름차순</label><br>
+		                    <input type="radio" name="memberSort" value="member_name desc">
+		                    <label for="name-D">이름 내림차순</label><br>
+		                	<button type="submit" style="display: block;">적용</button>
+	                </form>
+	                <form action="<%= request.getContextPath() %>/admin/adminMemberCheckSort">
 	                    <p>회원 권한</p>
-	                    <input type="checkbox" name="member-role" value="ADMIN">
+	                    <input type="radio" name="memberRole" value="ADMIN">
 	                    <label for="ADMIN">ADMIN</label><br>
-	                    <input type="checkbox" name="member-role" value="COMMON">
+	                    <input type="radio" name="memberRole" value="COMMON">
 	                    <label for="COMMON">COMMON</label><br>
-	                    <input type="checkbox" name="member-role" value="VIP">
+	                    <input type="radio" name="memberRole" value="VIP">
 	                    <label for="VIP">VIP</label>
-	                </div>
-	            </div>        
+	                    <button type="submit" style="display: block;">적용</button>
+	                </form>
+	            </div>
 	        <table id="tbl-member" class="tbl">
 	            <thead>
 	                <tr>
-	                    <th>No</th>
 	                    <th>아이디</th>
 	                    <th>권한</th>
 	                    <th>이름</th>
@@ -124,24 +125,18 @@ window.addEventListener('load', () => {
 	                    <th>이메일</th>
 	                    <th>주소</th>
 	                    <th>가입일자</th>
-	                    <th>
-	                    <form action="">
-	                    	<button type="submit">삭제</button>
-	                    </form>
-						</th>
 	                </tr>
 	            </thead>
 	            <tbody>
 				<% if(members.isEmpty()){ %>
 					<tr>
-						<td colspan="11">조회된 회원이 없습니다.</td>
+						<td colspan="8">조회된 회원이 없습니다.</td>
 					</tr>
 				<% 
 				   } else { 
 					  for(Member member : members){
 				%>
 						<tr>
-							<td></td>
 							<td><%= member.getMemberId() %></td>
 							<td>
 								<select class="member-role" data-member-id="<%= member.getMemberId() %>" data-member-birthday="<%= member.getBirthday() %>">
@@ -157,7 +152,6 @@ window.addEventListener('load', () => {
 							<td><%= member.getEmail() != null ? member.getEmail() : "" %></td>
 							<td><%= member.getAddress() != null ? member.getAddress() : "" %></td>
 							<td><%= member.getEnrollDate() %></td>
-							<td><input type="checkbox" name="<%= member.getMemberId() %>" id=""></td>
 						</tr>
 				<%
 					  }			

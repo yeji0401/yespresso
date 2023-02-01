@@ -41,7 +41,7 @@ public class OrdersDao {
 	 * yeji start
 	 */
 	public List<Orders> selectAllOrders(Connection conn, Map<String, Object> param) {
-		String sql = prop.getProperty("selectAllMember"); // select * from (select row_number() over(order by ORDER_DATE desc) rnum, o.* from ORDERS o) where rnum between ? and ?
+		String sql = prop.getProperty("selectAllOrders"); // select * from (select row_number() over(order by ORDER_DATE desc) rnum, o.* from ORDERS o) where rnum between ? and ?
 		List<Orders> orders = new ArrayList<>();
 		int page = (int) param.get("page");
 		int limit = (int) param.get("limit");

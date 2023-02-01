@@ -152,7 +152,6 @@ public class Product {
 				+ ", productSaleCnt=" + productSaleCnt + ", productDate=" + productDate + ", thumbnailFilename="
 				+ thumbnailFilename + ", type=" + type + ", aroma=" + aroma + ", acidity=" + acidity + ", roasting="
 				+ roasting + ", cupSize=" + cupSize + "]";
-	}
-	
+	}	
 	
 }

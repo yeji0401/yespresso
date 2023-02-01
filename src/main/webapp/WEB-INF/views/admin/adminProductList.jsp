@@ -1,3 +1,4 @@
+<%@page import="com.sh.yespresso.product.model.service.ProductService"%>
 <%@page import="com.sh.yespresso.product.model.dto.CupSize"%>
 <%@page import="com.sh.yespresso.product.model.dto.Aroma"%>
 <%@page import="com.sh.yespresso.product.model.dto.Product"%>
@@ -20,59 +21,6 @@
 </style>
 <script>
 
-$(document).ready(function() {
-	 $('input[type="checkbox"][name="product-sort"]').click(function(){
-	  if($(this).prop('checked')){
-	     $('input[type="checkbox"][name="product-sort"]').prop('checked',false);
-	     $(this).prop('checked',true);
-	    }	  
- 	});
-});
-
-$(document).ready(function() {
-	 $('input[type="checkbox"][name="type"]').click(function(){
-	  if($(this).prop('checked')){
-	     $('input[type="checkbox"][name="type"]').prop('checked',false);
-	     $(this).prop('checked',true);
-	    }	  
-	});
-});
-
-$(document).ready(function() {
-	 $('input[type="checkbox"][name="aroma"]').click(function(){
-	  if($(this).prop('checked')){
-	     $('input[type="checkbox"][name="aroma"]').prop('checked',false);
-	     $(this).prop('checked',true);
-	    }	  
-	});
-});
-
-$(document).ready(function() {
-	 $('input[type="checkbox"][name="acidity"]').click(function(){
-	  if($(this).prop('checked')){
-	     $('input[type="checkbox"][name="acidity"]').prop('checked',false);
-	     $(this).prop('checked',true);
-	    }	  
-	});
-});
-
-$(document).ready(function() {
-	 $('input[type="checkbox"][name="roasting"]').click(function(){
-	  if($(this).prop('checked')){
-	     $('input[type="checkbox"][name="roasting"]').prop('checked',false);
-	     $(this).prop('checked',true);
-	    }	  
-	});
-});
-
-$(document).ready(function() {
-	 $('input[type="checkbox"][name="cup-size"]').click(function(){
-	  if($(this).prop('checked')){
-	     $('input[type="checkbox"][name="cup-size"]').prop('checked',false);
-	     $(this).prop('checked',true);
-	    }	  
-	});
-});
 
 </script>
     <section id="admin-container">
@@ -102,21 +50,21 @@ $(document).ready(function() {
             <div id="check-block">
                 <div id="product-sort">
                     <p>정렬순</p>
-                    <input type="checkbox" name="product-sort" value="no-A" checked>
+                    <input type="radio" name="product-sort" value="no-A" checked>
                     <label for="no-A">제품번호 오름차순</label><br>
-                    <input type="checkbox" name="product-sort" value="no-D">
+                    <input type="radio" name="product-sort" value="no-D">
                     <label for="no-D">제품번호 내림차순</label><br>
-                    <input type="checkbox" name="product-sort" value="price-A">
+                    <input type="radio" name="product-sort" value="price-A">
                     <label for="price-A">가격 오름차순</label><br>
-                    <input type="checkbox" name="product-sort" value="price-D">
+                    <input type="radio" name="product-sort" value="price-D">
                     <label for="price-D">가격 내림차순</label><br>
-                    <input type="checkbox" name="product-sort" value="stock-A">
+                    <input type="radio" name="product-sort" value="stock-A">
                     <label for="stock-A">재고 오름차순</label><br>
-                    <input type="checkbox" name="product-sort" value="stock-D">
+                    <input type="radio" name="product-sort" value="stock-D">
                     <label for="stock-D">재고 내림차순</label><br>
-                    <input type="checkbox" name="product-sort" value="p-enroll-A">
+                    <input type="radio" name="product-sort" value="p-enroll-A">
                     <label for="p-enroll-A">제품등록일 오름차순</label><br>
-                    <input type="checkbox" name="product-sort" value="p-enroll-D">
+                    <input type="radio" name="product-sort" value="p-enroll-D">
                     <label for="p-enroll-D">제품등록일 내림차순</label>
                 </div>
                 <div id="product-type">
@@ -196,10 +144,9 @@ $(document).ready(function() {
         <table id="tbl-product" class="tbl">
             <thead>
                 <tr>
-                    <th>No</th>
+                    <th>제품번호</th>
                     <th>제품사진</th>
                     <th>제품명</th>
-                    <th>제품번호</th>
                     <th>가격</th>
                     <th>재고</th>
                     <th>판매량</th>
@@ -222,18 +169,16 @@ $(document).ready(function() {
            <tbody>
 			<% if(products.isEmpty()){ %>
 				<tr>
-					<td colspan="16">조회된 제품이 없습니다.</td>
+					<td colspan="15">조회된 제품이 없습니다.</td>
 				</tr>
 			<% 
 			   } else { 
 				  for(Product product : products){
 			%>
 					<tr>
-					<%  %>
-						<td></td>
+						<td><%= product.getProductNo() %></td>
 						<td><img src="<%= request.getContextPath() %>/upload/product/<%= product.getThumbnailFilename() %>" alt="" style="width: 80px;"/> </td>
 						<td><%= product.getProductName() %></td>
-						<td><%= product.getProductNo() %></td>
 						<td style="color: #820000;">&#8361;<%= product.getProductPrice() %></td>
 						<td><%= product.getProductStock() %></td>
 						<td><%= product.getProductSaleCnt() %></td>
@@ -243,7 +188,7 @@ $(document).ready(function() {
 						<td><%= product.getAcidity() != 0 ? product.getAcidity() : "" %></td>
 						<td><%= product.getRoasting() != 0 ? product.getRoasting() : "" %></td>
 						<td><%= product.getCupSize() != null ? (product.getCupSize() == CupSize.none ? "" : product.getCupSize()) : "" %></td>
-						<td><input type="checkbox" name="<%= product.getProductNo() %>"></td>
+						<td><input type="checkbox" name="product" value="<%= product.getProductNo() %>"></td>
 					</tr>
 			<%
 				  }			

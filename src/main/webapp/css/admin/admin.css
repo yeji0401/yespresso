@@ -9,18 +9,23 @@
 
 section#admin-container {
 	width: 1200px;
+	margin-top: 10px;
 	margin-bottom: 30px;
+	border-radius: 50px;
+	padding: 10px;
+	background-color: white;
 }
 
 div#admin-block {
 	display: flex;
     width: 1000px;
     height: 70px;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 div#admin-block ul {
 	display: flex;
+	text-align: left;
     text-decoration: none;
 }
 
@@ -41,9 +46,19 @@ div#admin-block ul li a {
 }
 
 h2 {
+	width: 250px;
     text-align: center;
     margin-top: 30px;
-    translate: -250px;
+    translate: -530px;
+    color: white;
+    box-shadow: 5px 5px 3px #E8EAE6;
+    border-radius: 20px 0px 0px 20px;
+    background-color: #3C6255;
+}
+
+h2 a {
+	color: white;
+    text-decoration: none;
 }
 
 div#search-block {
@@ -61,10 +76,15 @@ div#product-search-block {
     margin-top: 30px;
 }
 
+form [button="submit"] {
+	margin: auto;
+	display: block;
+}
+
 div#member-check-block {
 	display: flex;
 	width: 500px;
-	height: 170px;
+	height: 200px;
 	margin: 0 auto;
 	margin-top: 30px;
 }
@@ -87,7 +107,7 @@ div#check-block div#roasting-c {
 	display: flex;
 }
 
-button {height: 20px; background-color: white; border: none; font-weight: bold;}
+button {height: 25px; background-color: white; border: 3px solid #E8EAE6; border-radius: 50%; font-weight: bold;}
 button:hover {text-decoration: underline;}
 
 /**** 테이블 리스트 관련 ****/
