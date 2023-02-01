@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
  *  3. url-pattern작성이 servlet이름작성보다 우선순위 높음.
  * 
  */
+@WebFilter("/*")
 public class LogFilter implements Filter {
 
 	/**
