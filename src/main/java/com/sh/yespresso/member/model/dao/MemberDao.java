@@ -82,7 +82,61 @@ public class MemberDao {
 
 		return totalCount;
 	}
+	
+	public List<Member> searchMember(Connection conn, Map<String, String> param) {
+		List<Member> members = new ArrayList<>();
+		String searchType = param.get("searchType"); // member_id | member_name | gender
+		String searchKeyword = param.get("searchKeyword");
+		String sql = prop.getProperty("searchMember"); // select * from member where # like ?
+		sql = sql.replace("#", searchType);
+		System.out.println(sql);
+		
+		// 1. PreaparedStatement 객체 생성 & 미완성쿼리 값대입
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, "%" + searchKeyword + "%"); 
+			// 2. 실행 & ResultSet 반환
+			try(ResultSet rset = pstmt.executeQuery()){				
+				// 3. ResultSet -> List<Member>
+				while(rset.next())
+					members.add(handleMemberResultSet(rset));
+			}
+		} catch (SQLException e) {
+			throw new MemberException("관리자 회원 검색 오류", e);
+		}
+		
+		return members;
+	}
+	
+	public int updateMemberRole(Connection conn, String memberId, String memberRole) {
+		String sql = prop.getProperty("updateMemberRole");
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, memberRole);
+			pstmt.setString(2, memberId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("관리자 회원 권한 수정 오류", e);
+		}
+		
+		return result;
+	}
+	
+	public int deleteMember(Connection conn, String memberId) {
+		int result = 0;
+		String sql = prop.getProperty("deleteMember");
 
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
+			pstmt.setString(1, memberId);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new MemberException("회원 탈퇴 오류", e);
+		}
+
+		return result;
+	}
 	/**
 	 * yeji end
 	 */

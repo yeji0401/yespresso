@@ -43,8 +43,8 @@ public class Product extends ProductEntity {
 		return "Product [details=" + details + ", toString()=" + super.toString() +"]";
 	}
 
+	
 	public void addDetails(ProductDetail detail) {
 		this.details.add(detail);
 	}
-	
 }

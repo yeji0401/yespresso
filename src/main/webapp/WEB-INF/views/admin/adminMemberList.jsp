@@ -10,11 +10,32 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <!-- 관리자용 admin.css link -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/admin.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 <style>
 div#search-memberId	 {display: <%= searchType == null || "member_id".equals(searchType) ? "inline-block" : "none" %>;}
 div#search-memberName{display: <%= "member_name".equals(searchType) ? "inline-block" : "none" %>;}
 </style>
 <script>
+$(document).ready(function() {
+	 $('input[type="checkbox"][name="member-sort"]').click(function(){
+	  if($(this).prop('checked')){
+	     $('input[type="checkbox"][name="member-sort"]').prop('checked',false);
+	     $(this).prop('checked',true);
+	    }	  
+	});
+});
+
+$(document).ready(function() {
+	 $('input[type="checkbox"][name="member-role"]').click(function(){
+	  if($(this).prop('checked')){
+	     $('input[type="checkbox"][name="member-role"]').prop('checked',false);
+	     $(this).prop('checked',true);
+	    }	  
+	});
+});
+
 window.addEventListener('load', () => {
 	document.querySelector("#searchType").addEventListener('change', (e) => {
 		console.log(e.target.value); // member_id, member_name
@@ -36,111 +57,136 @@ window.addEventListener('load', () => {
     <section id="admin-container">
         <div id="admin-block">
             <ul class="admin-nav">
-                <li class="member"><a href="">회원 관리</a></li>
+                <li class="member" style="font-weight: bold;"><a href="">회원 관리</a></li>
                 <li class="product"><a href="<%= request.getContextPath() %>/admin/adminProductList">제품 관리</a></li>
                 <li class="orders"><a href="<%= request.getContextPath() %>/admin/adminOrdersList">주문 관리</a></li>
             </ul>
         </div>
-        <h2>회원 관리</h2>
-        <div id="search-block">
-            <select id="searchType">
-                <option value="member_id">아이디</option>
-                <option value="member_name">이름</option>
-            </select>
-            <div id="search-memberId" class="search-type">
-                <form action="#">
-                    <input type="hidden" name="searchType" value="member_id">
-                    <input type="text" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요."
-                        value="">
-                    <button type="submit">검색</button>
-                </form>
-            </div>
-            <div id="search-memberName" class="search-type">
-                <form action="#">
-                    <input type="hidden" name="searchType" value="member_name">
-                    <input type="text" name="searchKeyword" size="25" placeholder="검색할 이름을 입력하세요."
-                        value="">
-                    <button type="submit">검색</button>
-                </form>
-            </div>
-        </div>
-            <div id="check-block">
-                <div id="member-sort" class="sorting">
-                    <p>정렬순</p>
-                    <input type="checkbox" name="enroll-A" id="enroll-A">
-                    <label for="enroll-A">가입일자 오름차순</label><br>
-                    <input type="checkbox" name="enroll-D" id="enroll-D">
-                    <label for="enroll-D">가입일자 내림차순</label><br>
-                    <input type="checkbox" name="id-A" id="id-A">
-                    <label for="id-A">아이디 오름차순</label><br>
-                    <input type="checkbox" name="id-D" id="id-D">
-                    <label for="id-D">아이디 내림차순</label><br>
-                    <input type="checkbox" name="name-A" id="name-A">
-                    <label for="name-A">이름 오름차순</label><br>
-                    <input type="checkbox" name="name-D" id="name-D">
-                    <label for="name-D">이름 내림차순</label>
-                </div>
-                <div id="member-role" class="sorting">
-                    <p>회원 권한</p>
-                    <input type="checkbox" name="ADMIN" id="ADMIN">
-                    <label for="ADMIN">ADMIN</label><br>
-                    <input type="checkbox" name="COMMON" id="COMMON">
-                    <label for="COMMON">COMMON</label><br>
-                    <input type="checkbox" name="VIP" id="VIP">
-                    <label for="VIP">VIP</label>
-                </div>
-            </div>        
-        <table id="tbl-member" class="tbl">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>아이디</th>
-                    <th>권한</th>
-                    <th>이름</th>
-                    <th>생년월일</th>
-                    <th>성별</th>
-                    <th>휴대폰 번호</th>
-                    <th>이메일</th>
-                    <th>주소</th>
-                    <th>가입일자</th>
-                    <th><button type="submit">삭제</button></th>
-                </tr>
-            </thead>
-            <tbody>
-			<% if(members.isEmpty()){ %>
-				<tr>
-					<td colspan="11">조회된 회원이 없습니다.</td>
-				</tr>
-			<% 
-			   } else { 
-				  for(Member member : members){
-			%>
+	        <h2>회원 관리</h2>
+	        <div id="search-block">
+	            <select id="searchType">
+	                <option value="member_id">아이디</option>
+	                <option value="member_name">이름</option>
+	            </select>
+	            <div id="search-memberId" class="search-type">
+	                <form action="<%= request.getContextPath()%>/admin/adminMemberFinder">
+	                    <input type="hidden" name="searchType" value="member_id">
+	                    <input type="text" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요."
+	                        value="<%= "member_id".equals(searchType) ? searchKeyword : "" %>">
+	                    <button type="submit">검색</button>
+	                </form>
+	            </div>
+	            <div id="search-memberName" class="search-type">
+	                <form action="<%=request.getContextPath()%>/admin/adminMemberFinder">
+	                    <input type="hidden" name="searchType" value="member_name">
+	                    <input type="text" name="searchKeyword" size="25" placeholder="검색할 이름을 입력하세요."
+	                        value="<%= "member_name".equals(searchType) ? searchKeyword : "" %>">
+	                    <button type="submit">검색</button>
+	                </form>
+	            </div>
+	        </div>
+	            <div id="member-check-block">
+	            	<form action="<%= request.getContextPath() %>/admin/adminMemberSort">
+		                    <p>정렬순</p>
+		                    <input type="radio" name="memberSort" value="enroll_date asc">
+		                    <label for="enroll-A">가입일자 오름차순</label><br>
+		                    <input type="radio" name="memberSort" value="enroll_date desc" checked>
+		                    <label for="enroll-D">가입일자 내림차순</label><br>
+		                    <input type="radio" name="memberSort" value="member_id asc">
+		                    <label for="id-A">아이디 오름차순</label><br>
+		                    <input type="radio" name="memberSort" value="member_id desc">
+		                    <label for="id-D">아이디 내림차순</label><br>
+		                    <input type="radio" name="memberSort" value="member_name asc">
+		                    <label for="name-A">이름 오름차순</label><br>
+		                    <input type="radio" name="memberSort" value="member_name desc">
+		                    <label for="name-D">이름 내림차순</label><br>
+		                	<button type="submit" style="display: block;">적용</button>
+	                </form>
+	                <form action="<%= request.getContextPath() %>/admin/adminMemberCheckSort">
+	                    <p>회원 권한</p>
+	                    <input type="radio" name="memberRole" value="ADMIN">
+	                    <label for="ADMIN">ADMIN</label><br>
+	                    <input type="radio" name="memberRole" value="COMMON">
+	                    <label for="COMMON">COMMON</label><br>
+	                    <input type="radio" name="memberRole" value="VIP">
+	                    <label for="VIP">VIP</label>
+	                    <button type="submit" style="display: block;">적용</button>
+	                </form>
+	            </div>
+	        <table id="tbl-member" class="tbl">
+	            <thead>
+	                <tr>
+	                    <th>아이디</th>
+	                    <th>권한</th>
+	                    <th>이름</th>
+	                    <th>생년월일</th>
+	                    <th>성별</th>
+	                    <th>휴대폰 번호</th>
+	                    <th>이메일</th>
+	                    <th>주소</th>
+	                    <th>가입일자</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+				<% if(members.isEmpty()){ %>
 					<tr>
-						<td>1</td>
-						<td><%= member.getMemberId() %></td>
-						<td>
-							<select class="member-role" data-member-id="<%= member.getMemberId() %>" data-member-birthday="<%= member.getBirthday() %>">
-								<option value="<%= MemberRole.C %>" <%= member.getMemberRole() == MemberRole.C ? "selected" : "" %>>COMMON</option>
-								<option value="<%= MemberRole.V %>" <%= member.getMemberRole() == MemberRole.V ? "selected" : "" %>>VIP</option>
-								<option value="<%= MemberRole.A %>" <%= member.getMemberRole() == MemberRole.A ? "selected" : "" %>>ADMIN</option>
-							</select>
-						</td>
-						<td><%= member.getMemberName() %></td>
-						<td><%= member.getBirthday() != null ? member.getBirthday() : "" %></td>
-						<td><%= member.getGender() != null ? member.getGender() : "" %></td>
-						<td><%= member.getPhone() %></td>
-						<td><%= member.getEmail() != null ? member.getEmail() : "" %></td>
-						<td><%= member.getAddress() %></td>
-						<td><%= member.getEnrollDate() %></td>
-						<td><input type="checkbox" name="" id=""></td>
+						<td colspan="8">조회된 회원이 없습니다.</td>
 					</tr>
-			<%
-				  }			
-				} 
-			%>            
-            </tbody>
-        </table>
-		<div id="pagebar">
-			<%= request.getAttribute("pagebar") %>
-		</div>        
+				<% 
+				   } else { 
+					  for(Member member : members){
+				%>
+						<tr>
+							<td><%= member.getMemberId() %></td>
+							<td>
+								<select class="member-role" data-member-id="<%= member.getMemberId() %>" data-member-birthday="<%= member.getBirthday() %>">
+									<option value="<%= MemberRole.C %>" <%= member.getMemberRole() == MemberRole.C ? "selected" : "" %>>COMMON</option>
+									<option value="<%= MemberRole.V %>" <%= member.getMemberRole() == MemberRole.V ? "selected" : "" %>>VIP</option>
+									<option value="<%= MemberRole.A %>" <%= member.getMemberRole() == MemberRole.A ? "selected" : "" %>>ADMIN</option>
+								</select>
+							</td>
+							<td><%= member.getMemberName() %></td>
+							<td><%= member.getBirthday() != null ? member.getBirthday() : "" %></td>
+							<td><%= member.getGender() != null ? member.getGender() : "" %></td>
+							<td><%= member.getPhone() %></td>
+							<td><%= member.getEmail() != null ? member.getEmail() : "" %></td>
+							<td><%= member.getAddress() != null ? member.getAddress() : "" %></td>
+							<td><%= member.getEnrollDate() %></td>
+						</tr>
+				<%
+					  }			
+					} 
+				%>            
+	            </tbody>
+	        </table>
+			<div id="pagebar">
+				<%= request.getAttribute("pagebar") %>
+			</div>
+		</section>
+<form action="<%= request.getContextPath() %>/admin/adminUpdateMemberRole" name="memberRoleUpdateFrm" method="POST">
+	<input type="hidden" name="memberId" />
+	<input type="hidden" name="memberRole" />
+</form>
+<script>
+document.querySelectorAll(".member-role").forEach((select) => {
+	select.addEventListener('change', (e) => {
+		console.log(e.target.value);
+		console.log(e.target.dataset.memberId);
+		const memberId = e.target.dataset.memberId;
+		const memberRole = e.target.value;
+		
+		if(confirm(`[\${memberId}]회원의 권한을 \${memberRole}로 변경하시겠습니까?`)){			
+			const frm = document.memberRoleUpdateFrm;
+			frm.memberId.value = memberId;
+			frm.memberRole.value = memberRole;
+			frm.submit();
+		}
+		else {
+			// e.target(select)하위의 selected 속성이 있는 option태그
+			e.target.querySelector("option[selected]").selected = true;
+		}
+		
+	});
+});
+</script>    
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

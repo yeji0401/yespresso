@@ -6,6 +6,7 @@
 	Member loginMember = (Member) session.getAttribute("loginMember");
 
 %>
+
 <!DOCTYPE html>
 <html>
 <head>

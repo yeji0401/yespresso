@@ -2,6 +2,8 @@ package com.sh.yespresso.product.model.service;
 
 import static com.sh.yespresso.common.JdbcTemplate.close;
 import static com.sh.yespresso.common.JdbcTemplate.getConnection;
+import static com.sh.yespresso.common.JdbcTemplate.commit;
+import static com.sh.yespresso.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -69,6 +71,41 @@ public class ProductService {
 	/**
 	 * yeji start
 	 */
+	public List<Product> selectAllProduct(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Product> products = productDao.selectAllProduct(conn, param);
+		close(conn);
+		return products;
+	}
+	
+	public int selectTotalCount() {
+		Connection conn = getConnection();
+		int totalCount = productDao.selectTotalCount(conn);
+		close(conn);
+		return totalCount;
+	}
+	
+	public List<Product> searchProduct(Map<String, String> param) {
+		Connection conn = getConnection();
+		List<Product> products = productDao.searchProduct(conn, param);
+		close(conn);
+		return products;
+	}
+	
+	public int insertProduct(Product product) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = productDao.insertProduct(conn, product);
+			commit(conn);			
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
 	/**
 	 * yeji end
 	 */
