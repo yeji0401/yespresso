@@ -38,9 +38,9 @@ public class MachineListServlet extends HttpServlet {
 		param.put("page", page);
 		param.put("limit", limit);
 		
-		List<Product> machineList = productService.selectMachineList(param);
+//		List<Product> machineList = productService.selectMachineList(param);
 		
-		System.out.println(machineList);
+//		System.out.println(machineList);
 		
 		int totalCount = productService.getTotalCntById("MA");
 		
@@ -48,7 +48,7 @@ public class MachineListServlet extends HttpServlet {
 		String pagebar = YespressoUtils.getPagebar(page, limit, totalCount, url);
 		System.out.println(pagebar);
 		
-		request.setAttribute("machineList", machineList);
+//		request.setAttribute("machineList", machineList);
 		request.setAttribute("pagebar", pagebar);
 		request.getRequestDispatcher("/WEB-INF/views/product/machineList.jsp").forward(request, response);
 	}

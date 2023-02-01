@@ -2,292 +2,198 @@
 -- MEMBER_ROLE
 --====================================
 create table MEMBER_ROLE (
-    ROLE_ID   char (1),
-    ROLE_NAME varchar2 (20) not null,
-    constraint PK_ROLE_ID primary key (ROLE_ID),
-    constraint CK_ROLE_ID check (ROLE_ID in ('C', 'V', 'A')),
-    constraint CK_ROLE_NAME check (ROLE_NAME in ('COMMON', 'VIP', 'ADMIN'))
+    ROLE_ID CHAR(1), 
+    ROLE_NAME VARCHAR2(20) NOT NULL,
+    
+    constraint PK_ROLE_ID primary key(ROLE_ID),
+    constraint CK_ROLE_ID check(ROLE_ID in ('C', 'V', 'A')),
+    constraint CK_ROLE_NAME check(ROLE_NAME in ('COMMON', 'VIP', 'ADMIN'))
 );
 
 -- comment
-comment on column MEMBER_ROLE.ROLE_ID is
-    '권한아이디';
-
-comment on column MEMBER_ROLE.ROLE_NAME is
-    '권한명';
+comment on column MEMBER_ROLE.ROLE_ID is '권한아이디';
+comment on column MEMBER_ROLE.ROLE_NAME is '권한명';
 
 -- 권한아이디 - 권한명
-insert into MEMBER_ROLE values (
-    'C',
-    'COMMON'
-);
-
-insert into MEMBER_ROLE values (
-    'V',
-    'VIP'
-);
-
-insert into MEMBER_ROLE values (
-    'A',
-    'ADMIN'
-);
+insert into MEMBER_ROLE values ('C', 'COMMON');
+insert into MEMBER_ROLE values ('V', 'VIP');
+insert into MEMBER_ROLE values ('A', 'ADMIN');
 
 -- 커밋
 commit;
 
-select
-    *
-from
-    MEMBER_ROLE;
+select * from member_role;
 
-delete from MEMBER
-where
-    MEMBER_ID = 'awonatwo';
+
 --====================================
 -- MEMBER
 --====================================
-create table MEMBER (
-    MEMBER_ID         varchar2 (30),
-    FK_MEMBER_ROLE_ID char (1) not null,
-    PASSWORD          varchar2 (300) not null,
-    MEMBER_NAME       varchar2 (20) not null,
-    BIRTHDAY          date,
-    GENDER            char (1),
-    EMAIL             varchar2 (30) not null,
-    PHONE             varchar2 (11) not null,
-    ADDRESS           varchar2 (50),
-    ENROLL_DATE       date default SYSDATE,
-    constraint PK_MEMBER_ID primary key (MEMBER_ID),
-    constraint FK_MEMBER_ROLE_ID foreign key (FK_MEMBER_ROLE_ID)
-        references MEMBER_ROLE (ROLE_ID),
-    constraint CK_GENDER check (GENDER in ('F', 'M'))
+CREATE TABLE MEMBER (
+	MEMBER_ID VARCHAR2(30),
+	FK_MEMBER_ROLE_ID CHAR(1) NOT NULL,
+	PASSWORD VARCHAR2(300)	NOT NULL,
+	MEMBER_NAME	VARCHAR2(20) NOT NULL,
+	BIRTHDAY DATE,
+	GENDER CHAR(1),
+	EMAIL VARCHAR2(30) NOT NULL,
+	PHONE VARCHAR2(11) NOT NULL,
+	ADDRESS	VARCHAR2(50),
+	ENROLL_DATE	DATE default sysdate,
+    
+    constraint PK_MEMBER_ID primary key(MEMBER_ID),
+    constraint FK_MEMBER_ROLE_ID foreign key(FK_MEMBER_ROLE_ID) references MEMBER_ROLE(ROLE_ID),
+    constraint CK_GENDER check(GENDER in ('F', 'M'))
 );
 -- GENDER not null 추가
-alter table MEMBER modify
-    GENDER not null;
+alter table MEMBER modify GENDER NOT NULL;
 
 -- comment
-comment on column MEMBER.MEMBER_ID is
-    '회원아이디';
-
-comment on column MEMBER.FK_MEMBER_ROLE_ID is
-    '회원권한아이디';
-
-comment on column MEMBER.PASSWORD is
-    '비밀번호';
-
-comment on column MEMBER.MEMBER_NAME is
-    '이름';
-
-comment on column MEMBER.BIRTHDAY is
-    '생년월일';
-
-comment on column MEMBER.GENDER is
-    '성별';
-
-comment on column MEMBER.EMAIL is
-    '이메일';
-
-comment on column MEMBER.PHONE is
-    '휴대폰번호';
-
-comment on column MEMBER.ADDRESS is
-    '주소';
-
-comment on column MEMBER.ENROLL_DATE is
-    '회원가입일자';
+comment on column MEMBER.MEMBER_ID is '회원아이디';
+comment on column MEMBER.FK_MEMBER_ROLE_ID is '회원권한아이디';
+comment on column MEMBER.PASSWORD is '비밀번호';
+comment on column MEMBER.MEMBER_NAME is '이름';
+comment on column MEMBER.BIRTHDAY is '생년월일';
+comment on column MEMBER.GENDER is '성별';
+comment on column MEMBER.EMAIL is '이메일';
+comment on column MEMBER.PHONE is '휴대폰번호';
+comment on column MEMBER.ADDRESS is '주소';
+comment on column MEMBER.ENROLL_DATE is '회원가입일자';
 
 -- insert
-insert into MEMBER values (
-    'admin',
-    'A',
-    'admin1234!',
-    '관리자',
-    null,
-    'F',
-    'admin@naver.com',
-    '01012341234',
-    null, default
+insert into MEMBER
+values (
+    'admin', 'A', 'admin1234!', '관리자', NULL, 'F', 'admin@naver.com', '01012341234', NULL, default
 );
 
-insert into MEMBER values (
-    'honggd',
-    'C',
-    'honggd123!',
-    '홍길동',
-    null,
-    'M',
-    'honggd@naver.com',
-    '01012341234',
-    null, default
+insert into MEMBER
+values (
+    'honggd', 'C', 'honggd123!', '홍길동', NULL, 'M', 'honggd@naver.com', '01012341234', NULL, default
 );
 
-insert into MEMBER values (
-    'sinsa',
-    'C',
-    'sinsa123!',
-    '신사임당',
-    null,
-    'M',
-    'sinsa@naver.com',
-    '01012341234',
-    null, default
+insert into MEMBER
+values (
+    'sinsa', 'C', 'sinsa123!', '신사임당', NULL, 'M', 'sinsa@naver.com', '01012341234', NULL, default
 );
 
-insert into MEMBER values (
-    'hyojung',
-    'V',
-    'phj123!',
-    '박효정',
-    null,
-    'F',
-    'phj@naver.com',
-    '01012341234',
-    null, default
+insert into MEMBER
+values (
+    'hyojung', 'V', 'phj123!', '박효정', NULL, 'F', 'phj@naver.com', '01012341234', NULL, default
 );
 
-select
-    *
-from
-    MEMBER
+
+select * from member
 order by
     FK_MEMBER_ROLE_ID asc;
+    
+select * from member
+where FK_MEMBER_ROLE_ID = 'A';
+
 
 select
     *
 from
-    USER_COL_COMMENTS
+    user_col_comments
 where
-    TABLE_NAME = 'MEMBER';
+    table_name = 'MEMBER';
+
 
 --===========================
 --RECIPE
 --===========================
-create table RECIPE (
-    RECIPE_NO        number,
-    RECIPE_MEMBER_ID varchar2 (30),
-    RECIPE_TITLE     varchar2 (200) not null,
-    RECIPE_CONTENT   varchar2 (4000) not null,
-    RECIPE_READ      number default 0,
-    RECIPE_DATE      date default SYSDATE,
-    constraint PK_RECIPE_NO primary key (RECIPE_NO),
+create table RECIPE(
+    RECIPE_NO number,
+    RECIPE_MEMBER_ID varchar2(30),
+    RECIPE_TITLE varchar2(200) NOT NULL,
+    RECIPE_CONTENT varchar2(4000) NOT NULL,
+    RECIPE_READ number default 0,
+    RECIPE_DATE date default sysdate,
+    
+    constraint PK_RECIPE_NO primary key(RECIPE_NO),
     -- 회원삭제시 레시피 작성자 null
-    constraint FK_RECIPE_MEMBER_ID foreign key (RECIPE_MEMBER_ID)
-        references MEMBER (MEMBER_ID)
-            on delete set null
+    constraint FK_RECIPE_MEMBER_ID foreign key(RECIPE_MEMBER_ID) references MEMBER(MEMBER_ID) on delete set null
 ); 
 
 -- comment
-comment on column RECIPE.RECIPE_NO is
-    '게시글번호';
-
-comment on column RECIPE.RECIPE_MEMBER_ID is
-    '작성자';
-
-comment on column RECIPE.RECIPE_TITLE is
-    '제목';
-
-comment on column RECIPE.RECIPE_CONTENT is
-    '내용';
-
-comment on column RECIPE.RECIPE_READ is
-    '조회수';
-
-comment on column RECIPE.RECIPE_DATE is
-    '등록일';
+comment on column RECIPE.RECIPE_NO is '게시글번호';
+comment on column RECIPE.RECIPE_MEMBER_ID is '작성자';
+comment on column RECIPE.RECIPE_TITLE is '제목';
+comment on column RECIPE.RECIPE_CONTENT is '내용';
+comment on column RECIPE.RECIPE_READ is '조회수';
+comment on column RECIPE.RECIPE_DATE is '등록일';
 
 -- sequence
-create sequence SEQ_RECIPE_NO;
+create sequence seq_recipe_no;
 
 -- 확인
 select
     *
 from
-    USER_COL_COMMENTS
+    user_col_comments
 where
-    TABLE_NAME = 'RECIPE';
+    table_name = 'RECIPE';
     
 --===========================
 -- RECIPE_ATTACHMENT
 --===========================
-create table RECIPE_ATTACHMENT (
-    RECIPE_FILE_NO       number,
-    RECIPE_ATTACHMENT_NO number not null,
-    RECIPE_FILENAME      varchar2 (255) not null,
-    RE_RECIPE_FILENAME   varchar2 (255) not null,
-    RECIPE_FILE_DATE     date default SYSDATE,
-    constraint PK_RECIPE_FILE_NO primary key (RECIPE_FILE_NO),
+create table RECIPE_ATTACHMENT(
+    RECIPE_FILE_NO number,
+    RECIPE_ATTACHMENT_NO number NOT NULL,
+    RECIPE_FILENAME varchar2(255) NOT NULL,
+    RE_RECIPE_FILENAME varchar2(255) NOT NULL,
+    RECIPE_FILE_DATE date default sysdate,
+    
+    constraint PK_RECIPE_FILE_NO primary key(RECIPE_FILE_NO),
     -- 레시피 게시글 삭제시 첨부파일도 삭제 
-    constraint FK_RECIPE_ATTACHMENT_NO foreign key (RECIPE_ATTACHMENT_NO)
-        references RECIPE (RECIPE_NO)
-            on delete cascade
+    constraint FK_RECIPE_ATTACHMENT_NO foreign key(RECIPE_ATTACHMENT_NO) references RECIPE(RECIPE_NO) on delete cascade
 );
 
 -- comment
-comment on column RECIPE_ATTACHMENT.RECIPE_FILE_NO is
-    '첨부파일번호';
-
-comment on column RECIPE_ATTACHMENT.RECIPE_ATTACHMENT_NO is
-    '게시글번호';
-
-comment on column RECIPE_ATTACHMENT.RECIPE_FILENAME is
-    '원본파일명';
-
-comment on column RECIPE_ATTACHMENT.RE_RECIPE_FILENAME is
-    '서버파일명'; -- 날짜 || - || 첨부파일번호 || .jpg
-comment on column RECIPE_ATTACHMENT.RECIPE_FILE_DATE is
-    '업로드일시'; 
+comment on column RECIPE_ATTACHMENT.RECIPE_FILE_NO is '첨부파일번호';
+comment on column RECIPE_ATTACHMENT.RECIPE_ATTACHMENT_NO is '게시글번호';
+comment on column RECIPE_ATTACHMENT.RECIPE_FILENAME is '원본파일명';
+comment on column RECIPE_ATTACHMENT.RE_RECIPE_FILENAME is '서버파일명'; -- 날짜 || - || 첨부파일번호 || .jpg
+comment on column RECIPE_ATTACHMENT.RECIPE_FILE_DATE is '업로드일시'; 
 
 -- sequence
-create sequence SEQ_RECIPE_ATTACHMENT_NO;
+create sequence seq_recipe_attachment_no;
 
 -- 확인        
 select
     *
 from
-    USER_COL_COMMENTS
+    user_col_comments
 where
-    TABLE_NAME = 'RECIPE_ATTACHMENT';
+    table_name = 'RECIPE_ATTACHMENT';
     
 --===========================
 -- CART
 --===========================
 create table CART (
-    CART_NO         number,
-    CART_MEMBER_ID  varchar2 (30) not null,
-    CART_PRODUCT_NO varchar2 (20) not null,
-    AMOUNT          number default 1,
-    constraint PK_CART_NO primary key (CART_NO),
-    constraint FK_CART_MEMBER_ID foreign key (CART_MEMBER_ID)
-        references MEMBER (MEMBER_ID)
-            on delete cascade,
-    constraint FK_CART_PRODUCT_NO foreign key (CART_PRODUCT_NO)
-        references PRODUCT (PRODUCT_NO)
-            on delete cascade
+    CART_NO number,
+    CART_MEMBER_ID varchar2(30) not null, 
+    CART_PRODUCT_NO VARCHAR2(20) not null,
+    AMOUNT number default 1,
+    
+    constraint PK_CART_NO primary key(CART_NO),
+    constraint FK_CART_MEMBER_ID foreign key(CART_MEMBER_ID) references MEMBER(MEMBER_ID) on delete cascade,
+    constraint FK_CART_PRODUCT_NO foreign key(CART_PRODUCT_NO) references PRODUCT(PRODUCT_NO) on delete cascade
 );
 
-comment on column CART.CART_NO is
-    '장바구니번호';
-
-comment on column CART.CART_MEMBER_ID is
-    '회원 아이디';
-
-comment on column CART.CART_PRODUCT_NO is
-    '제품 번호';
-
-comment on column CART.AMOUNT is
-    '수량';
+comment on column CART.CART_NO is '장바구니번호';
+comment on column CART.CART_MEMBER_ID is '회원 아이디';
+comment on column CART.CART_PRODUCT_NO is '제품 번호';
+comment on column CART.AMOUNT is '수량';
 
 -- sequence
-create sequence SEQ_CART_NO;
+create sequence seq_cart_no;
 
 -- 확인        
 select
     *
 from
-    USER_COL_COMMENTS
+    user_col_comments
 where
-    TABLE_NAME = 'CART';
+    table_name = 'CART';
 
 ----------------------------------------------------------
 -- 1 CART - insert
@@ -304,6 +210,7 @@ insert into ORDER_DETAIL values (seq_order_details_no, ?, ?, ?)
 delete * from CART where FK_MEMBER_ID = ? 
 
 ----------------------------------------------------------
+
 
 --===========================
 -- ORDERS
@@ -345,6 +252,14 @@ where
 -- ORDER_NO
 -- yes-230119-0001
 'yes-' || to_char(sysdate, 'yymmdd') || '-' || lpad(seq_order_no.nextval ,4,'0')
+
+select * from orders;
+
+insert into orders values ('yes-' || to_char(sysdate, 'yymmdd') || '-' || lpad(seq_order_no.nextval ,4,'0'), 'honggd', default, 12345, default);
+
+select * from (select row_number() over(order by ORDER_DATE desc) rnum, o.* from ORDERS o) where rnum between 1 and 5;
+
+COMMIT;
 
 --===========================
 -- ORDER_DETAIL
@@ -417,6 +332,7 @@ end;
 /
 --
 
+
 --===========================
 -- PRODUCT_CATEGORY
 --===========================
@@ -448,6 +364,7 @@ values (
 
 -- 확인
 select * from product_category;
+
 
 --===========================
 -- PRODUCT
@@ -495,6 +412,8 @@ comment on column PRODUCT.CUP_SIZE is '컵사이즈';
 -- sequence
 create sequence seq_product_no;
 
+select * from all_sequences where sequence_name = 'seq_product_no';
+
 -- p001 
 insert into 
     PRODUCT
@@ -516,6 +435,7 @@ values (
 
 -- 확인        
 select * from product;
+
 
 --===========================
 -- PRODUCT_DETAIL
@@ -541,6 +461,7 @@ comment on column PRODUCT_DETAIL.PRODUCT_FILE_DATE is '업로드일시';
 -- sequence
 create sequence seq_product_details_no;
 
+
 -- 확인        
 select
     *
@@ -548,6 +469,8 @@ from
     user_col_comments
 where
     table_name = 'PRODUCT_DETAIL';
+    
+select * from product_detail;
 
 commit;
 
@@ -625,6 +548,7 @@ from
 where
     table_name = 'REVIEW_ATTACHMENT';
 
+
 --===========================
 -- QUESTION
 --===========================
@@ -654,6 +578,7 @@ from
     user_col_comments
 where
     table_name = 'QUESTION';
+
 
 --===========================
 -- QUESTION_ATTACHMENT
@@ -689,3 +614,48 @@ where
     
 SELECT * FROM    ALL_CONSTRAINTS
 WHERE    TABLE_NAME = 'order_detail';
+
+select * from cart where cart_member_id = 'gurumi';
+insert into cart 
+values (
+seq_cart_no.nextval,
+'gurumi',
+'p0002',
+4
+);
+
+insert into 
+    PRODUCT
+values (
+    'p' || lpad(seq_product_no.nextval, 4, '0'),
+    'CO',
+    '인피니망 더블 에스프레소',
+    '10390',
+    default,
+    default, 
+    default,
+    'p' || lpad(seq_product_no.nextval, 4, '0') || '.jpg',
+    'vertuo',
+    'fruit',
+    '3',
+    '6',
+    'M'
+);
+
+
+-- 장바구니 조회 쿼리
+select
+    p.thumbnail_filename,
+    p.product_name,
+    p.product_price,
+    c.amount,
+    (p.product_price * c.amount)
+from
+    cart c join member m
+        on c.cart_member_id = m.member_id
+        join product p on c.cart_product_no = p.product_no
+where
+   m.member_id = 'gurumi';
+   
+   select * from cart;
+   
