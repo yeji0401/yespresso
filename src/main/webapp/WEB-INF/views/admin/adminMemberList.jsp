@@ -70,7 +70,7 @@ window.addEventListener('load', () => {
 	            <div id="check-block">
 	            	<div id="memberSort">
 		                    <p>정렬순</p>
-		                    <input type="radio" name="memberSort" value="enroll_date asc">
+		                    <input type="radio" name="memberSort" value="">
 		                    <label for="enroll-A">가입일자 오름차순</label><br>
 		                    <input type="radio" name="memberSort" value="enroll_date desc" checked>
 		                    <label for="enroll-D">가입일자 내림차순</label><br>
@@ -105,11 +105,7 @@ window.addEventListener('load', () => {
 	                    <th>이메일</th>
 	                    <th>주소</th>
 	                    <th>가입일자</th>
-	                    <th>
-	                    	<form action="">
-	                    		<button type="submit">삭제</button>
-	                    	</form>
-	                    </th>
+	                    <th>삭제</th>
 	                </tr>
 	            </thead>
 	            <tbody>
@@ -137,7 +133,11 @@ window.addEventListener('load', () => {
 							<td><%= member.getEmail() != null ? member.getEmail() : "" %></td>
 							<td><%= member.getAddress() != null ? member.getAddress() : "" %></td>
 							<td><%= member.getEnrollDate() %></td>
-							<td><input type="checkbox" name="member" value="<%= member.getMemberId() %>"></td>
+							<td>
+								<form action="<%= request.getContextPath() %>/admin/adminMemberDelete" name="memberDeleteFrm" method="POST">
+									<button type="submit" name ="memberId" value="<%= member.getMemberId() %>" onclick="confirmDeleteMember()">삭제</button>
+								</form>
+							</td>
 						</tr>
 				<%
 					  }			
@@ -174,5 +174,9 @@ document.querySelectorAll(".member-role").forEach((select) => {
 		
 	});
 });
+
+function confirmDeleteMember() {
+    window.confirm("정말 이 회원을 삭제하시겠습니까?");
+ }
 </script>    
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

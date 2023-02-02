@@ -1,3 +1,7 @@
+<%@page import="com.sh.yespresso.product.model.dto.ProductCategory"%>
+<%@page import="com.sh.yespresso.product.model.dto.CupSize"%>
+<%@page import="com.sh.yespresso.product.model.dto.Aroma"%>
+<%@page import="com.sh.yespresso.product.model.dto.Type"%>
 <%@page import="java.util.List"%>
 <%@page import="com.sh.yespresso.product.model.dto.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,11 +27,11 @@
 			<td><input type="text" name="productNo" value="<%= product.getProductNo() %>" readonly /></td>
 			<th>카테고리번호</th>
 			<td>
-				<input type="radio" name="category" value="<%= product.getProductCategory() %>" required/>
+				<input type="radio" name="category" value="CO" <%= product.getProductCategory() == ProductCategory.CO ? "checked" : "" %> required/>
 				<label for="CO">커피</label>
-				<input type="radio" name="category" value="MA" />
+				<input type="radio" name="category" value="MA" <%= product.getProductCategory() == ProductCategory.MA ? "checked" : "" %>/>
 				<label for="MA">머신</label>
-				<input type="radio" name="category" value="AC" />
+				<input type="radio" name="category" value="AC" <%= product.getProductCategory() == ProductCategory.AC ? "checked" : "" %>/>
 				<label for="AC">액세서리</label>
 			</td>
 
@@ -48,18 +52,18 @@
 		<tr>
 			<th>제품타입</th>
 			<td>
-				<input type="radio" name="type" value="<%= product.getType() %>" required/>
+				<input type="radio" name="type" value="vertuo" <%= product.getType() == Type.vertuo ? "checked" : "" %> required/>
 				<label for="vertuo">버츄오</label>
-				<input type="radio" name="type" value="original" />
+				<input type="radio" name="type" value="original" <%= product.getType() == Type.original ? "checked" : "" %> />
 				<label for="original">오리지널</label>
 			</td>
 			<th>아로마</th>
 			<td>
-				<input type="radio" name="aroma" value="<%= product.getAroma() %>" />
+				<input type="radio" name="aroma" value="cocoa" <%= product.getAroma() == Aroma.cocoa ? "checked" : "" %>/>
 				<label for="cocoa">코코아</label>
-				<input type="radio" name="aroma" value="biscuit" />
+				<input type="radio" name="aroma" value="biscuit" <%= product.getAroma() == Aroma.biscuit ? "checked" : "" %>/>
 				<label for="biscuit">비스킷</label>
-				<input type="radio" name="aroma" value="fruit" />
+				<input type="radio" name="aroma" value="fruit" <%= product.getAroma() == Aroma.fruit ? "checked" : "" %>/>
 				<label for="fruit">과일</label>
 			</td>
 		</tr>
@@ -74,11 +78,11 @@
 		<tr>
 			<th>컵사이즈</th>
 			<td>
-				<input type="radio" name="cupSize" value="<%= product.getCupSize() %>" />
+				<input type="radio" name="cupSize" value="S" <%= product.getCupSize() == CupSize.S ? "checked" : "" %>/>
 				<label for="S">S</label>
-				<input type="radio" name="cupSize" value="M" />
+				<input type="radio" name="cupSize" value="M" <%= product.getCupSize() == CupSize.M ? "checked" : "" %>/>
 				<label for="M">M</label>
-				<input type="radio" name="cupSize" value="L" />
+				<input type="radio" name="cupSize" value="L" <%= product.getCupSize() == CupSize.L ? "checked" : "" %>/>
 				<label for="L">L</label>
 			</td>
 			<th>썸네일 파일</th>

@@ -156,14 +156,7 @@
                     <th>산미감</th>
                     <th>로스팅</th>
                     <th>컵사이즈</th>
-                    <th>
-                    	<form action="<%= request.getContextPath() %>/admin/adminProductUpdate">
-                    		<button type="submit">수정</button>
-                    	</form>
-                    	<form action="">
-                    		<button type="submit">삭제</button>
-                    	</form>
-                    </th>
+                    <th>수정/삭제</th>
                 </tr>
             </thead>
            <tbody>
@@ -188,7 +181,14 @@
 						<td><%= product.getAcidity() != 0 ? product.getAcidity() : "" %></td>
 						<td><%= product.getRoasting() != 0 ? product.getRoasting() : "" %></td>
 						<td><%= product.getCupSize() != null ? (product.getCupSize() == CupSize.none ? "" : product.getCupSize()) : "" %></td>
-						<td><input type="checkbox" name="productNo" value="<%= product.getProductNo() %>"></td>
+						<td>
+							<form action="<%= request.getContextPath() %>/admin/adminProductUpdate">
+								<button type="submit" name ="productNo" value="<%= product.getProductNo() %>">수정</button>
+							</form>
+							<form action="<%= request.getContextPath() %>/admin/adminProductDelete" method="POST">
+								<button type="submit" name ="productNo" value="<%= product.getProductNo() %>" onclick="confirmDeleteProuduct()">삭제</button>
+							</form>
+						</td>
 					</tr>
 			<%
 				  }			
@@ -201,23 +201,8 @@
 		</div>
 </section>
 <script>
-$("input[type='checkbox']").on("change", function(){
-    if($(this).is(":checked"))
-    {
-        $.ajax({
-            url: "<%=request.getContextPath() %>/admin/adminProductUpdate",
-            type: 'POST',
-            data: $(this).val(),
-            success(data){
-				console.log(data);
-            },
-            error(data)) {
-				console.log(data);
-			}
-        })
-
-    }
-})
-
+function confirmDeleteProuduct() {
+    window.confirm("정말 이 제품을 삭제하시겠습니까?");
+}
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

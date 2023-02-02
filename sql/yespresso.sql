@@ -95,6 +95,8 @@ from
     user_col_comments
 where
     table_name = 'MEMBER';
+    
+select * from member;
 
 
 --===========================
@@ -332,6 +334,7 @@ end;
 /
 --
 
+select * from order_detail;
 
 --===========================
 -- PRODUCT_CATEGORY
