@@ -16,12 +16,12 @@
 </style>
 <script>
 let index = 0;
-
+let list = null;
 const dataArr = [
 	0, 0, 0, 0, 0
 ]
 function startResearch(index){
-	console.log(5646);
+	//console.log(5646);
 	$qna = $('.qna');
 	$content = $('.content');
 	$question = $('.question');
@@ -54,14 +54,8 @@ function startResearch(index){
 		<img src="<%= request.getContextPath() %>/upload/coffee/acidity1.png" style="width: 250px;"/><p style="color:white;">산미가 적어 바디감이 풍부</p></a> <br />`;
 		let ans2 = `<a href="javascript:void(0)" onclick="setData(2, 2);" style="text-decoration-line : none;">
 		<img src="<%= request.getContextPath() %>/upload/coffee/acidity2.png" style="width: 250px;"/><p style="color:white;">산미가 높아 상큼함</p></a>`;
-		let ans3 = `<a href="javascript:void(0)" onclick="setData(2, 3);" style="text-decoration-line : none;">
-		<img src="<%= request.getContextPath() %>/upload/coffee/acidity2.png" style="width: 250px;"/><p style="color:white;">산미가 높아 상큼함</p></a>`;
-		let ans4 = `<a href="javascript:void(0)" onclick="setData(2, 4);" style="text-decoration-line : none;">
-		<img src="<%= request.getContextPath() %>/upload/coffee/acidity2.png" style="width: 250px;"/><p style="color:white;">산미가 높아 상큼함</p></a>`;
 		$question.append(ans1);
 		$question.append(ans2);
-		$question.append(ans3);
-		$question.append(ans4);
 	} else if(index == 3){
 		$question.text('4. 어떤 종류의 커피의 맛을 좋아하세요?');
 		let ans1 = `<br /> <br /><a href="javascript:void(0)" onclick="setData(3, 1);" style="text-decoration-line : none;"><br />
@@ -89,13 +83,22 @@ function startResearch(index){
 		$.ajax({
 			url : "<%= request.getContextPath() %>/coffee/coffeeResult",
 			data : {dataArr : dataArr},
-			datatype : "html",
+			dataType : "json",
 			traditional: true,
 			success: function(data){
 				console.log(data);
+				list = data;
 			},
-			erroe : function(err){
+			error : function(err){
 				console.log(err);
+			}, 
+			complete: function () {
+				for(let i = 0; i < list.length; i++){
+					let result = `<img src="<%= request.getContextPath() %>/upload/product/`+ list[i].thumbnailFilename + `" style="width: 180px;"/><p style="color:white;"></p></a><p>` + list[i].productName + `</p>`+`<p>` + list[i].productPrice + `</p>`;
+					
+					$content.append(result);
+				}
+				
 			} 
 		});
 		
@@ -124,7 +127,7 @@ function setData(index, value){
 			</div>
 		</div> 
 	</div>
-	</div>	
+
 
 </body>
 </html>

@@ -6,6 +6,7 @@ import static com.sh.yespresso.common.JdbcTemplate.commit;
 import static com.sh.yespresso.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -163,11 +164,11 @@ public class ProductService {
 	/**
 	 * jooh start
 	 */
-	public int selectResult(String[] ajaxMsg) {
+	public List<Product> selectResult(Product product) {
 		Connection conn = getConnection();
-		int result = 0;
+		List<Product> list = new ArrayList<Product>();
 		try {
-			result = productDao.selectResult(conn, ajaxMsg);
+			list = productDao.selectResult(conn, product);
 			commit(conn);			
 		} catch (Exception e) {
 			rollback(conn);
@@ -175,7 +176,7 @@ public class ProductService {
 		} finally {
 			close(conn);
 		}
-		return result;
+		return list;
 	}
 	/**
 	 * jooh end

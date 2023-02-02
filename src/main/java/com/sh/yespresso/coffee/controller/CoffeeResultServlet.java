@@ -1,14 +1,20 @@
 package com.sh.yespresso.coffee.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.sh.yespresso.coffee.model.service.CoffeeService;
+import com.sh.yespresso.product.model.dto.Aroma;
+import com.sh.yespresso.product.model.dto.CupSize;
 import com.sh.yespresso.product.model.dto.Product;
+import com.sh.yespresso.product.model.dto.Type;
 import com.sh.yespresso.product.model.service.ProductService;
 
 /**
@@ -41,52 +47,61 @@ public class CoffeeResultServlet extends HttpServlet {
 	        
 	    //2.업무로직
 		
-			String type;
-			String aroma;
+			Type type;
+			Aroma aroma;
 			int acidity;
 			int roasting;
-			String cupsize;
+			CupSize cupsize;
 			
 			if(ajaxMsg[0].equals("1")) {
-				type = "vertuo";
+				type = Type.vertuo;
 			}else {
-				type="original";
+				type= Type.original;
 			}
 			
 			if(ajaxMsg[1].equals("1")) {
-				aroma = "cocoa";
+				aroma = Aroma.cocoa;
 			}else if(ajaxMsg[1].equals("2")) {
-				aroma="biscuit";
+				aroma = Aroma.biscuit;
 			}else {
-				aroma="fruit";
+				aroma= Aroma.fruit;
 			}
 			
 			if(ajaxMsg[2].equals("1")) {
 				acidity=1;
 			}else {
-				acidity = 3;
+				acidity = 2;
 			}
 			
 			if(ajaxMsg[3].equals("1")) {
-				roasting = 6;
+				roasting = 1;
 			}else {
-				roasting = 8;
+				roasting = 2;
 			}
 			
-			if(ajaxMsg[1].equals("1")) {
-				cupsize = "s";
-			}else if(ajaxMsg[1].equals("2")) {
-				cupsize="m";
+			if(ajaxMsg[4].equals("1")) {
+				//cupsize = "s";
+				cupsize = CupSize.S;
+			}else if(ajaxMsg[4].equals("2")) {
+				//cupsize="m";
+				cupsize = CupSize.M;
 			}else {
-				cupsize="l";
+				//cupsize="l";
+				cupsize = CupSize.L;
 			}
 		    
-//			Product product = coffeeService.selectResult(ajaxMsg);
-			
-		   
+			 // google json 
+	        
 			System.out.println(ajaxMsg.getClass().getName());
-			int product = productService.selectResult(ajaxMsg);
-			System.out.println(product);
+			List<Product> list = productService.selectResult(new Product(type, aroma, acidity, roasting, cupsize));
+		
+			
+			//System.out.println(product);
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			//response.setContentType("application/x-json; charset=utf-8");
+			new Gson().toJson(list, response.getWriter());
+			
 	}
 
 

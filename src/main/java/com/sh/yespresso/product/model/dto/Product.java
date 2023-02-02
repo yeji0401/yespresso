@@ -47,4 +47,10 @@ public class Product extends ProductEntity {
     public void addDetails(ProductDetail detail) {
         this.details.add(detail);
     }
+
+	public Product(Type type, Aroma aroma, int acidity, int roasting, CupSize cupSize) {
+		super(type, aroma, acidity, roasting, cupSize);
+		// TODO Auto-generated constructor stub
+	}
+    
 }

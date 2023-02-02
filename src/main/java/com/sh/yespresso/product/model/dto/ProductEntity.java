@@ -40,6 +40,16 @@ public class ProductEntity {
 		this.roasting = roasting;
 		this.cupSize = cupSize;
 	}
+	
+
+	public ProductEntity(Type type, Aroma aroma, int acidity, int roasting, CupSize cupSize) {
+		super();
+		this.type = type;
+		this.aroma = aroma;
+		this.acidity = acidity;
+		this.roasting = roasting;
+		this.cupSize = cupSize;
+	}
 
 	public String getProductNo() {
 		return productNo;
