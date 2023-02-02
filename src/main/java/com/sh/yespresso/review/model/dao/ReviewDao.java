@@ -31,7 +31,7 @@ public class ReviewDao {
 	/**
 	 * hj start
 	 */
-	// DQL 
+	// DQL 제품에 해당하는 리뷰 목록
 	public List<Review> selectReviewByPdNo(Connection conn, Map<String, Object> param) {
 		// select * from (select row_number() over(order by REVIEW_NO desc) rnum, r.* from REVIEW r where REVIEW_PRODUCT_NO = ?) where rnum between ? and ?;
 		String sql = prop.getProperty("selectReviewByPdNo"); 
@@ -40,6 +40,7 @@ public class ReviewDao {
 		int page = (int) param.get("page");
 		int limit = (int) param.get("limit");
 		String pdNo = (String) param.get("pdNo"); // 담아뒀던 제품번호 가져옴
+		System.out.println(pdNo);
 		
 		int start = (page - 1) * limit + 1;
 		int end = page * limit;
@@ -52,8 +53,16 @@ public class ReviewDao {
 			try(ResultSet rset = pstmt.executeQuery()){
 				
 				while(rset.next()) {
-					Review review = handleReviewResultSet(rset);
-					reviewList.add(review);					
+					Review review = new Review();
+					review.setReviewNo(rset.getInt("REVIEW_NO"));
+					review.setReviewMemberId(rset.getString("REVIEW_MEMBER_ID"));
+					review.setReviewOrderNo(rset.getString("REVIEW_ORDER_NO"));
+					review.setReviewProductNo(rset.getString("REVIEW_PRODUCT_NO"));
+					review.setReviewTitle(rset.getString("REVIEW_TITLE"));
+					review.setReviewContent(rset.getString("REVIEW_CONTENT"));
+					review.setReviewRating(rset.getInt("REVIEW_NO"));
+					review.setReviewDate(rset.getDate("REVIEW_DATE"));
+					reviewList.add(review);
 				}
 			}
 			
@@ -61,9 +70,28 @@ public class ReviewDao {
 			throw new ReviewException("제품별 리뷰목록 조회 오류!", e);
 		}
 		
-
 		return reviewList;
 	}
+	
+	// DQL 제품에 해당하는 리뷰 개수
+	public int selectRvCountByPdNo(Connection conn, String pdNo) {
+		String sql = prop.getProperty("selectRvCountByPdNo");
+		int totalCount = 0;
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, pdNo);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				if (rset.next()) {
+					totalCount = rset.getInt(1);
+				}
+			}
+		} catch (Exception e) {
+			throw new ReviewException("제품별 리뷰 수 조회 오류!", e);
+		}
+		return totalCount;
+	}
+
 	
 	/**
 	 * hj end

@@ -36,11 +36,11 @@
 			<div class="review-file"></div>
 		</div>
 	</div>
-
-	<div id='pagebar'>
-	</div>
 <%
 		} // for문 끝
 	} // if문 끝
 %>	
+	<div id='pagebar'>
+		<%= request.getAttribute("pagebar") %>
+	</div>
 </section>

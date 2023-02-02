@@ -10,6 +10,7 @@ import java.util.Map;
 import com.sh.yespresso.question.model.dao.QuestionDao;
 import com.sh.yespresso.question.model.dto.Question;
 import com.sh.yespresso.question.model.dto.QuestionAttachment;
+import com.sh.yespresso.review.model.dto.Review;
 
 public class QuestionService {
 	private QuestionDao questionDao = new QuestionDao();
@@ -17,6 +18,21 @@ public class QuestionService {
 	/**
 	 * hj start
 	 */
+	// DQL 제품에 해당하는 문의리스트
+	public List<Question> selectQuestionByPdNo(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Question> questionList = questionDao.selectQuestionByPdNo(conn, param);
+		close(conn);
+		return questionList;
+	}
+	
+	// DQL 제품에 해당하는 문의 수
+	public int selectTotalCountByPdNo(String pdNo) {
+		Connection conn = getConnection();
+		int totalCount = questionDao.selectTotalCountByPdNo(conn, pdNo);
+		close(conn);
+		return totalCount;
+	}
 	/**
 	 * hj end
 	 */
@@ -71,6 +87,7 @@ public class QuestionService {
 		close(conn);
 		return questionAttach;
 	}
+
 
 	/**
 	 * awon end

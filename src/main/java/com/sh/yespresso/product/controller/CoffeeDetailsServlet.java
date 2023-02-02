@@ -31,7 +31,7 @@ public class CoffeeDetailsServlet extends HttpServlet {
 		// selectDetailByProductNo = select * from PRODUCT_DETAIL where PRODUCT_ATTACHMENT_NO = ? 
 		Product product = productService.selectOneProduct(prodNo);
 //		System.out.println(product);
-		
+		System.out.println("getDetails=" + product.getDetails());
 		System.out.println(product.getDetails().get(0).getReProductFilename());
 
 		// 3. view단 위임

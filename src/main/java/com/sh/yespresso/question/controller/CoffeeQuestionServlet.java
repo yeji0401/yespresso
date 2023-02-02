@@ -1,4 +1,4 @@
-package com.sh.yespresso.review.controller;
+package com.sh.yespresso.question.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -11,23 +11,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.sh.yespresso.common.YespressoUtils;
-import com.sh.yespresso.review.model.dto.Review;
-import com.sh.yespresso.review.model.service.ReviewService;
+import com.sh.yespresso.member.model.dto.Member;
+import com.sh.yespresso.question.model.dto.Question;
+import com.sh.yespresso.question.model.service.QuestionService;
 
 /**
- * Servlet implementation class CoffeeReviewServlet
+ * Servlet implementation class CoffeeQuestionServlet
  */
-@WebServlet("/coffee/review")
-public class CoffeeReviewServlet extends HttpServlet {
+@WebServlet("/coffee/question")
+public class CoffeeQuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ReviewService reviewService = new ReviewService();
+	private QuestionService questionService = new QuestionService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		// 페이징
 		final int limit = 5; 
 		int page = 1;
@@ -40,27 +41,36 @@ public class CoffeeReviewServlet extends HttpServlet {
 		Map<String, Object> param = new HashMap<>();
 		param.put("page", page);
 		param.put("limit", limit);
+
 		
 		// 1. 사용자입력값 - pdNo 받아오기
 		String pdNo = request.getParameter("pdNo");
 		param.put("pdNo", pdNo); //param에 제품번호도 넣어줌
-		System.out.println("param=" + param);
+		System.out.println("문의에서가져옴 =" + pdNo);
+
+		// 2. 업무로직 - 받아온 pdNo로 Question테이블에서 문의 가져오기 
+		// select * from QUESTION where QUESTION_PRODUCT_NO = ?(pdNo)
+		List<Question> questionList = questionService.selectQuestionByPdNo(param);
+		System.out.println(questionList);
 		
-		// 2. 업무로직 - 받아온 pdNo로 리뷰테이블에서 리뷰 가져오기
-		// select * from REVIEW where REVIEW_PRODUCT_NO = ?(pdNo)
-		List<Review> reviewList = reviewService.selectReviewByPdNo(param);
-		 System.out.println("리뷰목록=" + reviewList);
-		
-		// 페이지바 보내주기
-		int totalCount = reviewService.selectRvCountByPdNo(pdNo);
+		// 페이지바 보내기
+		int totalCount = questionService.selectTotalCountByPdNo(pdNo);
 		String url = request.getRequestURI();
 		String pagebar = YespressoUtils.getPagebar(page, limit, totalCount, url);
-		
-		// 3. view단 - 가져온 리뷰 담아서 되돌려줌 
-		request.setAttribute("reviewList", reviewList);
+	
+		// 3. view단 - 가져온 문의 담아서 보내기
+		request.setAttribute("questionList", questionList);
 		request.setAttribute("pagebar", pagebar);
-		request.getRequestDispatcher("/WEB-INF/views/product/coffeeReviewList.jsp") // 담은 reviewList를 coffeeReviewList.jsp에 전달
+		request.getRequestDispatcher("/WEB-INF/views/product/coffeeQuestionList.jsp")
 			.forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

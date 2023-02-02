@@ -28,7 +28,6 @@ public class CoffeeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		// 1. 업무로직 - 전체게시물수 조회 -> 전체페이지수 구하기
 		// 전체 게시물수 조회
 		int totalCount = productService.getTotalCntById("CO");
