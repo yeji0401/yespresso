@@ -4,7 +4,6 @@
 
 * {
 	margin: 0 auto;
-    font-family: 'Gothic A1', sans-serif;
 }
 
 section#admin-container {
@@ -14,6 +13,7 @@ section#admin-container {
 	border-radius: 50px;
 	padding: 10px;
 	background-color: white;
+	font-family: 'Gothic A1', sans-serif;
 }
 
 div#admin-block {
@@ -76,22 +76,10 @@ div#product-search-block {
     margin-top: 30px;
 }
 
-div#check-block {
-    display: flex;
-    width: 900px;
-    height: 200px;
-    margin: 0 auto;
-    margin-top: 30px;
-}
-
 div p {
     text-align: center;
     font-weight: bold;
     margin-bottom: 10px;
-}
-
-div#check-block div#roasting-c {
-	display: flex;
 }
 
 button {height: 25px; background-color: white; border: 3px solid #E8EAE6; border-radius: 50%; font-weight: bold;}

@@ -1,3 +1,5 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.*"%>
 <%@page import="com.sh.yespresso.orders.model.dto.OrderState"%>
 <%@page import="com.sh.yespresso.orders.model.dto.Orders"%>
 <%@page import="java.util.List"%>
@@ -8,6 +10,9 @@
 	
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
+	
+	DecimalFormat df = new DecimalFormat("₩###,###");
+	NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.KOREA);
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <!-- 관리자용 admin.css link -->
@@ -79,33 +84,7 @@ window.addEventListener('load', () => {
                     <button type="submit">검색</button>
                 </form>
             </div>
-        </div>
-            <div id="check-block">
-                <div id="order-sort">
-                    <p>정렬순</p>
-                    <input type="radio" name="order-sort" value="orderNo-A">
-                    <label for="orderNo-A">주문번호 오름차순</label><br>
-                    <input type="radio" name="order-sort" value="orderNo-D">
-                    <label for="orderNo-D">주문번호 내림차순</label><br>
-                    <input type="radio" name="order-sort" value="totalprice-A">
-                    <label for="totalprice-A">주문총액 오름차순</label><br>
-                    <input type="radio" name="order-sort" value="totalprice-D">
-                    <label for="totalprice-D">주문총액 내림차순</label><br>
-                    <input type="radio" name="order-sort" value="orderMemberId-A">
-                    <label for="orderMemberId-A">주문아이디 오름차순</label><br>
-                    <input type="radio" name="order-sort" value="orderMemberId-D">
-                    <label for="orderMemberId-D">주문아이디 내림차순</label>
-                </div>
-                <div id="order-state">
-                    <p>주문상태</p>
-                    <input type="radio" name="order-state" value="before">
-                    <label for="">배송 전</label><br>
-                    <input type="radio" name="order-state" value="delivery">
-                    <label for="">배송 중</label><br>
-                    <input type="radio" name="order-state" value="finish">
-                    <label for="">배송완료</label>
-                </div>
-            </div>        
+        </div>       
         <table id="tbl-orders" class="tbl">
             <thead>
                 <tr>
@@ -129,7 +108,7 @@ window.addEventListener('load', () => {
 						<td><%= order.getOrderNo() %></td>
 						<td><%= order.getOrderMemberId() %></td>
 						<td><%= order.getOrderDate() %></td>
-						<td style="color: #820000;">&#8361;<%= order.getTotalPrice() %></td>
+						<td style="color: #820000;"><%=df.format(order.getTotalPrice())%></td>
 						<td>
 							<select class="order-state" data-order-no="<%= order.getOrderNo() %>">
 								<option value="<%= OrderState.B %>" <%= order.getOrderState() == OrderState.B ? "selected" : "" %>>B (배송 전)</option>

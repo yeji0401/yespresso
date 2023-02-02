@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+* {
+	margin: 0 auto;
+}
+
+section#payment-container {
+	width: 1200px;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	border-radius: 50px;
+	padding: 10px;
+	background-color: white;
+	font-family: 'Gothic A1', sans-serif;
+}
+
+h2 {
+	width: 250px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    translate: -530px;
+    color: white;
+    box-shadow: 5px 5px 3px #E8EAE6;
+    border-radius: 20px 0px 0px 20px;
+    background-color: #3C6255;
+}
+
+div#payment {
+	display: flex;
+}
+
+table#tbl-member-info th {
+	width: 350px;
+	padding: 10px;
+	text-align: left;
+	color: white;
+	background-color: gray;
+	border-spacing: 10px;
+}
+
+table#tbl-member-info td {
+	text-align: left;
+}
+
+table#tbl-cart {
+	border-spacing: 10px;
+}
+
+table#tbl-cart th {
+	width: 160px;
+	margin-top: 10px;
+	padding: 10px;
+	text-align: center;
+	background-color: lightgray;
+}
+
+table#tbl-cart td {
+	text-align: center;
+}
+
+#total {
+	color: #820000;
+	font-weight: bold;
+}
+
+button {font-family: 'Gothic A1', sans-serif; display: block; height: 40px; background-color: white; border: 3px solid #E8EAE6; border-radius: 50%; font-weight: bold;}
+button:hover { border: 5px solid #A6BB8D;}

@@ -98,6 +98,8 @@ where
     
 select * from member;
 
+update member set address = '서울특별시 강남구 역삼동' where member_id = 'honggd';
+
 
 --===========================
 --RECIPE
@@ -196,6 +198,8 @@ from
     user_col_comments
 where
     table_name = 'CART';
+    
+select * from cart;
 
 ----------------------------------------------------------
 -- 1 CART - insert
@@ -517,6 +521,8 @@ from
     user_col_comments
 where
     table_name = 'REVIEW';
+    
+select * from review;
 
 --===========================
 -- REVIEW_ATTACHMENT
@@ -736,4 +742,6 @@ where
     );
     
     select * from cartlist where cart_list_member_id = 'gurumi';
+    
+    select * from cartlist where cart_list_member_id = 'honggd';
 -- awon end
