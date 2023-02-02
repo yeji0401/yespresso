@@ -91,6 +91,7 @@ public class QuestionDao {
 		question.setQuestionTitle(rset.getString("question_title"));
 		question.setQuestionContent(rset.getString("question_content"));
 		question.setQuestionDate(rset.getDate("question_date"));
+		question.setProductName(rset.getString("product_name"));
 
 		return question;
 	}

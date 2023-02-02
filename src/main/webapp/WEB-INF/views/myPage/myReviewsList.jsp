@@ -13,26 +13,21 @@ String productName = (String) request.getAttribute("productName");
 Review review = new Review();
 Product product = new Product();
 
-
 for (int i = 0; i < myReviewsList.size(); i++) {
 	review = myReviewsList.get(i);
 }
 %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/myReviewsList.css" />
-<section id="review-container">
-	<h2>게시판</h2>
-<section id="review-container">
-	<table id="tbl-review-list">
-		<thead>
-			<tr>
-
-				<th>제품 이름</th>
-				<th>리뷰 번호</th>
-				<th>제목</th>
-				<th>작성일</th>
-				<th>첨부파일</th>
-			</tr>
-		</thead>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/myPage/myReviewsList.css" />
+<p style="font-size: 30px; font-weight: 200; text-align: center; color: #3C6255;">나의 리뷰 내역</p>
+<section id="reviews-container">
+	<table id="tbl-reviews-list">
+		<tr id="col-name">
+			<th>제품 이름</th>
+			<th>리뷰 번호</th>
+			<th>제목</th>
+			<th>작성일</th>
+			<th>첨부파일</th>
+		</tr>
 		<tbody>
 			<%
 			if (myReviewsList.isEmpty()) {
@@ -47,9 +42,8 @@ for (int i = 0; i < myReviewsList.size(); i++) {
 			%>
 			<tr>
 				<td><%=review.getProductName()%></td>
-<%-- 				<td><%=review.getReviewProductNo()%></td> --%>
 				<td><%=review.getReviewNo()%></td>
-				<td><a href="<%=request.getContextPath()%>/myPage/myReviewView?no=<%=review.getReviewNo()%>"><%=review.getReviewTitle()%></a></td>
+				<td><%=review.getReviewTitle()%></td>
 				<td><%=review.getReviewDate()%></td>
 				<td>
 					<%
@@ -58,18 +52,19 @@ for (int i = 0; i < myReviewsList.size(); i++) {
  }
  %>
 				</td>
+				<%
+				}
+				}
+				%>
 			</tr>
-			<%
-			}
-			}
-			%>
 		</tbody>
 	</table>
-	</section>
-
 	<div id='pagebar'>
 		<%=request.getAttribute("pagebar")%>
 	</div>
 </section>
+
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+
+
 

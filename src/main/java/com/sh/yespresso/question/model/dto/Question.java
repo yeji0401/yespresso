@@ -8,11 +8,24 @@ public class Question extends QuestionEntity {
 
 	private int attachCnt;
 	private List<QuestionAttachment> questionAttachments = new ArrayList<>();
+	// awon start
+		private String productName;
+
+	//awon end
 
 	public Question() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	//awonStart
+	public Question(int questionNo, int questionLevel, int questionRefNo, String questionMemberId,
+			String questionProductNo, String questionTitle, String questionContent, Date questionDate, String productName) {
+		super(questionNo, questionLevel, questionRefNo, questionMemberId, questionProductNo, questionTitle,
+				questionContent, questionDate);
+		this.productName = productName;
+	}
+		// awon end
 
 	public Question(int questionNo, int questionLevel, int questionRefNo, String questionMemberId,
 			String questionProductNo, String questionTitle, String questionContent, Date questionDate, int attachCnt) {
@@ -45,6 +58,17 @@ public class Question extends QuestionEntity {
 		this.questionAttachments = questionAttachments;
 	}
 
+	// awon start
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	// awon end
+	
 	@Override
 	public String toString() {
 		return "Question [attachCnt=" + attachCnt + ", questionAttachments=" + questionAttachments + ", toString()="

@@ -51,11 +51,11 @@ public class MyQuestionsListServlet extends HttpServlet {
 		// 2. 업무로직
 		// a. db에서 목록조회(페이징)
 		List<Question> myQuestionsList = questionService.selectMyQuestionsList(param, questionMemberId);
-		int totalCount = questionService.selectTotalCount(); // select count(*) from question
-		System.out.println(totalCount);
-
+		
 		// b. 페이지바
+		int totalCount = questionService.selectTotalCount(); // select count(*) from question
 		String url = request.getRequestURI(); // /yespresso/myPage/myQuestionsList
+		
 		String pagebar = YespressoUtils.getPagebar(page, limit, totalCount, url);
 		System.out.println(pagebar);
 

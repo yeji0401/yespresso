@@ -32,6 +32,7 @@ input#pay {
 	border: none;
 	font-size: 16px;
 	margin-top: 2%;
+	margin-bottom: 2%;
 }
 
 #tbl-cart {
@@ -46,11 +47,20 @@ input#pay {
 td {
 	text-align: center;
 	padding: 10px;
-	border-radius: 30px;
+	color: #3c6255;
 }
 
 tfoot {
-	border-radius: 30px;
-	border: 1px solid #000;
-	background: #A6BB8D;
+	border-collapse: separate;
+	background-color: #E8EAE6;
+	font-size: 20px;
+	font-style: bold;
+}
+
+tfoot :first-child {
+	border-radius: 0px 0px 0px 30px;
+}
+
+tfoot :last-child {
+	border-radius: 0px 0px 30px 0px;
 }
