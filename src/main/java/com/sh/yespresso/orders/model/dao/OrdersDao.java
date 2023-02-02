@@ -179,10 +179,10 @@ public class OrdersDao {
 
 	private OrderDetail handleOrderDetailResultSet(ResultSet rset) throws SQLException {
 		OrderDetail od = new OrderDetail();
-		od.setDetailProductNo(rset.getString("order_detail_no"));
+		od.setDetailProductNo(rset.getString("detail_product_no"));
 		od.setOrderDetailNo(rset.getInt("order_detail_no"));
 		od.setOrderDetailAmount(rset.getInt("order_detail_amount"));
-		od.setOrderNo(rset.getString("order_no"));
+		od.setOrderNo(rset.getString("fk_order_no"));
 		return od;
 	}
 

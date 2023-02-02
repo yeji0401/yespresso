@@ -1,4 +1,5 @@
 <%@page import="com.sh.yespresso.review.model.dto.Review"%>
+<%@page import="com.sh.yespresso.product.model.dto.Product"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -8,7 +9,14 @@
 List<Review> myReviewsList = (List<Review>) request.getAttribute("myReviewsList");
 request.setCharacterEncoding("UTF-8");
 String reviewMemberId = (String) request.getAttribute("reviewMemberId");
+String productName = (String) request.getAttribute("productName");
 Review review = new Review();
+Product product = new Product();
+
+
+for (int i = 0; i < myReviewsList.size(); i++) {
+	review = myReviewsList.get(i);
+}
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/myReviewsList.css" />
 <section id="review-container">
@@ -18,7 +26,7 @@ Review review = new Review();
 		<thead>
 			<tr>
 
-				<th>리뷰 제품</th>
+				<th>제품 이름</th>
 				<th>리뷰 번호</th>
 				<th>제목</th>
 				<th>작성일</th>
@@ -38,8 +46,9 @@ Review review = new Review();
 			for (Review reviews : myReviewsList) {
 			%>
 			<tr>
+				<td><%=review.getProductName()%></td>
+<%-- 				<td><%=review.getReviewProductNo()%></td> --%>
 				<td><%=review.getReviewNo()%></td>
-				<td><%=review.getReviewProductNo()%></td>
 				<td><a href="<%=request.getContextPath()%>/myPage/myReviewView?no=<%=review.getReviewNo()%>"><%=review.getReviewTitle()%></a></td>
 				<td><%=review.getReviewDate()%></td>
 				<td>

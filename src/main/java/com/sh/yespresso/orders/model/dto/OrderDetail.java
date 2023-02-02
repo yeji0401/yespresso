@@ -5,10 +5,28 @@ public class OrderDetail {
 	private String orderNo; // FK_ORDER_NO
 	private String detailProductNo;
 	private int orderDetailAmount;
+//	awon start
+	private String productName;
+	private int productPrice;
+	// awon end
 
 	public OrderDetail() {
 		super();
 	}
+
+	// awon start
+	public OrderDetail(int orderDetailNo, String orderNo, String detailProductNo, int orderDetailAmount,
+			String productName, int productPrice) {
+		super();
+		this.orderDetailNo = orderDetailNo;
+		this.orderNo = orderNo;
+		this.detailProductNo = detailProductNo;
+		this.orderDetailAmount = orderDetailAmount;
+		this.productName = productName;
+		this.productPrice = productPrice;
+	}
+
+	// awon end
 
 	public OrderDetail(int orderDetailNo, String orderNo, String detailProductNo, int orderDetailAmount) {
 		super();
@@ -49,6 +67,25 @@ public class OrderDetail {
 	public void setOrderDetailAmount(int orderDetailAmount) {
 		this.orderDetailAmount = orderDetailAmount;
 	}
+	
+	//awon start
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public int getProductPrice() {
+		return productPrice;
+	}
+
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
+	}
+	//awon end
 
 	@Override
 	public String toString() {

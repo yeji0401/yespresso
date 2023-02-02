@@ -4,8 +4,15 @@
 <%@page import="com.sh.yespresso.member.model.dto.Member"%>
 <%@page import="com.sh.yespresso.cart.model.dto.Cart"%>
 <%@page import="com.sh.yespresso.cart.model.dto.CartProduct"%>
+<%@ page import="java.text.*" %>
+<%@page import="java.util.Locale"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/myPage/cart.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+<script src="<%= request.getContextPath() %>/js/jquery-3.6.1.js"></script>
 
 <%
 request.setCharacterEncoding("UTF-8");
@@ -18,19 +25,21 @@ for (int i = 0; i < myCartList.size(); i++) {
 	cartProduct = myCartList.get(i);
 
 }
+DecimalFormat df = new DecimalFormat("₩###,###");
+NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.KOREA);
 %>
 <section id=cart-container>
 
-	<form name="cartFrm" method="get" action="<%=request.getContextPath()%>/cart/cart">
+	<form name="cartFrm" metdod="get" action="<%=request.getContextPath()%>/cart/cart">
 
 		<table id="tbl-cart">
-			<tr>
-				<th>제품명</th>
-				<th>개별 단가</th>
-				<th>수량</th>
-				<th>합계</th>
+			<tr id ="cart-col">
+				<td>제품명</td>
+				<td>개별 단가</td>
+				<td>수량</td>
+				<td>합계</td>
 			</tr>
-			</thead>
+			</tdead>
 			<tbody>
 				<%
 				if (myCartList.isEmpty()) {
@@ -50,24 +59,27 @@ for (int i = 0; i < myCartList.size(); i++) {
 				%>
 				<tr>
 					<td><%=myCartList.get(i).getProductName()%></td>
-					<td><%=myCartList.get(i).getProductPrice()%></td>
+					<td><%=df.format(myCartList.get(i).getProductPrice())%></td>
 					<td><%=myCartList.get(i).getAmount()%></td>
-					<td><%=totalPrice%></td>
+					<td><%=df.format(totalPrice)%></td>
 				</tr>
 				<%
 				}
+				
 				}
 				%>
-				<tr>
-					<th>총액</th>
-					<th></th>
-					<th><%=sumAmount%></th>
-					<th><%=sumPrice%></th>
-					<th></th>
-				</tr>
 			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="2">총액</td>
+					<td><%=sumAmount%></td>
+					<td><%=df.format(sumPrice)%></td>
+				</tr>
+				<tr>
+				</tr>
+			</tfoot>
 		</table>
-		<button onclick="location.href='index.jsp'">결제하기</button>
+		 <input type="button" value="결제하기" id="pay" onclick="location.href = '<%= request.getContextPath() %>';" tabindex="4"></td>
 	</form>
 
 
