@@ -1,9 +1,12 @@
 <%@page import="com.sh.yespresso.review.model.dto.Review"%>
+<%@page import="java.util.Arrays"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.sh.yespresso.review.model.dto.ReviewAttachment"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 Review review = (Review) request.getAttribute("review");
+String reviewMemberId = (String) request.getAttribute("reviewMemberId");
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/myReviewView.css" />

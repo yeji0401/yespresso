@@ -1,20 +1,23 @@
 <%@page import="com.sh.yespresso.question.model.dto.Question"%>
+<%@page import="java.util.Arrays"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
 List<Question> myQuestionsList = (List<Question>) request.getAttribute("myQuestionsList");
-
-String questionMemberId = loginMember.getMemberId();
+request.setCharacterEncoding("UTF-8");
+String questionMemberId = (String) request.getAttribute("questionMemberId");
+Question question = new Question();
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/myQuestionsList.css" />
 <section id="question-container">
 	<h2>게시판</h2>
-
+<section id="question-container">
 	<table id="tbl-question-list">
 		<thead>
 			<tr>
-				<!-- QUESTION_NO, QUESTION_PRODUCT_NO, QUESTION_TITLE, QUESTION_DATE -->
+
 				<th>질문 제품</th>
 				<th>질문 번호</th>
 				<th>제목</th>
@@ -25,13 +28,14 @@ String questionMemberId = loginMember.getMemberId();
 		<tbody>
 			<%
 			if (myQuestionsList.isEmpty()) {
+				myQuestionsList = new ArrayList<Question>();
 			%>
 			<tr>
 				<td colspan="5">조회된 질문이 없습니다.</td>
 			</tr>
 			<%
 			} else {
-			for (Question question : myQuestionsList) {
+			for (Question questions : myQuestionsList) {
 			%>
 			<tr>
 				<td><%=question.getQuestionNo()%></td>
@@ -52,9 +56,11 @@ String questionMemberId = loginMember.getMemberId();
 			%>
 		</tbody>
 	</table>
+	</section>
 
 	<div id='pagebar'>
 		<%=request.getAttribute("pagebar")%>
 	</div>
 </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+
