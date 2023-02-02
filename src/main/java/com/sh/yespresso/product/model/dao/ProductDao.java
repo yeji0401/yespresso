@@ -410,23 +410,47 @@ public class ProductDao {
 	/**
 	 * jooh start
 	 */
-	public int selectResult (Connection conn, String[] ajaxMsg ) {
+	public List<Product> selectResult (Connection conn, Product product ) {
 		String sql = prop.getProperty("selectResult"); 
 		int result = 0;
+		//ResultSet rset =  null;
+		List<Product> list = new ArrayList<>();
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-			pstmt.setString(1, ajaxMsg[0]);
-			pstmt.setString(2, ajaxMsg[1]);
-			pstmt.setString(3, ajaxMsg[2]);
-			pstmt.setString(4, ajaxMsg[3]);
-			pstmt.setString(5, ajaxMsg[4]);
+//select * from product where type = ? and aroma = ? and  acidity in ? and roasting in ? cup_size = ?
+			// and acidity in ? and roasting in ?
 			
-			result = pstmt.executeUpdate();
+			pstmt.setObject(1,  product.getType().toString());
+			pstmt.setObject(2,  product.getAroma().toString());
+			pstmt.setObject(3, product.getCupSize().toString());
+			//String query = "";
+			if(product.getAcidity() == 1) {
+				sql += " and acidity in (1, 2)";
+			}else {
+				sql += " and acidity in (3, 4, 5)";
+			}
+			if(product.getRoasting() == 1) {
+				sql += " and roasting in (1, 2, 3, 4, 5, 6)";
+			}else {
+				sql += " and roasting in (7, 8, 9, 10, 11, 12, 13)";
+			}
+
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					Product _product = new Product();
+					_product.setProductNo(rset.getString("product_no"));
+					_product.setProductName(rset.getString("product_name"));
+					_product.setProductPrice(rset.getInt("product_price"));
+					_product.setThumbnailFilename(rset.getString("thumbnail_filename"));
+					
+					list.add(_product);
+				}
+			}
 			
 		} catch (SQLException e) {
 			throw new ProductException("결과 오류", e);
 		}
-		return result;
+		return list;
 	}
 	/**
 	 * jooh end
