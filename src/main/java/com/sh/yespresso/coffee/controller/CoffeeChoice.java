@@ -1,4 +1,4 @@
-package com.sh.yespresso.coffee;
+package com.sh.yespresso.coffee.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

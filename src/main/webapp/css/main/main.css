@@ -1,17 +1,4 @@
 @charset "UTF-8";
-.fade-out-box{
-	display : inline-block;
-	background : white;
-	padding : 10px;
-	animation: fadeout 3s;
-	-webkit-animation : fadeout 3s;
-	animation-fill-mode:forwards;
-}
-@keyframes fadeout {
-	from{
-		opacity:1;
-	}
-	to{
-		opacity:0;
-	}
-}
+tr,td{text-align: center;}
+input[type=button]{border-radius: 30px; width:415px; 
+    height:40px; background:#A6BB8D; color: white; border: none; font-size:16px;}
