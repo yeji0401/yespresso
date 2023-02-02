@@ -13,11 +13,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
+	<%
 request.setCharacterEncoding("UTF-8");
 String cartMemberId = (String) request.getAttribute("cartMemberId");
 List<CartProduct> myCartList = (List<CartProduct>) request.getAttribute("myCartList");
-int cartListNo = Integer.parseInt(request.getParameter("cartListNo"));
+CartProduct cartProduct = new CartProduct();
+for (int i = 0; i < myCartList.size(); i++) {
+	cartProduct = myCartList.get(i);
+
+}
 
 %>
 </body>

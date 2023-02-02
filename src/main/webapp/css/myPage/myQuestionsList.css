@@ -4,7 +4,7 @@
 	margin: 0 auto;
 }
 
-#orders-container {
+#questions-container {
 	width: fit-content;
 	margin-top: 10px;
 	margin-bottom: 30px;
@@ -26,7 +26,7 @@ h2 {
 
 table {
 	width: 900px;
-	height: 200px;
+
 	margin: 0 auto;
 	margin-top: 30px;
 	text-align: center;
@@ -47,6 +47,7 @@ table {
   border-radius: 0px 30px 0px 0px;
 }
 th, td, a {
+	padding: 15px;
 	text-align: center;
 	text-decoration: none;
 	color: #3c6255

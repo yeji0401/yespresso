@@ -4,15 +4,15 @@
 <%@page import="com.sh.yespresso.member.model.dto.Member"%>
 <%@page import="com.sh.yespresso.cart.model.dto.Cart"%>
 <%@page import="com.sh.yespresso.cart.model.dto.CartProduct"%>
-<%@ page import="java.text.*" %>
+<%@ page import="java.text.*"%>
 <%@page import="java.util.Locale"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/myPage/cart.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/cart/cart.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-<script src="<%= request.getContextPath() %>/js/jquery-3.6.1.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery-3.6.1.js"></script>
 
 <%
 request.setCharacterEncoding("UTF-8");
@@ -33,7 +33,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.KOREA);
 	<form name="cartFrm" method="get" action="<%=request.getContextPath()%>/payment/payment">
 
 		<table id="tbl-cart">
-			<tr id ="cart-col">
+			<tr id="cart-col">
 				<td>제품명</td>
 				<td>개별 단가</td>
 				<td>수량</td>
@@ -65,7 +65,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.KOREA);
 				</tr>
 				<%
 				}
-				
+
 				}
 				%>
 			</tbody>
@@ -79,7 +79,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.KOREA);
 				</tr>
 			</tfoot>
 		</table>
-		 <input type="submit" value="결제하기" id="pay" tabindex="4"></td>
+		<input type="submit" value="결제하기" id="pay" tabindex="4">
+		</td>
 	</form>
 
 
@@ -87,5 +88,4 @@ NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.KOREA);
 </section>
 
 
-</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
