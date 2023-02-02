@@ -62,6 +62,22 @@ public class MemberService {
 		return result;
 	}
 	
+	public int updateOrderState(String orderNo, String orderState) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = memberDao.updateOrderState(conn, orderNo, orderState);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+	
 	public int deleteMember(String memberId) {
 		int result = 0;
 		// 1. Connection 객체 생성
