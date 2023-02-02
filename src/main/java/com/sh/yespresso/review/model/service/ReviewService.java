@@ -19,6 +19,14 @@ public class ReviewService {
 	/**
 	 * hj start
 	 */
+
+	// DQL 제품에 해당하는 리뷰리스트 
+	public List<Review> selectReviewByPdNo(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Review> reviewList = reviewDao.selectReviewByPdNo(conn, param);
+		close(conn);
+		return reviewList;
+	}
 	/**
 	 * hj end
 	 */
@@ -110,7 +118,6 @@ public class ReviewService {
 		}
 		return result;
 	}
-
 	/**
 	 * awon end
 	 */

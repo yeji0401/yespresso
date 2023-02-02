@@ -6,7 +6,7 @@
 <%
 	int totalPage = (int) request.getAttribute("totalPage");
 %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/productList.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/product/productList.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 <div class="productList-container">

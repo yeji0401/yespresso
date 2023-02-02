@@ -9,7 +9,7 @@
 	String thumb = product.getDetails().get(0).getReProductFilename();
 	String det = product.getDetails().get(1).getReProductFilename();
 %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/productList.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/product/productList.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <style>
 section#product-container{
@@ -79,15 +79,15 @@ section#product-container{
 		</tr>
 		
 		<tr class="product-review-wrap">
-			<td></td>
+			<td id="review-wrap">
+			
+			</td>
 		</tr>
 		<tr class="product-question-wrap">
 			<td></td>
 		</tr>
 	</table>
-
 </section>
-
 <script>
 window.addEventListener('load', () => {
 	getReview("<%= product.getProductNo() %>");
@@ -97,18 +97,13 @@ const getReview = (pdNo) => {
 	$.ajax({
 		url: "<%= request.getContextPath() %>/coffee/review",
 		data : {pdNo},
-		dataType : "json",
+		dataType : "html",
 		success(data){
 			console.log(data);
+			document.querySelector("#review-wrap").innerHTML = data;
 		},
 		error : console.log
-	})
-	
-}
-
+	});
+};
 </script>
-
-
-
-<%@ include file="/WEB-INF/views/product/productReview.jsp" %>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

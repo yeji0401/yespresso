@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+section#product-review-container {
+    margin: 30px 0 0 0;
+    background: #ffffff;
+}
+.product-review-row {
+	display: table;
+    width: 100%;
+    margin-top: -1px;
+    padding: 20px 0 20px 0;
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+}
+.star_day_name {
+display: table-cell;
+width: 15%;
+padding: 0 20px 0 40px;
+}
+.star_day_name strong {
+display: block;
+color: #ffcc00;
+font-size: 20px;
+}
+.star_day_name span {
+    display: block;
+    padding: 5px 0 5px 0;
+    color: #636363
+}
+.text_file_cont {
+    display: table-cell;
+    width: 85%;
+    padding:10px 0 10px 10px;
+    vertical-align: top;
+    color: #100F0F;
+    
+}
+.review-title {
+	font-weight: bold;
+}
+.review-cont {
+	padding: 10px 0;
+}

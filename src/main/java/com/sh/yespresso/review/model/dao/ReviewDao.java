@@ -31,6 +31,40 @@ public class ReviewDao {
 	/**
 	 * hj start
 	 */
+	// DQL 
+	public List<Review> selectReviewByPdNo(Connection conn, Map<String, Object> param) {
+		// select * from (select row_number() over(order by REVIEW_NO desc) rnum, r.* from REVIEW r where REVIEW_PRODUCT_NO = ?) where rnum between ? and ?;
+		String sql = prop.getProperty("selectReviewByPdNo"); 
+		List<Review> reviewList = new ArrayList<>();
+		
+		int page = (int) param.get("page");
+		int limit = (int) param.get("limit");
+		String pdNo = (String) param.get("pdNo"); // 담아뒀던 제품번호 가져옴
+		
+		int start = (page - 1) * limit + 1;
+		int end = page * limit;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, pdNo);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				
+				while(rset.next()) {
+					Review review = handleReviewResultSet(rset);
+					reviewList.add(review);					
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new ReviewException("제품별 리뷰목록 조회 오류!", e);
+		}
+		
+
+		return reviewList;
+	}
+	
 	/**
 	 * hj end
 	 */
@@ -226,6 +260,7 @@ public class ReviewDao {
 
 		return result;
 	}
+
 
 	/**
 	 * awon end
