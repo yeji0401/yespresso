@@ -311,7 +311,7 @@ public class ProductDao {
 	public int insertProduct(Connection conn, Product product) {
 		
 		// insert into PRODUCT values 
-		// ('p' || lpad(seq_product_no.nextval, 4, '0'), ?, ?, ?, default, default, default, 'p' || lpad(seq_product_no.nextval, 4, '0') || '.png', ?, ?, ?, ?, ?)
+		// ('p' || lpad(seq_product_no.nextval, 4, '0'), ?, ?, ?, ?, default, default, 'p' || lpad(seq_product_no.nextval, 4, '0') || '.png', ?, ?, ?, ?, ?)
 		String sql = prop.getProperty("insertProduct"); 
 		int result = 0;
 		
@@ -319,11 +319,56 @@ public class ProductDao {
 			pstmt.setString(1, product.getProductCategory().name());
 			pstmt.setString(2, product.getProductName());
 			pstmt.setInt(3, product.getProductPrice());
-			pstmt.setString(4, product.getType().name());
-			pstmt.setString(5, product.getAroma().name());
-			pstmt.setInt(6, product.getAcidity());
-			pstmt.setInt(7, product.getRoasting());
-			pstmt.setString(8, product.getCupSize().name());
+			pstmt.setInt(4, product.getProductStock());
+			pstmt.setString(5, product.getType().name());
+			pstmt.setString(6, product.getAroma().name());
+			pstmt.setInt(7, product.getAcidity());
+			pstmt.setInt(8, product.getRoasting());
+			pstmt.setString(9, product.getCupSize().name());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new ProductException("제품 등록 오류", e);
+		}
+		return result;
+	}
+	
+	public Product selectProduct(Connection conn, String productNo) {
+		String sql = prop.getProperty("selectOneProduct");
+		Product product = null;
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, productNo);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					product = handleProductResultSet(rset);
+				}
+			}
+		} catch (Exception e) {
+			throw new ProductException("제품 한 개 조회 오류!", e);
+		}
+		
+		return product;
+	}
+	
+	public int updateProduct(Connection conn, Product product) {
+		
+		// insert into PRODUCT values 
+		// ('p' || lpad(seq_product_no.nextval, 4, '0'), ?, ?, ?, ?, default, default, 'p' || lpad(seq_product_no.nextval, 4, '0') || '.png', ?, ?, ?, ?, ?)
+		String sql = prop.getProperty("updateProduct"); 
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, product.getProductCategory().name());
+			pstmt.setString(2, product.getProductName());
+			pstmt.setInt(3, product.getProductPrice());
+			pstmt.setInt(4, product.getProductStock());
+			pstmt.setString(5, product.getType().name());
+			pstmt.setString(6, product.getAroma().name());
+			pstmt.setInt(7, product.getAcidity());
+			pstmt.setInt(8, product.getRoasting());
+			pstmt.setString(9, product.getCupSize().name());
 			
 			result = pstmt.executeUpdate();
 			

@@ -1,3 +1,4 @@
+<%@page import="com.sh.yespresso.orders.model.dto.OrderState"%>
 <%@page import="com.sh.yespresso.orders.model.dto.Orders"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -80,28 +81,28 @@ window.addEventListener('load', () => {
             </div>
         </div>
             <div id="check-block">
-                <div id="order-sort" class="sorting">
+                <div id="order-sort">
                     <p>정렬순</p>
-                    <input type="checkbox" name="order-sort" value="orderNo-A">
+                    <input type="radio" name="order-sort" value="orderNo-A">
                     <label for="orderNo-A">주문번호 오름차순</label><br>
-                    <input type="checkbox" name="order-sort" value="orderNo-D">
+                    <input type="radio" name="order-sort" value="orderNo-D">
                     <label for="orderNo-D">주문번호 내림차순</label><br>
-                    <input type="checkbox" name="order-sort" value="totalprice-A">
+                    <input type="radio" name="order-sort" value="totalprice-A">
                     <label for="totalprice-A">주문총액 오름차순</label><br>
-                    <input type="checkbox" name="order-sort" value="totalprice-D">
+                    <input type="radio" name="order-sort" value="totalprice-D">
                     <label for="totalprice-D">주문총액 내림차순</label><br>
-                    <input type="checkbox" name="order-sort" value="orderMemberId-A">
+                    <input type="radio" name="order-sort" value="orderMemberId-A">
                     <label for="orderMemberId-A">주문아이디 오름차순</label><br>
-                    <input type="checkbox" name="order-sort" value="orderMemberId-D">
+                    <input type="radio" name="order-sort" value="orderMemberId-D">
                     <label for="orderMemberId-D">주문아이디 내림차순</label>
                 </div>
-                <div id="order-state" class="sorting">
+                <div id="order-state">
                     <p>주문상태</p>
-                    <input type="checkbox" name="order-state" value="before">
-                    <label for="">결제완료</label><br>
-                    <input type="checkbox" name="order-state" value="delivery">
-                    <label for="">배송중</label><br>
-                    <input type="checkbox" name="order-state" value="finish">
+                    <input type="radio" name="order-state" value="before">
+                    <label for="">배송 전</label><br>
+                    <input type="radio" name="order-state" value="delivery">
+                    <label for="">배송 중</label><br>
+                    <input type="radio" name="order-state" value="finish">
                     <label for="">배송완료</label>
                 </div>
             </div>        
@@ -128,8 +129,14 @@ window.addEventListener('load', () => {
 						<td><%= order.getOrderNo() %></td>
 						<td><%= order.getOrderMemberId() %></td>
 						<td><%= order.getOrderDate() %></td>
-						<td><%= order.getTotalPrice() %></td>
-						<td><%= order.getOrderState() %></td>
+						<td style="color: #820000;">&#8361;<%= order.getTotalPrice() %></td>
+						<td>
+							<select class="order-state" data-order-no="<%= order.getOrderNo() %>">
+								<option value="<%= OrderState.B %>" <%= order.getOrderState() == OrderState.B ? "selected" : "" %>>B (배송 전)</option>
+								<option value="<%= OrderState.D%>" <%= order.getOrderState() == OrderState.D ? "selected" : "" %>>D (배송 중)</option>
+								<option value="<%= OrderState.F %>" <%= order.getOrderState() == OrderState.F ? "selected" : "" %>>F (배송 완료)</option>
+							</select>
+						</td>
 					</tr>
 			<%
 				  }			
@@ -140,4 +147,29 @@ window.addEventListener('load', () => {
 		<div id="pagebar">
 			<%= request.getAttribute("pagebar") %>
 		</div>
+		</section>
+<form action="<%= request.getContextPath() %>/admin/adminUpdateOrderState" name="orderStateUpdateFrm" method="POST">
+	<input type="hidden" name="orderNo" />
+	<input type="hidden" name="orderState" />
+</form>
+<script>
+document.querySelectorAll(".order-state").forEach((select) => {
+	select.addEventListener('change', (e) => {
+		const orderNo = e.target.dataset.orderNo;
+		const orderState = e.target.value;
+		
+		if(confirm(`[\${orderNo}]의 배송 상태를 \${orderState}로 변경하시겠습니까?`)){			
+			const frm = document.orderStateUpdateFrm;
+			frm.orderNo.value = orderNo;
+			frm.orderState.value = orderState;
+			frm.submit();
+		}
+		else {
+			// e.target(select)하위의 selected 속성이 있는 option태그
+			e.target.querySelector("option[selected]").selected = true;
+		}
+		
+	});
+});
+</script> 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
