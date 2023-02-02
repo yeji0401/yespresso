@@ -178,8 +178,8 @@ public class ReviewDao {
 		review.setReviewContent(rset.getString("review_content"));
 		review.setReviewRating(rset.getInt("review_rating"));
 		review.setReviewDate(rset.getDate("review_date"));
+		review.setProductName(rset.getString("product_name"));
 		return review;
-
 	}
 
 	public int selectTotalCount(Connection conn) {
