@@ -79,7 +79,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.KOREA);
 				</tr>
 			</tfoot>
 		</table>
-		 <input type="button" value="결제하기" id="pay" onclick="location.href = '<%= request.getContextPath() %>';" tabindex="4"></td>
+		 <input type="submit" value="결제하기" id="pay" tabindex="4"></td>
 	</form>
 
 

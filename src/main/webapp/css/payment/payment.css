@@ -44,17 +44,25 @@ table#tbl-member-info td {
 }
 
 table#tbl-cart {
-	border-collapse: collapse;
+	border-spacing: 10px;
 }
 
 table#tbl-cart th {
-	width: 150px;
+	width: 160px;
 	margin-top: 10px;
 	padding: 10px;
 	text-align: center;
 	background-color: lightgray;
-	border-spacing: 10px;
 }
 
-input {font-family: 'Gothic A1', sans-serif; display: block; height: 40px; background-color: white; border: 3px solid #E8EAE6; border-radius: 50%; font-weight: bold;}
-input:hover { border: 5px solid #A6BB8D;}
+table#tbl-cart td {
+	text-align: center;
+}
+
+#total {
+	color: #820000;
+	font-weight: bold;
+}
+
+button {font-family: 'Gothic A1', sans-serif; display: block; height: 40px; background-color: white; border: 3px solid #E8EAE6; border-radius: 50%; font-weight: bold;}
+button:hover { border: 5px solid #A6BB8D;}

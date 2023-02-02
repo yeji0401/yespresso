@@ -1,3 +1,5 @@
+<%@page import="java.text.*"%>
+<%@page import="java.util.Locale"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sh.yespresso.cart.model.dto.CartProduct"%>
 <%@page import="java.util.List"%>
@@ -15,6 +17,8 @@
 	}
 	int tax = 0;
 	int total = 0;
+	DecimalFormat df = new DecimalFormat("₩###,###");
+	NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.KOREA);
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <!-- 결제용 payment.css link -->
@@ -41,7 +45,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><%=loginMember.getAddress()%></td>
+					<td colspan="2"><%=loginMember.getAddress() == null ? " " : loginMember.getAddress() %></td>
 				</tr>
 				<tr>
 					<td><img
@@ -54,7 +58,7 @@
 					<th colspan="2">청구 정보</th>
 				</tr>
 				<tr>
-					<td colspan="2"><%=loginMember.getAddress()%></td>
+					<td colspan="2"><%=loginMember.getAddress() == null ? " " : loginMember.getAddress() %></td>
 				</tr>
 				<tr>
 					<td><img
@@ -90,35 +94,35 @@
 					sumPrice = sumPrice + totalPrice;
 					int totalAmount = myCartList.get(i).getAmount() + myCartList.get(i).getAmount();
 					sumAmount = sumAmount + totalAmount;
-					tax = (int) (totalPrice * 0.1);
-					total = totalPrice + tax;
+					tax = (int) (sumPrice * 0.1);
+					total = sumPrice + tax;
 					
 				%>
 					<tr>
 						<td><%=myCartList.get(i).getProductName()%></td>
-						<td><%=myCartList.get(i).getProductPrice()%></td>
+						<td><%=df.format(myCartList.get(i).getProductPrice())%></td>
 						<td><%=myCartList.get(i).getAmount()%></td>
-						<td><%=totalPrice%></td>
+						<td style="padding: 0px 10px 0px 0px; text-align: right;"><%=df.format(totalPrice)%></td>
 					</tr>
 					<%
 					}
 					}
 					%>
+					<tr style="height: 50px;"></tr>
 					<tr>
 						<td>소계</td>
-						<td colspan="3"><%= sumPrice %></td>
+						<td colspan="3" style="padding: 0px 10px 0px 0px; text-align: right;"><%=df.format(sumPrice)%></td>
 					</tr>
 					<tr>
 						<td>부가세</td>
-						<td colspan="3"><%= tax %></td>
+						<td colspan="3" style="padding: 0px 10px 0px 0px; text-align: right;"><%=df.format(tax)%></td>
 					</tr>
 					<tr>
-						<td>전체 합계</td>
-						<td colspan="3"><%= total %></td>
+						<td style="font-weight: bold;">전체 합계</td>
+						<td colspan="3" id="total" style="padding: 0px 10px 0px 0px; text-align: right;"><%=df.format(total)%>​​</td>
 					</tr>
 					<tr>
-						<td colspan="4"><input type="submit" value="결제 진행하기"
-							onclick="complete()" /></td>
+						<td colspan="4"><button type="submit" onclick="complete()">결제 진행하기</button></td>
 					</tr>
 				</tbody>
 			</table>
@@ -127,13 +131,11 @@
 </section>
 <script>
 function complete() {
-	
 	if(window.confirm("결제 진행하시겠습니까?")) {
 		alert('주문해 주셔서 감사합니다.');
 	    location.href = "<%=request.getContextPath()%>";
 	} else {
-		location.href = "<%=request.getContextPath()%>
-	/payment/payment";
+		location.href = "<%=request.getContextPath()%>/payment/payment";
 		}
 
 	}
