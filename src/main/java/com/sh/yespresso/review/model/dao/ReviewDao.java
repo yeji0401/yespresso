@@ -31,7 +31,7 @@ public class ReviewDao {
 	/**
 	 * hj start
 	 */
-	// DQL 
+	// DQL 제품에 해당하는 리뷰 목록
 	public List<Review> selectReviewByPdNo(Connection conn, Map<String, Object> param) {
 		// select * from (select row_number() over(order by REVIEW_NO desc) rnum, r.* from REVIEW r where REVIEW_PRODUCT_NO = ?) where rnum between ? and ?;
 		String sql = prop.getProperty("selectReviewByPdNo"); 
@@ -64,6 +64,26 @@ public class ReviewDao {
 
 		return reviewList;
 	}
+	
+	// DQL 제품에 해당하는 리뷰 개수
+	public int selectTotalCountByPdNo(Connection conn, String pdNo) {
+		String sql = prop.getProperty("selectTotalCountByPdNo");
+		int totalCount = 0;
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, pdNo);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				if (rset.next()) {
+					totalCount = rset.getInt(1);
+				}
+			}
+		} catch (Exception e) {
+			throw new ReviewException("제품별 리뷰 수 조회 오류!", e);
+		}
+		return totalCount;
+	}
+
 	
 	/**
 	 * hj end
