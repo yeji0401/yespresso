@@ -22,7 +22,6 @@ int sumPrice = 0;
 int sumAmount = 0;
 for (int i = 0; i < myCartList.size(); i++) {
 	cartProduct = myCartList.get(i);
-
 }
 DecimalFormat df = new DecimalFormat("₩###,###");
 NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.KOREA);
@@ -49,17 +48,17 @@ NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.KOREA);
 				</tr>
 				<%
 				} else {
-				for (int i = 0; i < myCartList.size(); i++) {
-					int totalPrice = myCartList.get(i).getProductPrice() * myCartList.get(i).getAmount();
-					// 소계 = 가격 * 수량
-					sumPrice = sumPrice + totalPrice;
-					int totalAmount = myCartList.get(i).getAmount() + myCartList.get(i).getAmount();
-					sumAmount = sumAmount + totalAmount;
+					for (int i = 0; i < myCartList.size(); i++) {
+						int totalPrice = myCartList.get(i).getProductPrice() * myCartList.get(i).getAmount();
+						// 소계 = 가격 * 수량
+						sumPrice = sumPrice + totalPrice;
+						int totalAmount = myCartList.get(i).getAmount() + myCartList.get(i).getAmount();
+						sumAmount = sumAmount + totalAmount;
 				%>
 				<tr>
 					<td><%=myCartList.get(i).getProductName()%></td>
-					<td><%=df.format(myCartList.get(i).getProductPrice())%></td>
-					<td><%=myCartList.get(i).getAmount()%></td>
+						<td><%=df.format(myCartList.get(i).getProductPrice())%></td>
+						<td><%=myCartList.get(i).getAmount()%></td>
 					<td><%=df.format(totalPrice)%></td>
 				</tr>
 				<%
@@ -70,8 +69,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.KOREA);
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="2">총액</td>
-					<td><%=sumAmount%></td>
+					<td colspan="3">총액</td>
+					<%-- <td><%=sumAmount%></td> --%>
 					<td><%=df.format(sumPrice)%></td>
 				</tr>
 				<tr>

@@ -3,13 +3,14 @@
 body {
 	background-color: #DDD6C9;
 	font-family: 'Montserrat', sans-serif;
+	display : flex;
 }
 
-/****** 마이페이지 메뉴 스타일 ******/
+***** 마이페이지 메뉴 스타일 *****
 div.my-page-menu-block {
 	font-family: 'Gothic A1', sans-serif;
-	        font-size: 32px;
-        font-weight: 400;
+	font-size: 32px;
+	font-weight: 400;
 	width: 640px;
 	height: 640px;
 	margin-top: 10%;
@@ -18,27 +19,25 @@ div.my-page-menu-block {
 div.my-page-menu-block * {
 	display: inline-block;
 	background-color: #A6BB8D;
-	padding : 0px;
-	margin : 0px;
-	border-radius : 30px 30px 30px 30px;
-
+	padding: 0px;
+	margin: 0px;
+	border-radius: 30px 30px 30px 30px;
 }
 
 div.my-page-menu-block * :hover {
 	background-color: #3C6255;
-
 }
-div.my-page-menu-block div {
+
+div.my-page-menu-block div a {
 	text-align: center;
-	margin-left:auto; 
-	margin-right:auto;
+	margin-left: auto;
+	margin-right: auto;
 	width: 300px;
 	height: 300px;
+		font-size: 32px;
 	color: white;
 	text-decoration: none;
 	display: flex;
-    align-items: center;
-    justify-content: center;
+	align-items: center;
+	justify-content: center;
 }
-
-
