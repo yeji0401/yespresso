@@ -123,6 +123,22 @@ public class MemberDao {
 		return result;
 	}
 	
+	public int updateOrderState(Connection conn, String orderNo, String orderState) {
+		String sql = prop.getProperty("updateOrderState");
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, orderState);
+			pstmt.setString(2, orderNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("관리자 배송 상태 수정 오류", e);
+		}
+		
+		return result;
+	}
+	
 	public int deleteMember(Connection conn, String memberId) {
 		int result = 0;
 		String sql = prop.getProperty("deleteMember");
@@ -132,7 +148,7 @@ public class MemberDao {
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			throw new MemberException("회원 탈퇴 오류", e);
+			throw new MemberException("회원 삭제 오류", e);
 		}
 
 		return result;

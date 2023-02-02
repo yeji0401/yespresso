@@ -71,6 +71,7 @@ public class ProductService {
 	/**
 	 * yeji start
 	 */
+	/* DQL : 모든 제품 정보 출력 */
 	public List<Product> selectAllProduct(Map<String, Object> param) {
 		Connection conn = getConnection();
 		List<Product> products = productDao.selectAllProduct(conn, param);
@@ -93,6 +94,28 @@ public class ProductService {
 	}
 	
 	public int insertProduct(Product product) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = productDao.insertProduct(conn, product);
+			commit(conn);			
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+	
+	public Product selectProduct(String productNo) {
+		Connection conn = getConnection();
+		Product product = productDao.selectProduct(conn, productNo);
+		close(conn);
+		return product;
+	}
+	
+	public int updateProduct(Product product) {
 		Connection conn = getConnection();
 		int result = 0;
 		try {

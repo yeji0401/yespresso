@@ -21,7 +21,7 @@ public class OrdersDao {
 
 	public OrdersDao() {
 		System.out.println("path 가져오기 시도 중");
-		String path = OrdersDao.class.getResource("/sql/order/orders-query.properties").getPath();
+		String path = OrdersDao.class.getResource("/sql/orders/orders-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch (IOException e) {
