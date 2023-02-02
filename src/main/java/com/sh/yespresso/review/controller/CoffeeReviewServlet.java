@@ -40,20 +40,19 @@ public class CoffeeReviewServlet extends HttpServlet {
 		Map<String, Object> param = new HashMap<>();
 		param.put("page", page);
 		param.put("limit", limit);
-		// System.out.println("param=" + param);
 		
 		// 1. 사용자입력값 - pdNo 받아오기
 		String pdNo = request.getParameter("pdNo");
-		// System.out.println("리뷰에서가져옴=" + pdNo);
 		param.put("pdNo", pdNo); //param에 제품번호도 넣어줌
+		System.out.println("param=" + param);
 		
 		// 2. 업무로직 - 받아온 pdNo로 리뷰테이블에서 리뷰 가져오기
 		// select * from REVIEW where REVIEW_PRODUCT_NO = ?(pdNo)
 		List<Review> reviewList = reviewService.selectReviewByPdNo(param);
-		// System.out.println("리뷰목록=" + reviewList);
+		 System.out.println("리뷰목록=" + reviewList);
 		
 		// 페이지바 보내주기
-		int totalCount = reviewService.selectTotalCountByPdNo(pdNo);
+		int totalCount = reviewService.selectRvCountByPdNo(pdNo);
 		String url = request.getRequestURI();
 		String pagebar = YespressoUtils.getPagebar(page, limit, totalCount, url);
 		

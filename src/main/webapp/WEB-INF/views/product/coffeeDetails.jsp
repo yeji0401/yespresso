@@ -70,6 +70,7 @@ section#product-container{
 					<%= pdType %>
 					</span>
 					<span class="pd-name"><%= product.getProductName() %></span>
+						
 				</div>
 		</tr>
 		<tr class="product-detail-wrap">
@@ -79,25 +80,19 @@ section#product-container{
 				</div>
 			</td>
 		</tr>
-		
 		<tr class="product-review-wrap">
 			<td id="review-wrap"></td>
 		</tr>
-		<tr class="product-question-wrap">
-			<td id="question-wrap">
-		<% if(loginMember != null){ %>	
-		<input type="button" value="글쓰기" id="btn-add"
-		onclick="location.href = '<%= request.getContextPath() %>/review/reviewEnroll';" />	
-		<% } %>	
-			</td>
-		</tr>
 	</table>
+		<div class="product-question-wrap">
+			<div id="question-wrap"></div>
+		</div>
 </section>
 <script>
-
 window.addEventListener('load', () => {
 	getReview("<%= product.getProductNo() %>");
 	getQuestion("<%= product.getProductNo() %>");
+
 });
 
 // 비동기로 리뷰 가져오기

@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/product/productReview.css" />
 <%
 	List<Question> questionList = (List<Question>) request.getAttribute("questionList");
+
 %>
 <style>
 #product-question-container {
@@ -48,6 +49,9 @@ colgroup {
 	font-weight: bold;
 	display: block;
 }
+tr.level2 {
+	background-color: gray;
+}
 </style>
 
 <section id="product-question-container">
@@ -69,36 +73,41 @@ colgroup {
 		</thead>
 		<tbody>
 		<% if(!questionList.isEmpty()){
-			int qNo = questionList.size();
+			int qNo = 0;
 			for(int i = 0; i < questionList.size(); i++){
-				String filterId = questionList.get(i).getQuestionMemberId().substring(0,3) + "*****";
+				if(questionList.get(i).getQuestionLevel() == 1){
+					String filterId = questionList.get(i).getQuestionMemberId().substring(0,3) + "*****";
+					qNo++;
 		%>
-			<tr>
-				<td><%= qNo %></td>
-				<td class="board_tit">
-					<span class="qna-title"><%= questionList.get(i).getQuestionTitle() %></span>
-					<span class="qna-cont"><%= questionList.get(i).getQuestionContent() %></span>
-				</td>
-				<td><%= filterId %></td>
-				<td><%= questionList.get(i).getQuestionDate() %></td>
-			</tr>
-
-<%
-			qNo--;
+					<tr class="level1">
+						<td><%= qNo %></td>
+						<td class="board_tit">
+							<span class="qna-title"><%= questionList.get(i).getQuestionTitle() %></span>
+							<span class="qna-cont"><%= questionList.get(i).getQuestionContent() %></span>
+						</td>
+						<td><%= filterId %></td>
+						<td><%= questionList.get(i).getQuestionDate() %></td>
+					</tr>
+<%          
+			} else { 
+%>
+					<tr class="level2">
+						<td></td>
+						<td class="board_tit">
+							<span class="qna-cont"><%= questionList.get(i).getQuestionContent() %></span>
+						</td>
+						<td>관리자</td>
+						<td><%= questionList.get(i).getQuestionDate() %></td>
+					</tr>
+<% 
+			}
 		} // for문 끝
 	} // if문 끝
 %>	
 		</tbody>
 	</table>	
-	
-	<%
-		//if(!comments.isEmpty()){}
-	%>
+
 	<div id='pagebar'>
 		<%= request.getAttribute("pagebar") %>
 	</div>
 </section>
-
-<script>
-
-</script>

@@ -29,9 +29,9 @@ public class ReviewService {
 	}
 	
 	// DQL 제품에 해당하는 리뷰 수
-	public int selectTotalCountByPdNo(String pdNo) {
+	public int selectRvCountByPdNo(String pdNo) {
 		Connection conn = getConnection();
-		int totalCount = reviewDao.selectTotalCountByPdNo(conn, pdNo);
+		int totalCount = reviewDao.selectRvCountByPdNo(conn, pdNo);
 		close(conn);
 		return totalCount;
 	}
