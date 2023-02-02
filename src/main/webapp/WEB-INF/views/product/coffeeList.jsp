@@ -72,16 +72,6 @@ document.querySelectorAll("#pagebar div").forEach((page) => {
 		const page = e.target;
 		console.log(page.innerText);
 		getPage(Number(page.innerText)); 
-		
-
-//		const pbtn = document.querySelectorAll(".page-btn");
-//		for(let i = 0; i < pbtn.length; i++){
-//			if(page.innerText == pbtn[i].innertext){
-//				pbtn[i].classList.add("clicked");
-//			} else {
-//				pbtn[i].classList.remove("clicked");
-//			}
-//		}
 	});
 });
 
@@ -176,8 +166,6 @@ const getPage = (page) => {
 				}
 			}
 			
-			
-
 		},
 		error : console.log
 	});
