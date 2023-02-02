@@ -21,7 +21,7 @@ for (int i = 0; i < myCartList.size(); i++) {
 %>
 <section id=cart-container>
 
-	<form name="cartFrm" method="get" action="<%=request.getContextPath()%>/cart/cart">
+	<form name="cartFrm" method="get" action="<%=request.getContextPath()%>/payment/payment">
 
 		<table id="tbl-cart">
 			<tr>
