@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.sh.yespresso.coffee.model.service.CoffeeService;
 import com.sh.yespresso.product.model.dto.Aroma;
 import com.sh.yespresso.product.model.dto.CupSize;
 import com.sh.yespresso.product.model.dto.Product;
