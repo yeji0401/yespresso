@@ -70,13 +70,12 @@ public class CartDao {
 
 	private Cart handleCartResultSet(ResultSet rset) throws SQLException {
 		Cart cart = new Cart();
-		cart.setCartNo(rset.getInt("cart_list_no"));
+		cart.setCartNo(rset.getInt("cart_no"));
 		cart.setProductName(rset.getString("product_name"));
 		cart.setProductPrice(rset.getInt("product_price"));
-		cart.setCartMemberId(rset.getString("cart_list_member_id"));
+		cart.setCartMemberId(rset.getString("cart_member_id"));
 		cart.setCartProductNo(rset.getString("product_no"));
 		cart.setAmount(rset.getInt("amount"));
-		cart.setTotalPrice(rset.getInt("total_price"));
 		return cart;
 	}
 
