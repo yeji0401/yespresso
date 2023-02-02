@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sh.yespresso.common.YespressoUtils;
+import com.google.gson.Gson;
 import com.sh.yespresso.product.model.dto.Product;
 import com.sh.yespresso.product.model.service.ProductService;
 
 /**
- * Servlet implementation class MachineListServlet
+ * Servlet implementation class AccMorePageServlet
  */
-@WebServlet("/product/machineList")
-public class MachineListServlet extends HttpServlet {
+@WebServlet("/acc/morePage")
+public class AccMorePageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService productService = new ProductService();
 
@@ -27,18 +27,22 @@ public class MachineListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		// 1. 업무로직 - 전체게시물수 조회 -> 전체페이지수 구하기
-		// 전체 게시물수 조회
-		int totalCount = productService.getTotalCntById("MA");
-		// 전체 페이지수 조회
+		// 1. 사용자입력값 처리
+		int page = Integer.parseInt(request.getParameter("page"));
 		int limit = 12;
-		int totalPage = (int) Math.ceil((double) totalCount / limit);
-		
-		// 2. 응답처리
-		request.setAttribute("totalPage", totalPage);
-		request.getRequestDispatcher("/WEB-INF/views/product/machineList.jsp") // jsp를 view단으로 사용해 html응답
-			.forward(request, response);
-	}
 
+		int start = (page-1) * limit + 1;
+		int end = page * limit;
+		Map<String, Integer> param = new HashMap<>();
+		param.put("start", start);
+		param.put("end", end);
+		
+		// 2. 업무로직
+		List<Product> accList = productService.selectAccList(param);
+//		System.out.println("coffeeList= " + coffeeList);
+		
+		// 3. 응답처리 - json
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(accList, response.getWriter());
+	}
 }
