@@ -55,7 +55,15 @@ public class QuestionDao {
 			try(ResultSet rset = pstmt.executeQuery()){
 				
 				while(rset.next()) {
-					Question question = handleQuestionResultSet(rset);
+					Question question = new Question();
+					question.setQuestionNo(rset.getInt("question_no"));
+					question.setQuestionLevel(rset.getInt("question_level"));
+					question.setQuestionRefNo(rset.getInt("question_ref_no"));
+					question.setQuestionMemberId(rset.getString("question_member_id"));
+					question.setQuestionProductNo(rset.getString("question_product_no"));
+					question.setQuestionTitle(rset.getString("question_title"));
+					question.setQuestionContent(rset.getString("question_content"));
+					question.setQuestionDate(rset.getDate("question_date"));
 					questionList.add(question);					
 				}
 			}
