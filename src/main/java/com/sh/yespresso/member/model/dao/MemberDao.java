@@ -87,7 +87,7 @@ public class MemberDao {
 		List<Member> members = new ArrayList<>();
 		String searchType = param.get("searchType"); // member_id | member_name | gender
 		String searchKeyword = param.get("searchKeyword");
-		String sql = prop.getProperty("searchMember"); // select * from member where # like ?
+		String sql = prop.getProperty("searchMember"); // select * from MEMBER where # like ? 
 		sql = sql.replace("#", searchType);
 		System.out.println(sql);
 		
@@ -108,7 +108,7 @@ public class MemberDao {
 	}
 	
 	public int updateMemberRole(Connection conn, String memberId, String memberRole) {
-		String sql = prop.getProperty("updateMemberRole");
+		String sql = prop.getProperty("updateMemberRole"); // update MEMBER set FK_MEMBER_ROLE_ID = ? where MEMBER_ID = ?
 		int result = 0;
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -124,7 +124,7 @@ public class MemberDao {
 	}
 	
 	public int updateOrderState(Connection conn, String orderNo, String orderState) {
-		String sql = prop.getProperty("updateOrderState");
+		String sql = prop.getProperty("updateOrderState"); // update ORDERS set ORDER_STATE = ? where ORDER_NO = ?
 		int result = 0;
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -141,7 +141,7 @@ public class MemberDao {
 	
 	public int deleteMember(Connection conn, String memberId) {
 		int result = 0;
-		String sql = prop.getProperty("deleteMember");
+		String sql = prop.getProperty("myAccountDelete");
 
 		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
 			pstmt.setString(1, memberId);

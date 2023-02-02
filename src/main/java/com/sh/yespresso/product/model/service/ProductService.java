@@ -79,6 +79,7 @@ public class ProductService {
 		return products;
 	}
 	
+	/* DQL : 전체 제품 개수 */
 	public int selectTotalCount() {
 		Connection conn = getConnection();
 		int totalCount = productDao.selectTotalCount(conn);
@@ -86,6 +87,7 @@ public class ProductService {
 		return totalCount;
 	}
 	
+	/* DQL : 제품 검색 */
 	public List<Product> searchProduct(Map<String, String> param) {
 		Connection conn = getConnection();
 		List<Product> products = productDao.searchProduct(conn, param);
@@ -93,6 +95,7 @@ public class ProductService {
 		return products;
 	}
 	
+	/* DML : 제품 등록 */
 	public int insertProduct(Product product) {
 		Connection conn = getConnection();
 		int result = 0;
@@ -119,7 +122,22 @@ public class ProductService {
 		Connection conn = getConnection();
 		int result = 0;
 		try {
-			result = productDao.insertProduct(conn, product);
+			result = productDao.updateProduct(conn, product);
+			commit(conn);			
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+	
+	public int deleteProduct(String productNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = productDao.deleteProduct(conn, productNo);
 			commit(conn);			
 		} catch (Exception e) {
 			rollback(conn);

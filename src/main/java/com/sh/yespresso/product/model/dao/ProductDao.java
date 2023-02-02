@@ -354,8 +354,7 @@ public class ProductDao {
 	
 	public int updateProduct(Connection conn, Product product) {
 		
-		// insert into PRODUCT values 
-		// ('p' || lpad(seq_product_no.nextval, 4, '0'), ?, ?, ?, ?, default, default, 'p' || lpad(seq_product_no.nextval, 4, '0') || '.png', ?, ?, ?, ?, ?)
+		// update PRODUCT set FK_CATEGORY_ID = ?, PRODUCT_NAME = ?, PRODUCT_PRICE = ?, PRODUCT_STOCK = ?, TYPE = ?, AROMA = ?, ACIDITY = ?, ROASTING = ?, CUP_SIZE = ? WHERE PRODUCT_NO = ?
 		String sql = prop.getProperty("updateProduct"); 
 		int result = 0;
 		
@@ -369,11 +368,28 @@ public class ProductDao {
 			pstmt.setInt(7, product.getAcidity());
 			pstmt.setInt(8, product.getRoasting());
 			pstmt.setString(9, product.getCupSize().name());
+			pstmt.setString(10, product.getProductNo());
 			
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			throw new ProductException("제품 등록 오류", e);
+		}
+		return result;
+	}
+	
+	public int deleteProduct(Connection conn, String productNo) {
+		
+		String sql = prop.getProperty("deleteProduct"); // delete from PRODUCT where PRODUCT_NO = ?
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, productNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new ProductException("제품 삭제 오류", e);
 		}
 		return result;
 	}

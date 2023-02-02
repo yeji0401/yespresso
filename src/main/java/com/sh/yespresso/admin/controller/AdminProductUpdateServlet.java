@@ -35,6 +35,7 @@ public class AdminProductUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자입력 처리
 		String productNo = request.getParameter("productNo");
+		System.out.println(productNo);
 		
 		// 2. 업무로직
 		Product product = productService.selectProduct(productNo);
@@ -89,8 +90,7 @@ public class AdminProductUpdateServlet extends HttpServlet {
 			int result = productService.updateProduct(product);
 			
 			// 3. 응답 처리
-			response.setContentType("application/json; charset=utf-8");
-			new Gson().toJson(product, response.getWriter());
+			response.sendRedirect(request.getContextPath() + "/admin/adminProductList");
 			
 			
 		} catch (Exception e) {
