@@ -21,7 +21,7 @@ public class OrdersDao {
 
 	public OrdersDao() {
 		System.out.println("path 가져오기 시도 중");
-		String path = OrdersDao.class.getResource("/sql/order/orders-query.properties").getPath();
+		String path = OrdersDao.class.getResource("/sql/orders/orders-query.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch (IOException e) {
@@ -103,7 +103,7 @@ public class OrdersDao {
 	 */
 	// 마이페이지 - 주문리스트 보기.
 	public List<Orders> selectMyOrdersList(Connection conn, Map<String, Object> param, String orderMemberId) {
-		// selectMyOrdersList = select * from (select row_number() over(order by no
+		// selectMyOrdersList = select * from (select row_number() over(order by order_no
 		// desc) rnum, b.* from orders o where order_member_id = ?) where rnum between ?
 		// and ?
 		String sql = prop.getProperty("selectMyOrdersList");

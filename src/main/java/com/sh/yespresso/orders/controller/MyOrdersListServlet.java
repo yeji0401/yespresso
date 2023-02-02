@@ -31,27 +31,31 @@ public class MyOrdersListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 1. 사용자입력값 처리
+		// 1. 사용자입력값 처리 : id 가져오기
+				HttpSession session = request.getSession();
+				Member loginMember = (Member) session.getAttribute("loginMember");
+				String orderMemberId = loginMember.getMemberId();
+				
+				// 1. 사용자입력값 처리 : 페이지바.
 				final int limit = 5;
 				int page = 1;
 				try {
 					page = Integer.parseInt(request.getParameter("page"));
-				} catch (NumberFormatException e) {}
-				
+				} catch (NumberFormatException e) {
+				}
+
 				Map<String, Object> param = new HashMap<>();
-				HttpSession session = request.getSession();
-				Member loginMember = (Member) session.getAttribute("loginMember");
-				String orderMemberId = loginMember.getMemberId();
 				param.put("page", page);
 				param.put("limit", limit);
+
 				
 				// 2. 업무로직
 				// a. db에서 목록조회(페이징)
 				List<Orders> myOrdersList = ordersService.selectMyOrdersList(param, orderMemberId);
 				System.out.println(myOrdersList);
-				// b. 페이지바
 				int totalCount = ordersService.selectTotalCount(); // select count(*) from orders
 				System.out.println(totalCount);
+				// b. 페이지바
 				
 				String url = request.getRequestURI();
 				String pagebar = YespressoUtils.getPagebar(page, limit, totalCount, url);
@@ -60,6 +64,7 @@ public class MyOrdersListServlet extends HttpServlet {
 				// 3. view단 위임.
 				request.setAttribute("myOrdersList", myOrdersList);
 				request.setAttribute("pagebar", pagebar);
+				request.setAttribute("orderMemberId", orderMemberId);
 				request.getRequestDispatcher("/WEB-INF/views/myPage/myOrdersList.jsp").forward(request, response);
 
 	}

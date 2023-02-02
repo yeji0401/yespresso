@@ -4,15 +4,16 @@
 <%@page import="com.sh.yespresso.member.model.dto.Member"%>
 <%@page import="com.sh.yespresso.cart.model.dto.Cart"%>
 <%@page import="com.sh.yespresso.cart.model.dto.CartProduct"%>
-<%@page import="com.sh.yespresso.product.model.dto.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <%
+request.setCharacterEncoding("UTF-8");
 String cartMemberId = (String) request.getAttribute("cartMemberId");
 List<CartProduct> myCartList = (List<CartProduct>) request.getAttribute("myCartList");
 CartProduct cartProduct = new CartProduct();
-int sum = 0;
+int sumPrice = 0;
+int sumAmount = 0;
 for (int i = 0; i < myCartList.size(); i++) {
 	cartProduct = myCartList.get(i);
 
@@ -20,18 +21,15 @@ for (int i = 0; i < myCartList.size(); i++) {
 %>
 <section id=cart-container>
 
-	<form name="cartFrm" method="post" action="<%=request.getContextPath()%>/myPage/myCartList">
+	<form name="cartFrm" method="get" action="<%=request.getContextPath()%>/cart/cart">
 
 		<table id="tbl-cart">
-			<thead>
-				<tr>
-					<h2>나의 카트</h2>
-					<th>제품명</th>
-					<th>개별 단가</th>
-					<th>수량</th>
-					<th>합계</th>
-					<th>삭제</th>
-				</tr>
+			<tr>
+				<th>제품명</th>
+				<th>개별 단가</th>
+				<th>수량</th>
+				<th>합계</th>
+			</tr>
 			</thead>
 			<tbody>
 				<%
@@ -43,19 +41,19 @@ for (int i = 0; i < myCartList.size(); i++) {
 				</tr>
 				<%
 				} else {
-				for (CartProduct carts : myCartList) {
-					int total = carts.getProductPrice() * carts.getAmount();
+				for (int i = 0; i < myCartList.size(); i++) {
+					int totalPrice = myCartList.get(i).getProductPrice() * myCartList.get(i).getAmount();
 					// 소계 = 가격 * 수량
-					sum = sum + total;
+					sumPrice = sumPrice + totalPrice;
+					int totalAmount = myCartList.get(i).getAmount() + myCartList.get(i).getAmount();
+					sumAmount = sumAmount + totalAmount;
 				%>
 				<tr>
-					<td><%=carts.getProductName()%></td>
-					<td><%=carts.getProductPrice()%></td>
-					<td><%=carts.getAmount()%></td>
-					<td><%=total%></td>
-					<td><input type="button" onclick="deleteCart();" value="삭제" /></td>
+					<td><%=myCartList.get(i).getProductName()%></td>
+					<td><%=myCartList.get(i).getProductPrice()%></td>
+					<td><%=myCartList.get(i).getAmount()%></td>
+					<td><%=totalPrice%></td>
 				</tr>
-
 				<%
 				}
 				}
@@ -63,24 +61,19 @@ for (int i = 0; i < myCartList.size(); i++) {
 				<tr>
 					<th>총액</th>
 					<th></th>
-					<th></th>
-					<th><%=sum%></th>
+					<th><%=sumAmount%></th>
+					<th><%=sumPrice%></th>
 					<th></th>
 				</tr>
 			</tbody>
 		</table>
-		<input type="submit" value="결제하기" />
+		<button onclick="location.href='index.jsp'">결제하기</button>
 	</form>
+
+
+
 </section>
 
 
-
-<form action="<%=request.getContextPath()%>/cart/deleteMyCartList" method="POST" name="deleteMyCartListFrm"></form>
-<script>
-const deleteCart = () => {
-	if(confirm('정말 삭제하시겠습니까?')){
-		document.deleteMyCartListFrm.submit();
-	}
-};
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

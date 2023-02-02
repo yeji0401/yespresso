@@ -1,16 +1,19 @@
 <%@page import="com.sh.yespresso.review.model.dto.Review"%>
+<%@page import="java.util.Arrays"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
 List<Review> myReviewsList = (List<Review>) request.getAttribute("myReviewsList");
-
-String reviewMemberId = loginMember.getMemberId();
+request.setCharacterEncoding("UTF-8");
+String reviewMemberId = (String) request.getAttribute("reviewMemberId");
+Review review = new Review();
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/myReviewsList.css" />
 <section id="review-container">
 	<h2>게시판</h2>
-
+<section id="review-container">
 	<table id="tbl-review-list">
 		<thead>
 			<tr>
@@ -20,19 +23,19 @@ String reviewMemberId = loginMember.getMemberId();
 				<th>제목</th>
 				<th>작성일</th>
 				<th>첨부파일</th>
-				<th>삭제</th>
 			</tr>
 		</thead>
 		<tbody>
 			<%
 			if (myReviewsList.isEmpty()) {
+				myReviewsList = new ArrayList<Review>();
 			%>
 			<tr>
 				<td colspan="5">조회된 리뷰가 없습니다.</td>
 			</tr>
 			<%
 			} else {
-			for (Review review : myReviewsList) {
+			for (Review reviews : myReviewsList) {
 			%>
 			<tr>
 				<td><%=review.getReviewNo()%></td>
@@ -53,6 +56,7 @@ String reviewMemberId = loginMember.getMemberId();
 			%>
 		</tbody>
 	</table>
+	</section>
 
 	<div id='pagebar'>
 		<%=request.getAttribute("pagebar")%>
@@ -60,4 +64,3 @@ String reviewMemberId = loginMember.getMemberId();
 </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 
-<a href="<%=%>/myPage/myReviewView">내 리뷰 보기(삭제버튼 추가)</a>

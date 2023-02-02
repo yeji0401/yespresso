@@ -25,10 +25,12 @@ public class MyCartDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 1. 사용자입력값 처리
-		int cartProductNo = Integer.parseInt(request.getParameter("cartProductNo"));
-		System.out.println("cartProductNo = " + cartProductNo);
+		int cartListNo = Integer.parseInt(request.getParameter("cartListNo"));
+//		System.out.println("cartListNo = " + cartListNo);
 
-		int result = cartService.deleteMyCartListbyProductNo(cartProductNo);
+		int result = cartService.deleteMyCartListbyCartListNo(cartListNo);
+
+		request.setAttribute("cartListNo", cartListNo);
 
 		// 3. redirect : /cart/cart
 		request.getSession().setAttribute("msg", "품목을 성공적으로 삭제했습니다.");
