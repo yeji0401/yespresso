@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>My Page Index</title>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" />
+<%-- <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" /> --%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/myPage/myPageIndex.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
