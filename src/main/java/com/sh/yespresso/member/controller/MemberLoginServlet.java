@@ -82,14 +82,15 @@ public class MemberLoginServlet extends HttpServlet {
 			else {
 				// 로그인 실패
 				session.setAttribute("msg", "아이디가 존재하지 않거나 비밀번호가 틀립니다.");
+				String referer = request.getHeader("Referer"); // http://~
+				request.getRequestDispatcher("/WEB-INF/views/member/memberLogin.jsp")
+				.forward(request, response);
+				System.out.println("referer = " + referer);
 			}
 			
 			// 4. view단처리 - redirect(url변경 - 새로고침 안되도록)
 
-			String referer = request.getHeader("Referer"); // http://~
-			System.out.println("referer = " + referer);
-			response.sendRedirect(referer);
-			
+			response.sendRedirect(request.getContextPath() + "/");
 		}
 	
 		

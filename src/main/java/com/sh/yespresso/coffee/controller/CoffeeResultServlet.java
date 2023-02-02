@@ -89,9 +89,9 @@ public class CoffeeResultServlet extends HttpServlet {
 				cupsize = CupSize.L;
 			}
 		    
-			 // google json 
+			 
 	        
-			System.out.println(ajaxMsg.getClass().getName());
+			
 			List<Product> list = productService.selectResult(new Product(type, aroma, acidity, roasting, cupsize));
 		
 			
