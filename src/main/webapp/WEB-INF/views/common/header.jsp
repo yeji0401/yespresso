@@ -5,6 +5,21 @@
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 
+	String msg = (String) session.getAttribute("msg");
+	if (msg != null)
+	session.removeAttribute("msg");
+	
+	Cookie[] cookies = request.getCookies();
+	String saveId = null;
+	if (cookies != null) {
+		for (Cookie cookie : cookies) {
+			String name = cookie.getName();
+			String value = cookie.getValue();
+			// System.out.println(name + "=" + value);
+			if ("saveId".equals(name))
+		saveId = value;
+		}
+	};
 %>
 
 <!DOCTYPE html>
