@@ -41,7 +41,7 @@ public class CoffeeQuestionServlet extends HttpServlet {
 		Map<String, Object> param = new HashMap<>();
 		param.put("page", page);
 		param.put("limit", limit);
-		// System.out.println("param=" + param);
+
 		
 		// 1. 사용자입력값 - pdNo 받아오기
 		String pdNo = request.getParameter("pdNo");
