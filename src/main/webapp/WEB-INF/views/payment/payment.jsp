@@ -1,15 +1,15 @@
 <%@page import="java.text.*"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.sh.yespresso.cart.model.dto.CartProduct"%>
+<%@page import="com.sh.yespresso.cart.model.dto.Cart"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cartMemberId = (String) request.getAttribute("cartMemberId");
-	List<CartProduct> myCartList = (List<CartProduct>) request.getAttribute("myCartList");
-	CartProduct cartProduct = new CartProduct();
+	List<Cart> myCartList = (List<Cart>) request.getAttribute("myCartList");
+	Cart cartProduct = new Cart();
 	int sumPrice = 0;
 	int sumAmount = 0;
 	for (int i = 0; i < myCartList.size(); i++) {
@@ -81,7 +81,7 @@
 				<tbody>
 					<%
 					if (myCartList.isEmpty()) {
-						myCartList = new ArrayList<CartProduct>();
+						myCartList = new ArrayList<Cart>();
 					%>
 					<tr>
 						<td colspan="4"></td>

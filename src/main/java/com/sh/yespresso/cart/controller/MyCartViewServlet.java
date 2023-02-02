@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sh.yespresso.cart.model.dto.CartProduct;
+import com.sh.yespresso.cart.model.dto.Cart;
 import com.sh.yespresso.cart.model.service.CartService;
 import com.sh.yespresso.member.model.dto.Member;
 
@@ -32,7 +32,7 @@ public class MyCartViewServlet extends HttpServlet {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		String cartMemberId = loginMember.getMemberId();
 
-		List<CartProduct> myCartList = cartService.selectMyCartList(cartMemberId);
+		List<Cart> myCartList = cartService.selectMyCartList(cartMemberId);
 		request.setAttribute("cartMemberId", cartMemberId);
 		request.setAttribute("myCartList", myCartList);
 

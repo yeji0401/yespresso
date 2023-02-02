@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.sh.yespresso.cart.model.dto.CartProduct;
+import com.sh.yespresso.cart.model.dto.Cart;
 import com.sh.yespresso.cart.model.exception.CartException;
 
 public class CartDao {
@@ -44,9 +44,9 @@ public class CartDao {
 	/**
 	 * awon start
 	 */
-	public List<CartProduct> selectMyCartList(Connection conn, String cartMemberId) {
+	public List<Cart> selectMyCartList(Connection conn, String cartMemberId) {
 		String sql = prop.getProperty("selectMyCartList");
-		List<CartProduct> myCartList = new ArrayList<>();
+		List<Cart> myCartList = new ArrayList<>();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, cartMemberId);
@@ -54,7 +54,7 @@ public class CartDao {
 			try (ResultSet rset = pstmt.executeQuery()) {
 
 				while (rset.next()) {
-					CartProduct cart = handleCartResultSet(rset);
+					Cart cart = handleCartResultSet(rset);
 					myCartList.add(cart);
 					System.out.println(myCartList);
 				}
@@ -68,8 +68,8 @@ public class CartDao {
 
 	}
 
-	private CartProduct handleCartResultSet(ResultSet rset) throws SQLException {
-		CartProduct cart = new CartProduct();
+	private Cart handleCartResultSet(ResultSet rset) throws SQLException {
+		Cart cart = new Cart();
 		cart.setCartNo(rset.getInt("cart_list_no"));
 		cart.setProductName(rset.getString("product_name"));
 		cart.setProductPrice(rset.getInt("product_price"));
