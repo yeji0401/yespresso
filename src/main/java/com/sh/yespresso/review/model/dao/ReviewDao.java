@@ -114,8 +114,9 @@ public class ReviewDao {
 		int end = page * limit; // 5, 10, 15, 20, ...
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			pstmt.setString(1, reviewMemberId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 
 			try (ResultSet rset = pstmt.executeQuery()) {
 

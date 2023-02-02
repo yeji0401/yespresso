@@ -103,7 +103,7 @@ public class OrdersDao {
 	 */
 	// 마이페이지 - 주문리스트 보기.
 	public List<Orders> selectMyOrdersList(Connection conn, Map<String, Object> param, String orderMemberId) {
-		// selectMyOrdersList = select * from (select row_number() over(order by no
+		// selectMyOrdersList = select * from (select row_number() over(order by order_no
 		// desc) rnum, b.* from orders o where order_member_id = ?) where rnum between ?
 		// and ?
 		String sql = prop.getProperty("selectMyOrdersList");

@@ -659,3 +659,78 @@ where
    
    select * from cart;
    
+   
+   
+--   awon start
+--===========================
+-- CARTLIST
+--===========================
+create table CARTLIST (
+    CART_LIST_NO number,
+   PRODUCT_NAME VARCHAR2(50) NOT NULL,
+	PRODUCT_PRICE NUMBER NOT NULL,
+    CART_LIST_MEMBER_ID varchar2(30) not null, 
+   PRODUCT_NO VARCHAR2(20) not null,
+    AMOUNT number default 1,
+    TOTAL_PRICE number default 1,
+    
+    constraint PK_CART_LIST_NO primary key(CART_LIST_NO),
+    constraint FK_CART_LIST_MEMBER_ID foreign key(CART_LIST_MEMBER_ID) references MEMBER(MEMBER_ID) on delete cascade,
+    constraint FK_PRODUCT_NO foreign key(PRODUCT_NO) references PRODUCT(PRODUCT_NO) on delete cascade
+);
+
+comment on column CARTLIST.CART_LIST_NO is '장바구니번호';
+comment on column CARTLIST.PRODUCT_NAME is '제품명';
+comment on column CARTLIST.PRODUCT_PRICE is '가격';
+comment on column CARTLIST.CART_LIST_MEMBER_ID is '회원 아이디';
+comment on column CARTLIST.PRODUCT_NO is '제품 번호';
+comment on column CARTLIST.AMOUNT is '수량';
+comment on column CARTLIST.TOTAL_PRICE is '총가격';
+
+
+-- sequence
+create sequence seq_cart_list_no;
+
+-- 확인        
+select
+    *
+from
+    user_col_comments
+where
+    table_name = 'CARTLIST';
+
+----------------------------------------------------------
+-- 1 CARTLIST - insert
+    insert into CARTLIST values (
+        SEQ_CART_LIST_NO.nextval,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?
+    );
+    
+    
+    select * from product;
+    insert into CARTLIST values (
+    seq_cart_list_no.nextval,
+     '인피니망 더블 에스프레소',
+     '10390',
+     'gurumi',
+      'p0001',
+      '10',
+      default
+    );
+    insert into CARTLIST values (
+    seq_cart_list_no.nextval,
+     '파리',
+     '6990',
+     'gurumi',
+      'p0003',
+      '2',
+      default
+    );
+    
+    select * from cartlist where cart_list_member_id = 'gurumi';
+-- awon end

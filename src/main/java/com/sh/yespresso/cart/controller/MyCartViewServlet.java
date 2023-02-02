@@ -31,12 +31,13 @@ public class MyCartViewServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		String cartMemberId = loginMember.getMemberId();
-		System.out.println("cartMemberId = " + cartMemberId);
+
 		List<CartProduct> myCartList = cartService.selectMyCartList(cartMemberId);
 		request.setAttribute("cartMemberId", cartMemberId);
 		request.setAttribute("myCartList", myCartList);
 
 		request.getRequestDispatcher("/WEB-INF/views/cart/cart.jsp").forward(request, response);
+
 	}
 
 }

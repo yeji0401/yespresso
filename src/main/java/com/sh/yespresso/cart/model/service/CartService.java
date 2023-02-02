@@ -42,14 +42,14 @@ public class CartService {
 		close(conn);
 		return myCartList;
 	}
-	
 
-	public int deleteMyCartListbyProductNo(int cartProductNo) {
+	public int deleteMyCartListbyCartListNo(int cartListNo) {
 		Connection conn = getConnection();
 		int result = 0;
+
 		try {
 			// dao요청
-			result = cartDao.deleteMyCartListbyProductNo(conn, cartProductNo);
+			result = cartDao.deleteMyCartListbyCartListNo(conn, cartListNo);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -59,11 +59,10 @@ public class CartService {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * awon end
 	 */
-
 
 	/**
 	 * jooh start

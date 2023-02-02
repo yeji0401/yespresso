@@ -1,10 +1,13 @@
 <%@page import="com.sh.yespresso.question.model.dto.Question"%>
+<%@page import="java.util.Arrays"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.sh.yespresso.question.model.dto.QuestionAttachment"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 Question question = (Question) request.getAttribute("question");
 List<Question> answersList = (List<Question>) request.getAttribute("answersList");
+String questionMemberId = (String) request.getAttribute("questionMemberId");
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/myQuestionView.css" />

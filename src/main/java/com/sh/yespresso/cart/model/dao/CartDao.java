@@ -71,7 +71,7 @@ public class CartDao {
 	private CartProduct handleCartResultSet(ResultSet rset) throws SQLException {
 		CartProduct cart = new CartProduct();
 		cart.setCartNo(rset.getInt("cart_list_no"));
-		cart.setProductName("product_name");
+		cart.setProductName(rset.getString("product_name"));
 		cart.setProductPrice(rset.getInt("product_price"));
 		cart.setCartMemberId(rset.getString("cart_list_member_id"));
 		cart.setCartProductNo(rset.getString("product_no"));
@@ -80,12 +80,15 @@ public class CartDao {
 		return cart;
 	}
 
-	public int deleteMyCartListbyProductNo(Connection conn, int cartProductNo) {
-		String sql = prop.getProperty("deleteMyCartListbyProductNo"); // delete from cart where cartProductNo = ?
+	public int deleteMyCartListbyCartListNo(Connection conn, int cartListNo) {
+		String sql = prop.getProperty("deleteMyCartListbyCartListNo"); // delete from cart where cart_list_no = ?
 		int result = 0;
+		int[] cnt = null;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, cartProductNo);
+			pstmt.setInt(1, cartListNo);
+			cnt = pstmt.executeBatch();
+
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			throw new CartException("품목 삭제 오류!", e);
