@@ -18,11 +18,10 @@ section#product-container{
 	padding-top : 200px;
 }
 .product-info-wrap {
-	border: 1px solid black;
+	background-color: #fffbe9bf;
 }
 .product-info-wrap td {
 	width: 600px;
-		border: 1px solid black;
 }
 .product-info-img img{
 	height: 350px;
@@ -50,7 +49,18 @@ section#product-container{
 .info-box span {
 	display: block;
 }
-
+.pd-type{
+	padding-top: 150px;
+}
+.pd-price{
+	padding-top: 20px;
+	color: #A6BB8D;
+	font-size: 20px;
+	font-weight: bold;
+}
+#question-wrap{
+	padding-top: 20px;
+}
 </style>
 
 <section id ="product-container">
@@ -70,7 +80,7 @@ section#product-container{
 					<%= pdType %>
 					</span>
 					<span class="pd-name"><%= product.getProductName() %></span>
-						
+					<span class="pd-price"><%= product.getProductPrice() %>원</span>	
 				</div>
 		</tr>
 		<tr class="product-detail-wrap">
