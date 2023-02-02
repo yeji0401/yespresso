@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+body {
+	background-color: #DDD6C9;
+	font-family: 'Montserrat', sans-serif;
+}
+
+#cartFrm table {
+	margin: auto;
+	padding: 50px;
+	width: 500px;
+	height: 600px;
+}
+
+#cartFrm input[type=button] {
+	border-radius: 30px;
+	width: 415px;
+	height: 40px;
+	background: #A6BB8D;
+	color: white;
+	border: none;
+	font-size: 16px;
+}
+
+input#pay {
+	display: block;
+	border-radius: 30px;
+	width: 415px;
+	height: 40px;
+	background-color: #3C6255;
+	color: white;
+	border: none;
+	font-size: 16px;
+	margin-top: 2%;
+}
+
+#tbl-cart {
+	background: white;
+	border-radius: 30px;
+}
+
+#cart-col td {
+	font-size: 20px;
+}
+
+td {
+	text-align: center;
+	padding: 10px;
+	border-radius: 30px;
+}
+
+tfoot {
+	border-radius: 30px;
+	border: 1px solid #000;
+	background: #A6BB8D;
+}

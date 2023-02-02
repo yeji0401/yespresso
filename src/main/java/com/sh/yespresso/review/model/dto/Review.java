@@ -7,11 +7,22 @@ import java.util.List;
 public class Review extends ReviewEntity {
 	private int attachCnt;
 	private List<ReviewAttachment> reviewAttachments = new ArrayList<>();
+	// awon start
+	private String productName;
 
+//awon end
 	public Review() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+//awonStart
+	public Review(int reviewNo, String reviewMemberId, String reviewOrderNo, String productNo, String reviewTitle,
+			String reviewContent, int reviewRating, Date reviewDate, String productName) {
+		super(reviewNo, reviewMemberId, reviewOrderNo, productNo, reviewTitle, reviewContent, reviewRating, reviewDate);
+		this.productName = productName;
+	}
+	// awon end
 
 	public Review(int reviewNo, String reviewMemberId, String reviewOrderNo, String productNo, String reviewTitle,
 			String reviewContent, int reviewRating, Date reviewDate, int attachCnt) {
@@ -41,9 +52,21 @@ public class Review extends ReviewEntity {
 		this.reviewAttachments = reviewAttachments;
 	}
 
+	// awon start
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	// awon end
+
 	@Override
 	public String toString() {
-		return "Review [attachCnt=" + attachCnt + ", reviewAttachment=" + reviewAttachments  + ", toString()=" + super.toString() + "]";
+		return "Review [attachCnt=" + attachCnt + ", reviewAttachment=" + reviewAttachments + ", toString()="
+				+ super.toString() + "]";
 	}
 
 	/**

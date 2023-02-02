@@ -25,11 +25,20 @@ public class MyOrdersDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1. 사용자입력값 처리 : id 가져오기
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		String orderMemberId = loginMember.getMemberId();
-		List<OrderDetail> myOrdersDetail = ordersService.selectMyOrdersDetail("orderNo");
 		String orderNo = request.getParameter("orderNo");
+		
+		// 2. 업무로직
+		List<OrderDetail> myOrdersDetail = ordersService.selectMyOrdersDetail("orderNo");
+		
+		// 개행문자 변환처리
+		request.setAttribute("orderNo", orderNo);
+		request.setAttribute("orderMemberId", orderMemberId);
+		request.setAttribute("myOrdersDetail", myOrdersDetail);
+		
 		// jsp 포워딩
 		request.getRequestDispatcher("/WEB-INF/views/myPage/myOrdersDetail.jsp")
 			.forward(request, response);

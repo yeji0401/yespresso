@@ -1,28 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@page import="com.sh.yespresso.orders.model.dto.Orders"%>
+<%@page import="com.sh.yespresso.orders.model.dto.OrderDetail"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.Locale"%>
 <%@page import="java.util.ArrayList"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>My Orders Detail</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/myPage/myOrdersDetail.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;400;600;700;900&display=swap" rel="stylesheet">
-<script src="<%=request.getContextPath()%>/js/jquery-3.6.1.js"></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ page import="java.text.*" %>
 <%
+request.setCharacterEncoding("UTF-8");
+String orderNo = (String) request.getAttribute("orderNo");
 String orderMemberId = (String) request.getAttribute("orderMemberId");
-List<Orders> myOrdersList = (List<Orders>) request.getAttribute("myOrdersList");
+List<OrderDetail> myOrdersDetail = (List<OrderDetail>) request.getAttribute("myOrdersDetail");
+OrderDetail od = new OrderDetail();
+int sumPrice = 0;
+int sumAmount = 0;
+
+	DecimalFormat df = new DecimalFormat("₩###,###");
+	NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.KOREA);
+for (int i = 0; i < myOrdersDetail.size(); i++) {
+	od = myOrdersDetail.get(i);
+}
 %>
-</head>
-<body>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/myOrdersList.css" />
 	<section id="orderInfo-container">
 		<table id="orderInfo-tbl">
+		
 			<tr>
 				<td>주문번호</td>
 			</tr>
@@ -69,58 +72,45 @@ List<Orders> myOrdersList = (List<Orders>) request.getAttribute("myOrdersList");
 			</colgroup>
 			<tbody>
 				<tr>
-					<td colspan="7">주문완료</td>
+					<td colspan="5">주문완료</td>
 				</tr>
 				<tr>
-					<td colspan="2">productCategory(total amount)</td>
-					<td>개별 단가</td>
 					<td></td>
+					<td>개별 단가</td>
 					<td>수량</td>
 					<td>합계</td>
 					<td>리뷰작성</td>
 				</tr>
+				<%
+			if (myOrdersDetail.isEmpty()) {
+				myOrdersDetail = new ArrayList<OrderDetail>();
+			%>
+			<%
+			} else {
+			for (int i = 0; i < myOrdersDetail.size(); i++) {
+				int totalPrice = myOrdersDetail.get(i).getProductPrice() * myOrdersDetail.get(i).getOrderDetailAmount();
+				sumPrice = sumPrice + totalPrice;
+				int totalAmount = myOrdersDetail.get(i).getOrderDetailAmount() + myOrdersDetail.get(i).getOrderDetailAmount();
+				sumAmount = sumAmount + totalAmount;
+			%>
 				<tr>
-					<td>img</td>
-					<td>카자르</td>
-					<td>₩699</td>
+					<td><%=myOrdersDetail.get(i).getProductName()%></td>
+					<td><%=df.format(myOrdersDetail.get(i).getProductPrice())%></td>
 					<td>X</td>
-					<td>amount</td>
-					<td>₩6,990</td>
-					<td>button</td>
-				</tr>
-				<tr>
-					<td>img</td>
-					<td>카자르</td>
-					<td>₩699</td>
-					<td>X</td>
-					<td>amount</td>
-					<td>₩6,990</td>
+					<td><%=myOrdersDetail.get(i).getOrderDetailAmount()%></td>
+					<td><%=df.format(totalPrice)%></td>
 					<td>button "/myPage/myReviewEnroll" 삽입하기.</td>
 				</tr>
-				<tr>
-					<td colspan="2">productCategory(total amount)</td>
-					<td>개별 단가</td>
-					<td></td>
-					<td>수량</td>
-					<td>합계</td>
-					<td>리뷰작성</td>
-				</tr>
-				<tr>
-					<td>img</td>
-					<td>카자르</td>
-					<td>₩699</td>
-					<td>X</td>
-					<td>amount</td>
-					<td>₩6,990</td>
-					<td>button</td>
-				</tr>
+			<%}
+			} %>
+				
 				<tr>
 					<td>전체 합계</td>
 					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
-					<td>₩(6990*3)</td>
+					<td><%=df.format(sumPrice)%></td>
 					<td></td>
 				</tr>
 			</tbody>
