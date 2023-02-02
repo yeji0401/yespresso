@@ -30,7 +30,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.KOREA);
 %>
 <section id=cart-container>
 
-	<form name="cartFrm" metdod="get" action="<%=request.getContextPath()%>/cart/cart">
+	<form name="cartFrm" method="get" action="<%=request.getContextPath()%>/payment/payment">
 
 		<table id="tbl-cart">
 			<tr id ="cart-col">
@@ -79,7 +79,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.KOREA);
 				</tr>
 			</tfoot>
 		</table>
-		 <input type="button" value="결제하기" id="pay" onclick="location.href = '<%= request.getContextPath() %>';" tabindex="4"></td>
+		 <input type="submit" value="결제하기" id="pay" tabindex="4"></td>
 	</form>
 
 

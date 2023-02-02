@@ -67,32 +67,6 @@ window.addEventListener('load', () => {
 	                </form>
 	            </div>
 	        </div>
-	            <div id="check-block">
-	            	<div id="memberSort">
-		                    <p>정렬순</p>
-		                    <input type="radio" name="memberSort" value="">
-		                    <label for="enroll-A">가입일자 오름차순</label><br>
-		                    <input type="radio" name="memberSort" value="enroll_date desc" checked>
-		                    <label for="enroll-D">가입일자 내림차순</label><br>
-		                    <input type="radio" name="memberSort" value="member_id asc">
-		                    <label for="id-A">아이디 오름차순</label><br>
-		                    <input type="radio" name="memberSort" value="member_id desc">
-		                    <label for="id-D">아이디 내림차순</label><br>
-		                    <input type="radio" name="memberSort" value="member_name asc">
-		                    <label for="name-A">이름 오름차순</label><br>
-		                    <input type="radio" name="memberSort" value="member_name desc">
-		                    <label for="name-D">이름 내림차순</label><br>
-	                </div>
-	                <div id="memberRole">
-	                    <p>회원 권한</p>
-	                    <input type="radio" name="memberRole" value="ADMIN">
-	                    <label for="ADMIN">ADMIN</label><br>
-	                    <input type="radio" name="memberRole" value="COMMON">
-	                    <label for="COMMON">COMMON</label><br>
-	                    <input type="radio" name="memberRole" value="VIP">
-	                    <label for="VIP">VIP</label>
-	                </div>
-	            </div>
 	        <table id="tbl-member" class="tbl">
 	            <thead>
 	                <tr>
