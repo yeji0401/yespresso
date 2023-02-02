@@ -1,24 +1,29 @@
+<%@page import="java.util.List"%>
+<%@page import="com.sh.yespresso.product.model.dto.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	Product product = (Product) request.getAttribute("product");
+%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/product.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 <section id="product-container">
-	<h2>제품 등록</h2>
+	<h2>제품 수정</h2>
 	<form 
-		name="ProductEnrollFrm"
-		action="<%=request.getContextPath() %>/admin/adminProductEnroll" 
+		name="ProductUpdateFrm"
+		action="<%=request.getContextPath() %>/admin/adminProductUpdate" 
 		enctype="multipart/form-data"
 		method="post">
-		<table id="tbl-product-enroll">
+		<table id="tbl-product-update">
 		<tr>
 			<th>제품번호</th>
-			<td><input type="text" name="productNo" readonly /></td>
+			<td><input type="text" name="productNo" value="<%= product.getProductNo() %>" readonly /></td>
 			<th>카테고리번호</th>
 			<td>
-				<input type="radio" name="category" value="CO" required/>
+				<input type="radio" name="category" value="<%= product.getProductCategory() %>" required/>
 				<label for="CO">커피</label>
 				<input type="radio" name="category" value="MA" />
 				<label for="MA">머신</label>
@@ -29,28 +34,28 @@
 		</tr>
 		<tr>
 			<th>제품명</th>
-			<td><input type="text" name="productName" required /></td>
+			<td><input type="text" name="productName" value="<%= product.getProductName() %>" required /></td>
 			<th>가격</th>
-			<td><input type="text" name="productPrice" required /></td>
+			<td><input type="text" name="productPrice" value="<%= product.getProductPrice() %>" /></td>
 			
 		</tr>
 		<tr>
 			<th>재고</th>
-			<td><input type="number" name="productStock" min="1" max="100"/></td>
+			<td><input type="number" name="productStock" min="1" max="100" value="<%= product.getProductStock() %>"/></td>
 			<th>제품등록일</th>
-			<td><input type="text" name="productDate" readonly /></td>
+			<td><input type="text" name="productDate" value="<%= product.getProductDate() %>" readonly /></td>
 		</tr>
 		<tr>
 			<th>제품타입</th>
 			<td>
-				<input type="radio" name="type" value="vertuo" required/>
+				<input type="radio" name="type" value="<%= product.getType() %>" required/>
 				<label for="vertuo">버츄오</label>
 				<input type="radio" name="type" value="original" />
 				<label for="original">오리지널</label>
 			</td>
 			<th>아로마</th>
 			<td>
-				<input type="radio" name="aroma" value="cocoa" />
+				<input type="radio" name="aroma" value="<%= product.getAroma() %>" />
 				<label for="cocoa">코코아</label>
 				<input type="radio" name="aroma" value="biscuit" />
 				<label for="biscuit">비스킷</label>
@@ -61,15 +66,15 @@
 		<tr>
 			<th>산미감</th>
 			<td>
-				<input type="number" name="acidity" max = "5" min ="1" value="1" />			
+				<input type="number" name="acidity" max = "5" min ="1" value="<%= product.getAcidity() %>" />			
 			</td>
 			<th>로스팅</th>
-			<td><input type="number" name="roasting" max = "13" min ="1" value="1" /></td>
+			<td><input type="number" name="roasting" max = "13" min ="1" value="<%= product.getRoasting() %>" /></td>
 		</tr>
 		<tr>
 			<th>컵사이즈</th>
 			<td>
-				<input type="radio" name="cupSize" value="S" />
+				<input type="radio" name="cupSize" value="<%= product.getCupSize() %>" />
 				<label for="S">S</label>
 				<input type="radio" name="cupSize" value="M" />
 				<label for="M">M</label>
@@ -78,12 +83,12 @@
 			</td>
 			<th>썸네일 파일</th>
 			<td>			
-				<input type="file" name="upFile">
+				<img src="<%= request.getContextPath() %>/upload/product/<%= product.getThumbnailFilename() %>" alt="" style="width: 50px;"/>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4">
-				<input type="submit" value="등록">
+				<input type="submit" value="수정">
 			</td>			
 		</tr>
 		</table>

@@ -18,24 +18,6 @@ div#search-memberId	 {display: <%= searchType == null || "member_id".equals(sear
 div#search-memberName{display: <%= "member_name".equals(searchType) ? "inline-block" : "none" %>;}
 </style>
 <script>
-$(document).ready(function() {
-	 $('input[type="checkbox"][name="member-sort"]').click(function(){
-	  if($(this).prop('checked')){
-	     $('input[type="checkbox"][name="member-sort"]').prop('checked',false);
-	     $(this).prop('checked',true);
-	    }	  
-	});
-});
-
-$(document).ready(function() {
-	 $('input[type="checkbox"][name="member-role"]').click(function(){
-	  if($(this).prop('checked')){
-	     $('input[type="checkbox"][name="member-role"]').prop('checked',false);
-	     $(this).prop('checked',true);
-	    }	  
-	});
-});
-
 window.addEventListener('load', () => {
 	document.querySelector("#searchType").addEventListener('change', (e) => {
 		console.log(e.target.value); // member_id, member_name
@@ -85,8 +67,8 @@ window.addEventListener('load', () => {
 	                </form>
 	            </div>
 	        </div>
-	            <div id="member-check-block">
-	            	<form action="<%= request.getContextPath() %>/admin/adminMemberSort">
+	            <div id="check-block">
+	            	<div id="memberSort">
 		                    <p>정렬순</p>
 		                    <input type="radio" name="memberSort" value="enroll_date asc">
 		                    <label for="enroll-A">가입일자 오름차순</label><br>
@@ -100,9 +82,8 @@ window.addEventListener('load', () => {
 		                    <label for="name-A">이름 오름차순</label><br>
 		                    <input type="radio" name="memberSort" value="member_name desc">
 		                    <label for="name-D">이름 내림차순</label><br>
-		                	<button type="submit" style="display: block;">적용</button>
-	                </form>
-	                <form action="<%= request.getContextPath() %>/admin/adminMemberCheckSort">
+	                </div>
+	                <div id="memberRole">
 	                    <p>회원 권한</p>
 	                    <input type="radio" name="memberRole" value="ADMIN">
 	                    <label for="ADMIN">ADMIN</label><br>
@@ -110,8 +91,7 @@ window.addEventListener('load', () => {
 	                    <label for="COMMON">COMMON</label><br>
 	                    <input type="radio" name="memberRole" value="VIP">
 	                    <label for="VIP">VIP</label>
-	                    <button type="submit" style="display: block;">적용</button>
-	                </form>
+	                </div>
 	            </div>
 	        <table id="tbl-member" class="tbl">
 	            <thead>
@@ -125,12 +105,17 @@ window.addEventListener('load', () => {
 	                    <th>이메일</th>
 	                    <th>주소</th>
 	                    <th>가입일자</th>
+	                    <th>
+	                    	<form action="">
+	                    		<button type="submit">삭제</button>
+	                    	</form>
+	                    </th>
 	                </tr>
 	            </thead>
 	            <tbody>
 				<% if(members.isEmpty()){ %>
 					<tr>
-						<td colspan="8">조회된 회원이 없습니다.</td>
+						<td colspan="9">조회된 회원이 없습니다.</td>
 					</tr>
 				<% 
 				   } else { 
@@ -139,7 +124,7 @@ window.addEventListener('load', () => {
 						<tr>
 							<td><%= member.getMemberId() %></td>
 							<td>
-								<select class="member-role" data-member-id="<%= member.getMemberId() %>" data-member-birthday="<%= member.getBirthday() %>">
+								<select class="member-role" data-member-id="<%= member.getMemberId() %>"">
 									<option value="<%= MemberRole.C %>" <%= member.getMemberRole() == MemberRole.C ? "selected" : "" %>>COMMON</option>
 									<option value="<%= MemberRole.V %>" <%= member.getMemberRole() == MemberRole.V ? "selected" : "" %>>VIP</option>
 									<option value="<%= MemberRole.A %>" <%= member.getMemberRole() == MemberRole.A ? "selected" : "" %>>ADMIN</option>
@@ -152,6 +137,7 @@ window.addEventListener('load', () => {
 							<td><%= member.getEmail() != null ? member.getEmail() : "" %></td>
 							<td><%= member.getAddress() != null ? member.getAddress() : "" %></td>
 							<td><%= member.getEnrollDate() %></td>
+							<td><input type="checkbox" name="member" value="<%= member.getMemberId() %>"></td>
 						</tr>
 				<%
 					  }			
