@@ -14,11 +14,11 @@ import com.sh.yespresso.product.model.dto.ProductEntity;
 public class CoffeeService {
 	private CoffeeDao coffeeDao = new CoffeeDao();
 	
-	public int selectResult(Product product) {
+	public int selectResult(String[] ajaxMsg) {
 		Connection conn = getConnection();
 		int result = 0;
 		try {
-			result = coffeeDao.selectResult(conn, product);
+			result = coffeeDao.selectResult(conn, ajaxMsg);
 			commit(conn);			
 		} catch (Exception e) {
 			rollback(conn);

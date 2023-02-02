@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.sh.yespresso.product.model.dto.Product;
-import com.sh.yespresso.product.model.dto.ProductEntity;
+
 import com.sh.yespresso.product.model.exception.ProductException;
 
 
@@ -28,16 +28,16 @@ public class CoffeeDao {
 	}
 
 
-	public int selectResult (Connection conn, Product product ) {
+	public int selectResult (Connection conn, String[] ajaxMsg ) {
 		String sql = prop.getProperty("selectResult"); 
 		int result = 0;
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-			pstmt.setString(1, product.getType().name());
-			pstmt.setString(2, product.getAroma().name());
-			pstmt.setInt(3, product.getAcidity());
-			pstmt.setInt(4, product.getRoasting());
-			pstmt.setString(5, product.getCupSize().name());
+			pstmt.setString(1, ajaxMsg[0]);
+			pstmt.setString(2, ajaxMsg[1]);
+			pstmt.setString(3, ajaxMsg[2]);
+			pstmt.setString(4, ajaxMsg[3]);
+			pstmt.setString(5, ajaxMsg[4]);
 			
 			result = pstmt.executeUpdate();
 			

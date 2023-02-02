@@ -33,7 +33,7 @@ public class AdminProductUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 사용자입력 처리
+		// 1. 사용자 입력값 처리
 		String productNo = request.getParameter("productNo");
 		System.out.println(productNo);
 		

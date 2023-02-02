@@ -14,6 +14,8 @@ import java.util.Properties;
 import com.sh.yespresso.question.model.dto.Question;
 import com.sh.yespresso.question.model.dto.QuestionAttachment;
 import com.sh.yespresso.question.model.exception.QuestionException;
+import com.sh.yespresso.review.model.dto.Review;
+import com.sh.yespresso.review.model.exception.ReviewException;
 
 public class QuestionDao {
 
@@ -32,6 +34,57 @@ public class QuestionDao {
 	/**
 	 * hj start
 	 */
+	// DQL 제품에 해당하는 문의리스트
+	public List<Question> selectQuestionByPdNo(Connection conn, Map<String, Object> param) {
+		// select * from (select row_number() over(order by QUESTION_NO desc) rnum, q.* from QUESTION q where QUESTION_PRODUCT_NO = ?) where rnum between ? and ?
+		String sql = prop.getProperty("selectQuestionByPdNo"); 
+		List<Question> questionList = new ArrayList<>();
+		
+		int page = (int) param.get("page");
+		int limit = (int) param.get("limit");
+		String pdNo = (String) param.get("pdNo"); // 담아뒀던 제품번호 가져옴
+		
+		int start = (page - 1) * limit + 1;
+		int end = page * limit;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, pdNo);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				
+				while(rset.next()) {
+					Question question = handleQuestionResultSet(rset);
+					questionList.add(question);					
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new QuestionException("제품별 문의목록 조회 오류!", e);
+		}
+		return questionList;
+	}
+	
+	// DQL 제품에 해당하는 문의 수
+	public int selectTotalCountByPdNo(Connection conn, String pdNo) {
+		String sql = prop.getProperty("selectTotalCountByPdNo");
+		int totalCount = 0;
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, pdNo);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				if (rset.next()) {
+					totalCount = rset.getInt(1);
+				}
+			}
+		} catch (Exception e) {
+			throw new QuestionException("제품별 리뷰 수 조회 오류!", e);
+		}
+		return totalCount;
+	}
+
 	/**
 	 * hj end
 	 */

@@ -163,6 +163,20 @@ public class ProductService {
 	/**
 	 * jooh start
 	 */
+	public int selectResult(String[] ajaxMsg) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = productDao.selectResult(conn, ajaxMsg);
+			commit(conn);			
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
 	/**
 	 * jooh end
 	 */

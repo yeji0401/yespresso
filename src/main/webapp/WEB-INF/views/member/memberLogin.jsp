@@ -6,24 +6,6 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/login.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.1.js"></script>
-<%
-	String msg = (String) session.getAttribute("msg");
-	if (msg != null)
-	session.removeAttribute("msg");
-
-	Cookie[] cookies = request.getCookies();
-	String saveId = null;
-	if (cookies != null) {
-		for (Cookie cookie : cookies) {
-			String name = cookie.getName();
-			String value = cookie.getValue();
-			// System.out.println(name + "=" + value);
-			if ("saveId".equals(name))
-		saveId = value;
-		}
-	}
-
-%>
 <script>
 window.addEventListener('load', () => {
 	

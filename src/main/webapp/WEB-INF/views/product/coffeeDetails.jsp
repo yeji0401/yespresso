@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="com.sh.yespresso.product.model.dto.Product"%>
 <%@page import="com.sh.yespresso.product.model.dto.Type"%>
 <%@page import="java.util.List"%>
@@ -68,6 +70,7 @@ section#product-container{
 					<%= pdType %>
 					</span>
 					<span class="pd-name"><%= product.getProductName() %></span>
+						
 				</div>
 		</tr>
 		<tr class="product-detail-wrap">
@@ -77,22 +80,22 @@ section#product-container{
 				</div>
 			</td>
 		</tr>
-		
 		<tr class="product-review-wrap">
-			<td id="review-wrap">
-			
-			</td>
-		</tr>
-		<tr class="product-question-wrap">
-			<td></td>
+			<td id="review-wrap"></td>
 		</tr>
 	</table>
+		<div class="product-question-wrap">
+			<div id="question-wrap"></div>
+		</div>
 </section>
 <script>
 window.addEventListener('load', () => {
 	getReview("<%= product.getProductNo() %>");
+	getQuestion("<%= product.getProductNo() %>");
+
 });
 
+// 비동기로 리뷰 가져오기
 const getReview = (pdNo) => {
 	$.ajax({
 		url: "<%= request.getContextPath() %>/coffee/review",
@@ -105,5 +108,19 @@ const getReview = (pdNo) => {
 		error : console.log
 	});
 };
+// 비동기로 문의 가져오기
+const getQuestion = (pdNo) => { 
+	$.ajax({
+		url: "<%= request.getContextPath() %>/coffee/question",
+		data : {pdNo},
+		dataType : "html",
+		success(data){
+			console.log(data);
+			document.querySelector("#question-wrap").innerHTML = data;
+		},
+		error : console.log
+	});
+};
+
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
