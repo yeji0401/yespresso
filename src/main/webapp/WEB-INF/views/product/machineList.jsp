@@ -24,8 +24,6 @@
 
 
 
-///////////////
-
 <%
 	for(int i = 0; i < coffeeList.size(); i++){
 		if(i >= 0 && i <= 3){

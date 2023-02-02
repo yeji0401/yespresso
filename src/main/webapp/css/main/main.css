@@ -1,0 +1,4 @@
+@charset "UTF-8";
+tr,td{text-align: center;}
+input[type=button]{border-radius: 30px; width:415px; 
+    height:40px; background:#A6BB8D; color: white; border: none; font-size:16px;}
